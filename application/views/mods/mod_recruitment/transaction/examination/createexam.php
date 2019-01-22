@@ -646,8 +646,14 @@ function submitData(type){
         });
 
         $("#loadingmodal").modal("show");
+        var url = "";
+        if(type == "create"){
+            url = "<?php echo base_url();?>examinationmanagement/newexam";
+        } else {
+            url = "<?php echo base_url();?>examinationmanagement/updateexam";
+        }
         $.ajax({
-            url: "<?php echo base_url();?>examinationmanagement/newexam",
+            url: url,
             type: "POST",
             dataType: "json",
             data: {

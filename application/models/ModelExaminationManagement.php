@@ -75,6 +75,23 @@ class ModelExaminationManagement extends CI_Model{
         }
     }
 
+
+    public function update($data = array(),$reqnum,$username) {
+        try {
+            $this->db->where('createdby',$username);
+            $this->db->where('requestnumber',$reqnum);
+            $query = $this->db->update($this->examTbl,$data);
+            if($query){
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
     function isanswered($reqnum,$username){
         try {
             $this->db->select('*');

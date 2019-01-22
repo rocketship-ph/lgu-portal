@@ -62,14 +62,6 @@
                 <fieldset>
                     <legend>Examination</legend>
                     <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="evaluator" class="col-lg-4 control-label">Evaluator</label>
-                            <div class="col-lg-8">
-                                <select class="form-control clearField" id="evaluator">
-                                    <option selected disabled>- Select Evaluator -</option>
-                                </select>
-                            </div>
-                        </div>
                         <div style="display: none" id="divRequestDetails">
                             <input type="hidden" id="lblgroupposition">
                             <div class="form-group">
@@ -156,42 +148,11 @@
 
         $("#panel_takeexam").addClass("selected_panel");
         window.isUpdate = false;
-        loadEvaluators();
+//        loadEvaluators();
+        loadExamination();
     });
 
-    function loadEvaluators(){
-        var evaluator = $("#evaluator");
-        evaluator.empty();
-        if(window.isUpdate == false){
-            $("#loadingmodal").modal("show");
-        }
-        $.ajax({
-            url: "<?php echo base_url();?>takeexammanagement/displayevaluators",
-            type: "GET",
-            dataType: "json",
-            success: function(result){
-                $("#loadingmodal").modal("hide");
-                if(result.Code == "00"){
-                    evaluator.append('<option selected disabled>- Select Evaluator -</option>');
-                    for(var i in result.details){
-                        var disp = result.details[i].firstname + " " + result.details[i].lastname + " ["+result.details[i].username+"]";
-                        evaluator.append('<option value="'+result.details[i].username+'">'+disp+'</option>')
-                    }
-                } else {
-                    evaluator.append('<option selected disabled>- No Evaluator Available -</option>');
-                }
-            },
-            error: function(e){
-                console.log(e);
-                evaluator.append('<option selected disabled>- No Evaluator Available -</option>');
-                $("#loadingmodal").modal("hide");
-
-            }
-        });
-    }
-
-    $("#evaluator").change(function(){
-        var eval = $(this).val();
+    function loadExamination(){
         $("#competencyTitle").hide();
         window.weightTotal = 0;
         window.grptable = [];
@@ -205,9 +166,6 @@
             url: "<?php echo base_url();?>takeexammanagement/displayexam",
             type: "POST",
             dataType: "json",
-            data: {
-                "EVALUATOR":eval
-            },
             success: function(result){
                 console.log("exam displayed");
                 console.log(result);
@@ -268,8 +226,10 @@
                         $("#tbltotal").text(window.weightTotal);
 
                     }
+                } else if(result.Code == "01"){
+                    messageDialogModal("Server Message",result.Message);
                 } else {
-                    messageDialogModal("No Group Table Data","The selected position request does not have the prerequisite group table data encoded to the system to create an examination. Please encode a group table data before creating an examination for this request number");
+                    messageDialogModal("Server Message","No Examination Data Found");
                 }
             },
             error: function(e){
@@ -277,7 +237,7 @@
                 console.log(e);
             }
         });
-    });
+    }
 
 
     function plotQuestionFields(cbi,title){
@@ -378,7 +338,6 @@
                     "GROUPTBL":window.grptable,
                     "GROUPPOSITION":$("#lblgroupposition").val(),
                     "REQUESTNUMBER":$("#requestNumber option:selected").val(),
-                    "EVALUATOR":$("#evaluator option:selected").val(),
                     "EXAM":arrAnswers
                 },
                 success: function(result){

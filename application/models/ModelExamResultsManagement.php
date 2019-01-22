@@ -61,7 +61,7 @@ class ModelExamResultsManagement extends CI_Model{
     function getApplicantCode($reqnum){
         try {
             $username = $this->session->userdata('username');
-            $statement = "select a.applicantcode,a.requestnumber,u.firstname,u.middlename,u.lastname from tblapplicant a inner join tblusers u on a.username=u.username where a.applicantcode in (select applicantcode from tblexamanswers where requestnumber='".$reqnum."' and evaluatorusername='".$username."');";
+                $statement = "select a.applicantcode,a.requestnumber,u.firstname,u.middlename,u.lastname from tblapplicant a inner join tblusers u on a.username=u.username where a.applicantcode in (select applicantcode from tblexamanswers where requestnumber='".$reqnum."');";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
