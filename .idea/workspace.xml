@@ -40,15 +40,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="login.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/mods/mod_session/login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5244361" vertical-offset="12641" max-vertical-offset="16983">
-              <caret line="760" column="37" selection-start-line="760" selection-start-column="37" selection-end-line="760" selection-end-column="37" />
+            <state vertical-scroll-proportion="-12.692307" vertical-offset="12641" max-vertical-offset="16983">
+              <caret line="763" column="53" selection-start-line="763" selection-start-column="53" selection-end-line="763" selection-end-column="53" />
               <folding>
                 <marker date="1548168286088" expanded="false" signature="41766:41786" placeholder="..." />
                 <marker date="1548168286088" expanded="false" signature="44061:44116" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="loyaltyaward.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_rewards/loyaltyaward.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.575188" vertical-offset="884" max-vertical-offset="3162">
+              <caret line="70" column="62" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -148,7 +158,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/models/ModelBoardingManagement.php" />
         <option value="$PROJECT_DIR$/application/controllers/Boardingmanagement.php" />
         <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/transaction/boarding.php" />
         <option value="$PROJECT_DIR$/application/models/ModelAssessBiManagement.php" />
@@ -199,6 +208,7 @@
         <option value="$PROJECT_DIR$/application/logs/log-2019-01-21.php" />
         <option value="$PROJECT_DIR$/application/config/email.php" />
         <option value="$PROJECT_DIR$/application/views/mods/mod_session/login.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_rewards/loyaltyaward.php" />
       </list>
     </option>
   </component>
@@ -368,6 +378,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="mod_session" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LGU GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lgu-portal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mods" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mod_rewards" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -759,19 +795,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/models/ModelApplicantLetterManagement.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="748">
-          <caret line="24" column="231" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="231" />
-          <folding>
-            <marker date="1548084640796" expanded="true" signature="293:1168" placeholder="select a.req..." />
-            <marker date="1548084640796" expanded="true" signature="1574:1778" placeholder="select p.ema..tblpdsdetails..." />
-            <marker date="1548084640796" expanded="true" signature="1580:1778" placeholder="select a.req..." />
-            <marker date="1548084640796" expanded="true" signature="1660:1732" placeholder="select usern..tblusers..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/backgroundinvestigation.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="548">
@@ -1137,12 +1160,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_session/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5244361" vertical-offset="12641" max-vertical-offset="16983">
-          <caret line="760" column="37" selection-start-line="760" selection-start-column="37" selection-end-line="760" selection-end-column="37" />
+        <state vertical-scroll-proportion="-12.692307" vertical-offset="12641" max-vertical-offset="16983">
+          <caret line="763" column="53" selection-start-line="763" selection-start-column="53" selection-end-line="763" selection-end-column="53" />
           <folding>
             <marker date="1548168286088" expanded="false" signature="41766:41786" placeholder="..." />
             <marker date="1548168286088" expanded="false" signature="44061:44116" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_rewards/loyaltyaward.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.575188" vertical-offset="884" max-vertical-offset="3162">
+          <caret line="70" column="62" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>
