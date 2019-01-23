@@ -371,7 +371,7 @@
         var th1 = '';
         var tr1 = '';
         for(var keys in group){
-            if(!(group[keys].type == "TECHNICAL")){
+            if(!(group[keys].type == "TECHNICALXX")){
                 thcompetencies+=group[keys].titles.length;
                 th1+='<th colspan="'+group[keys].titles.length+'">'+group[keys].type+'</th>';
                 var t = group[keys].titles;

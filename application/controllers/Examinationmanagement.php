@@ -122,7 +122,7 @@ class ExaminationManagement extends CI_Controller {
             ));
             echo $result;
         } else {
-            $update = $this->ModelExaminationManagement->update($insertData,$reqnum,$username);
+            $update = $this->ModelExaminationManagement->update($insertData,$reqnum);
             if($update){
                 $auditdata = array(
                     'modulename'=>'Examination Module',
