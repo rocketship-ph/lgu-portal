@@ -225,19 +225,22 @@
                         $(win.document.body).find('h1')
                             .text('Behavioral Competency Based Index Report')
                             .css('font-size', '15pt');
+                        $(win.document.body)
+                            .prepend( '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>');
                     }
                 },
                 {
                     extend: 'excelHtml5',
                     title: "BehavioralCompetencyBasedIndexReport" + moment().format("YYYY-MM-DD")
-                },
-                {
-                    extend: 'pdfHtml5',
-                    title: "BehavioralCompetencyBasedIndexReport" + moment().format("YYYY-MM-DD"),
-                    message: 'Behavioral Competency Based Index Report',
-                    orientation: 'landscape',
-                    pageSize: 'LEGAL'
                 }
+//                ,
+//                {
+//                    extend: 'pdfHtml5',
+//                    title: "BehavioralCompetencyBasedIndexReport" + moment().format("YYYY-MM-DD"),
+//                    message: 'Behavioral Competency Based Index Report',
+//                    orientation: 'landscape',
+//                    pageSize: 'LEGAL'
+//                }
             ]
         });
     }
