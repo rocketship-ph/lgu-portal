@@ -90,7 +90,7 @@
 <script type="text/javascript" src="<?php echo $GLOBALS['googlecharts'];?>"></script>
 <script type="application/javascript">
 $(document).ready(function(){
-    $("#nav_analytics_reports").removeClass().addClass("active");
+    $("#nav_recruitment_reports").removeClass().addClass("active");
 
     $("#ul_recruitmentmenu").show();
     $("#ul_mainmenu").hide();
@@ -327,22 +327,26 @@ function generateChart(data){
         padding: 5px;
         color: black;
     }
-                          @media print {
-  body * {
-    display: : none;
-    visibility: hidden;
-    top: 0;
-  }
-  #container, #container * {
-    visibility: visible;
-  }
-  #container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin-top: -750px;
-  }
-  #exportPDF {
-      visibility: hidden;
-  }
+    @media print {
+        body * {
+            display:: none;
+            visibility: hidden;
+            top: 0;
+        }
+
+        #container, #container * {
+            visibility: visible;
+        }
+
+        #container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin-top: -650px;
+        }
+
+        #exportPDF {
+            visibility: hidden;
+        }
+    }
 </style>

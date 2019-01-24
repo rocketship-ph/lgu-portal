@@ -195,7 +195,7 @@
                             <a id="pill_reports" href="<?php echo base_url();?>main/reports" style="text-align: center">
                                 <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="50px">
                                 <br>Report Generation</a></li>
-                         <li id="nav_analytics_reports">
+                         <li id="nav_analytics_reports" style="display:none">
                             <a id="pill_reports" href="<?php echo base_url();?>main/analytics" style="text-align: center">
                                 <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="50px">
                                 <br>Analytics</a></li>

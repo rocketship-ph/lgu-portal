@@ -30,7 +30,7 @@ class Main extends CI_Controller {
         $data = array('content'=>'mods/mod_menu/recruitmentmenu');
         $this->load->view('templates/MasterTemplate',$data);
     }
-      public function analytics()
+    public function analytics()
     {
 //        if(in_array($GLOBALS['NAV_CREATEREQUESTPERSONNEL'],$this->session->userdata('modules'))){
 //            $data = array('content'=>'mods/mod_rsp/mod_recruitment/requestnewpersonnel');
@@ -38,6 +38,16 @@ class Main extends CI_Controller {
 //            $data = array('content'=>'mods/unauthorizedpage');
 //        }
         $data = array('content'=>'mods/mod_menu/analyticsmenu');
+        $this->load->view('templates/MasterTemplate',$data);
+    }
+    public function cscreports()
+    {
+//        if(in_array($GLOBALS['NAV_CREATEREQUESTPERSONNEL'],$this->session->userdata('modules'))){
+//            $data = array('content'=>'mods/mod_rsp/mod_recruitment/requestnewpersonnel');
+//        } else {
+//            $data = array('content'=>'mods/unauthorizedpage');
+//        }
+        $data = array('content'=>'mods/mod_menu/cscreportsmenu');
         $this->load->view('templates/MasterTemplate',$data);
     }
     public function learning()

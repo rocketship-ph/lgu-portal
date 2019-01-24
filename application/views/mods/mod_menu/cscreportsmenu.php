@@ -58,7 +58,7 @@
                 &nbsp;&nbsp;
             </td>
             <td>
-                <div class="panel panel-menu" align="center"  id="panel_requestpersonnelreports">
+                <div class="panel panel-menu" align="center">
                     <a href="<?php echo base_url();?>main/analytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
                         <br>
@@ -70,7 +70,7 @@
                 &nbsp;&nbsp;
             </td>
             <td>
-                <div class="panel panel-menu" align="center" >
+                <div class="panel panel-menu" align="center"   id="panel_requestpersonnelreports">
                     <a href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
                         <br>
@@ -84,95 +84,43 @@
 <div class="col-md-12">
     <hr>
 </div>
-<div class="form-group col-md-3">
+    <div class="col-md-12">
+        <legend>Workforce Profile</legend>
+    </div>
+    <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
-                <a style="text-align: center" href="<?php echo base_url();?>analytics/agerangeanalytics">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/employmentstatus">
                     <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
                     <br><br>
-                    Age Range Analytics
+                    Employment Status
                 </a>
             </div>
         </div>
     </div>
-<div class="form-group col-md-3">
+    <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
-                <a style="text-align: center" href="<?php echo base_url();?>analytics/educationalattainmentanalytics">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/salarygrades">
                     <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
                     <br><br>
-                    Highest Educational Attainment Analytics
+                    Salary Grades
                 </a>
             </div>
         </div>
     </div>
-<div class="form-group col-md-3">
+    <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
-                <a style="text-align: center" href="<?php echo base_url();?>analytics/yearsincurrentpositionanalytics">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/agerange">
                     <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
                     <br><br>
-                    Years in Current Position Analytics
-                </a>
-            </div>
-        </div>
-    </div>
-<div class="form-group col-md-3">
-        <div class="panel">
-            <div class="panel-body" align="center">
-                <a style="text-align: center" href="<?php echo base_url();?>analytics/yearsinserviceanalytics">
-                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
-                    <br><br>
-                    Years in Public Service Analytics
-                </a>
-            </div>
-        </div>
-    </div>
-<div class="form-group col-md-3">
-        <div class="panel">
-            <div class="panel-body" align="center">
-                <a style="text-align: center" href="<?php echo base_url();?>analytics/employmentstatusanalytics">
-                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
-                    <br><br>
-                    Employment Status Analytics
+                    Age Range
                 </a>
             </div>
         </div>
     </div>
 
-<div class="form-group col-md-3">
-        <div class="panel">
-            <div class="panel-body" align="center">
-                <a style="text-align: center" href="<?php echo base_url();?>analytics/salarygradesanalytics">
-                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
-                    <br><br>
-                    Salary Grades Analytics
-                </a>
-            </div>
-        </div>
-    </div>
-<div class="form-group col-md-3">
-        <div class="panel">
-            <div class="panel-body" align="center">
-                <a style="text-align: center" href="<?php echo base_url();?>analytics/fieldofexpertiseanalytics">
-                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
-                    <br><br>
-                    Field of Expertise Analytics
-                </a>
-            </div>
-        </div>
-    </div>
-<div class="form-group col-md-3">
-        <div class="panel">
-            <div class="panel-body" align="center">
-                <a style="text-align: center" href="<?php echo base_url();?>analytics/departmentanalytics">
-                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
-                    <br><br>
-                    Complement by Department Analytics
-                </a>
-            </div>
-        </div>
-    </div>
 
 
 

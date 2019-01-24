@@ -39,7 +39,7 @@
                     <a href="<?php echo base_url();?>analytics/salarygradesanalytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="40px">
                         <br>
-                        Salary Grades Analytics
+                        Salary Grades
                     </a>
                 </div>
             </td>
@@ -48,10 +48,10 @@
             </td>
             <td>
                 <div class="panel panel-menu" align="center" id="panel_applicantreports">
-                    <a  href="<?php echo base_url();?>main/analytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                    <a  href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
                         <br>
-                        Analytics Menu
+                        CSC Required Reports Menu
                     </a>
                 </div>
             </td>
@@ -63,7 +63,7 @@
         <hr>
     </div>
     <div class="col-md-12" id="container">
-        <legend>Salary Grades Analytics</legend>
+        <legend>Salary Grades </legend>
             <button id="exportPDF" class="btn btn-success btn-xs pull-right">Export as PDF</button><br><br>
         <div class="row">
             <div class="col-md-12">
@@ -112,7 +112,6 @@ function loadReport() {
                 $("#loadingmodal").modal("hide");
                 if(data.Code == "00"){
                     countAgeRange(data.details);
-                    generateChart(data.details);
                     console.log(data.details);
                     $('#tblcont1').show();
                     $("#tblmsg1").hide();
@@ -262,7 +261,6 @@ function countAgeRange(data){
     }
 
         $("#tbldata").append('<tr> <td><b>Grand Total</b></td> <td><b>'+ctrm+'</b></td> <td><b>'+ctrf+'</b></td> <td><b>'+sum(ctrm,ctrf)+'</b></td> </tr>');
-    generateChart(cdata);
 }
 
 function hasName(prop, value, data) {
