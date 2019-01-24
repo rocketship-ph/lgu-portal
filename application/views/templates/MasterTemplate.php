@@ -195,6 +195,11 @@
                             <a id="pill_reports" href="<?php echo base_url();?>main/reports" style="text-align: center">
                                 <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="50px">
                                 <br>Report Generation</a></li>
+                         <li id="nav_analytics_reports">
+                            <a id="pill_reports" href="<?php echo base_url();?>main/analytics" style="text-align: center">
+                                <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="50px">
+                                <br>Analytics</a></li>
+
                         <?php if($this->session->userdata('userlevel') == 'ADMINISTRATOR'):?>
                             <li id="nav_recruitment_utilities">
                                 <a id="pill_utilities" href="<?php echo base_url();?>main/utilities" style="text-align: center">
