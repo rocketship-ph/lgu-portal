@@ -36,10 +36,10 @@
             </td>
             <td>
                 <div class="panel panel-menu" align="center" id="panel_requestpersonnelreports">
-                    <a href="<?php echo base_url();?>analytics/salarygradesanalytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                    <a href="<?php echo base_url();?>analytics/positionlevelanalytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="40px">
                         <br>
-                        Salary Grades Analytics
+                        Levels of Position Analytics
                     </a>
                 </div>
             </td>
@@ -63,7 +63,7 @@
         <hr>
     </div>
     <div class="col-md-12" id="container">
-        <legend>Salary Grades Analytics</legend>
+        <legend>Levels of Position Analytics</legend>
             <button id="exportPDF" class="btn btn-success btn-xs pull-right">Export as PDF</button><br><br>
         <div class="row">
             <div class="col-md-12">
@@ -152,7 +152,7 @@ function countAgeRange(data){
     var ctrm =0;
     var ctrf =0;
     for(var i=0;i<data.length;i++) {
-        var value = data[i]['salarygrade'].toUpperCase();
+        var value = data[i]['positionlevel'].toUpperCase();
         var val =[];
         if(value!=""&&value!=null&&value!="null"){
             if(data[i]['gender']=="MALE"){
@@ -197,7 +197,7 @@ function countAgeRange(data){
         temp.push(cnt);
         datax.push(temp);
     }
-    $("#tbldata").append('<tr> <td><b>Status</b></td> <td width="15%"><b>Male</b></td> <td width="15%"><b>Female</b></td> <td width="15%"><b>Total</b></td> </tr>');
+    $("#tbldata").append('<tr> <td><b>Level</b></td> <td width="15%"><b>Male</b></td> <td width="15%"><b>Female</b></td> <td width="15%"><b>Total</b></td> </tr>');
      var obj = [];
     var cur = null;
     var sg = [];
@@ -284,14 +284,14 @@ function sum(m,f){
 function generateChart(data){
     var chartObj = new Object();
     chartObj['chartName'] = 'engDiv';
-    chartObj['chartTitle'] = 'Salary Grades';
+    chartObj['chartTitle'] = 'Levels of Position';
     chartObj['data'] = cdata;
     google.charts.setOnLoadCallback(function() {
         drawChart();
     });
     function drawChart() {
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Salary Grades Analytics');
+        data.addColumn('string', 'Levels of Position Analytics');
         data.addColumn('number', 'Total Number of Male Employees');
         data.addColumn('number', 'Total Number of Female Employees');
 

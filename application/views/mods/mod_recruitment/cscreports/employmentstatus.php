@@ -36,10 +36,10 @@
             </td>
             <td>
                 <div class="panel panel-menu" align="center" id="panel_requestpersonnelreports">
-                    <a href="<?php echo base_url();?>analytics/yearsinserviceanalytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                    <a href="<?php echo base_url();?>cscreports/employmentstatus" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="40px">
                         <br>
-                        Department Analytics
+                        Employment Status
                     </a>
                 </div>
             </td>
@@ -48,10 +48,10 @@
             </td>
             <td>
                 <div class="panel panel-menu" align="center" id="panel_applicantreports">
-                    <a  href="<?php echo base_url();?>main/analytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                    <a  href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
                         <br>
-                        Analytics Menu
+                        CSC Required Reports Menu
                     </a>
                 </div>
             </td>
@@ -63,8 +63,8 @@
         <hr>
     </div>
     <div class="col-md-12" id="container">
-        <legend>Complement by Department Analytics</legend>
-                   <button id="exportPDF" class="btn btn-success btn-xs pull-right">Export as PDF</button><br><br>
+        <legend>Employment Status </legend>
+        <button id="exportPDF" class="btn btn-success btn-xs pull-right">Export as PDF</button><br><br>
         <div class="row">
             <div class="col-md-12">
                 <h5 id="tblmsg1" style="display:none"></h5>
@@ -112,7 +112,6 @@ function loadReport() {
                 $("#loadingmodal").modal("hide");
                 if(data.Code == "00"){
                     countAgeRange(data.details);
-                    generateChart(data.details);
                     console.log(data.details);
                     $('#tblcont1').show();
                     $("#tblmsg1").hide();
@@ -152,7 +151,7 @@ function countAgeRange(data){
     var ctrm =0;
     var ctrf =0;
     for(var i=0;i<data.length;i++) {
-        var value = data[i]['department'].toUpperCase();
+        var value = data[i]['employmentstatus'].toUpperCase();
         var val =[];
         if(value!=""&&value!=null&&value!="null"){
             if(data[i]['gender']=="MALE"){
@@ -197,14 +196,14 @@ function countAgeRange(data){
         temp.push(cnt);
         datax.push(temp);
     }
-    $("#tbldata").append('<tr> <td><b>Department</b></td> <td width="15%"><b>Male</b></td> <td width="15%"><b>Female</b></td> <td width="15%"><b>Total</b></td> </tr>');
+    $("#tbldata").append('<tr> <td><b>Employment Status</b></td> <td width="15%"><b>Male</b></td> <td width="15%"><b>Female</b></td> <td width="15%"><b>Total</b></td> </tr>');
      var obj = [];
     var cur = null;
     var sg = [];
     var val = [];
     for(var i=0; i<datax.length;i++){
         var item = {}
-        var d = datax[i][0];
+        var d = datax[i][0].replace("- SELECT EMPLOYMENT TYPE -", "N/A");
         var dx = d.replace("*M*","").replace("*F*","");
         item["sg"] = dx;
         if(datax[i][0].substring(0, 3)=="*M*"){
@@ -232,6 +231,7 @@ function countAgeRange(data){
     var result = {};
     result.rows = [];
 
+
     for(i in newObj){
           var m =0, f=0;
             for(x in obj){
@@ -243,8 +243,6 @@ function countAgeRange(data){
           }
         }
           result.rows.push({'sg':i,'total':newObj[i],'m':m,'f':f});
-
-        
         if(i==""){
             $("#tbldata").append('<tr> <td>N/A</td> <td>'+m+'</td> <td>'+f+'</td> <td><b>'+newObj[i]+'</b></td> </tr>');
         } else {
@@ -252,15 +250,18 @@ function countAgeRange(data){
         }
         
         var cobj=[];
-        cobj.push(i);
+        if(i==""){
+             cobj.push("N/A");
+         } else {
+            cobj.push(i);
+         }
         cobj.push(m);
         cobj.push(f);
         cdata.push(cobj);
     }
-    console.log(JSON.stringify(result.rows));
 
         $("#tbldata").append('<tr> <td><b>Grand Total</b></td> <td><b>'+ctrm+'</b></td> <td><b>'+ctrf+'</b></td> <td><b>'+sum(ctrm,ctrf)+'</b></td> </tr>');
-    generateChart(cdata);
+
 }
 
 function hasName(prop, value, data) {
@@ -282,14 +283,14 @@ function sum(m,f){
 function generateChart(data){
     var chartObj = new Object();
     chartObj['chartName'] = 'engDiv';
-    chartObj['chartTitle'] = 'Department';
+    chartObj['chartTitle'] = 'Employment Status';
     chartObj['data'] = cdata;
     google.charts.setOnLoadCallback(function() {
         drawChart();
     });
     function drawChart() {
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Complement by Department Analytics');
+        data.addColumn('string', 'Employment Status Analytics');
         data.addColumn('number', 'Total Number of Male Employees');
         data.addColumn('number', 'Total Number of Female Employees');
 
@@ -299,7 +300,7 @@ function generateChart(data){
             chartArea: {
                 width: 500,
                 right: 10,
-                left:400
+                left:200
             },
             legend: { position: 'bottom', alignment: 'start' },
             colors: ['#1976d2','#e53935'],
@@ -316,7 +317,7 @@ function generateChart(data){
         chart.draw(data, options);
     }
 }
-    $('#exportPDF').click(function () {
+   $('#exportPDF').click(function () {
     window.print();
 });
 </script>
@@ -324,7 +325,7 @@ function generateChart(data){
     table.tblanalytics td{
         padding: 5px;
         color: black;
-    }                          
+    }
     @media print {
         body * {
             display:: none;
@@ -345,6 +346,11 @@ function generateChart(data){
 
         #exportPDF {
             visibility: hidden;
+
+        }
+        div {
+            width:100%;
         }
     }
+
 </style>

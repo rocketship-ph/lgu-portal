@@ -36,10 +36,10 @@
         </td>
         <td>
             <div class="panel panel-menu" align="center" id="panel_requestpersonnelreports">
-                <a href="<?php echo base_url();?>analytics/agerangeanalytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                <a href="<?php echo base_url();?>cscreports/agerange" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                     <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="40px">
                     <br>
-                    Age Range Analytics
+                    Age Range
                 </a>
             </div>
         </td>
@@ -48,10 +48,10 @@
         </td>
         <td>
             <div class="panel panel-menu" align="center" id="panel_applicantreports">
-                <a  href="<?php echo base_url();?>main/analytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                <a  href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                     <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
                     <br>
-                    Analytics Menu
+                    CSC Required Reports Menu
                 </a>
             </div>
         </td>
@@ -63,7 +63,7 @@
         <hr>
     </div>
     <div class="col-md-12" id="container">
-        <legend>Age Range Analytics</legend>
+        <legend>Age Range</legend>
         <button id="exportPDF" class="btn btn-success btn-xs pull-right">Export as PDF</button><br><br>
         <div class="row">
             <div class="col-md-12 section-to-print" >
@@ -82,7 +82,7 @@
                         <tbody>
                         </tbody>
                     </table> -->
-                    <table class="tblanalytics2" style="width: 100%;" border="2">
+                    <table class="tblanalytics2" style="width: 100%; display: none" border="2" >
                        <tbody>
                           <tr>
                              <td rowspan="2" width="10%"><b>Age Range</b></td>
@@ -305,7 +305,6 @@ function loadReport() {
                 $("#loadingmodal").modal("hide");
                 if(data.Code == "00"){
                     countAgeRange(data.details);
-                    generateChart(data.details);
                     $('#tblcont1').show();
                     $("#tblmsg1").hide();
                 } else {
@@ -872,6 +871,9 @@ $('#exportPDF').click(function () {
 
         #exportPDF {
             visibility: hidden;
+        }
+        div {
+            width: 100%;
         }
     }
 </style>
