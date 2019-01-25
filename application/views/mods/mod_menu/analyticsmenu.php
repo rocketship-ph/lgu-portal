@@ -84,6 +84,7 @@
 <div class="col-md-12">
     <hr>
 </div>
+    <?php if(in_array($GLOBALS['NAV_AGERANGEANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -95,6 +96,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_EDUCATIONALATTAINMENTANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -106,6 +109,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_YEARSINCURRENTPOSITIONANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -117,6 +122,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_YEARSINPUBLICSERVICEANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -128,6 +135,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_EMPLOYMENTSTATUSANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -139,7 +148,8 @@
             </div>
         </div>
     </div>
-
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_SALARYGRADEANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -151,6 +161,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_FIELDOFEXPERTISEANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -162,6 +174,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_COMPLEMENTBYDEPARTMENTANALYTICS'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -173,6 +187,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_LEVELSOFPOSITIONANALYTICS'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -184,9 +200,7 @@
             </div>
         </div>
     </div>
-
-
-
+    <?php endif;?>
 </div>
 </div>
 <script type="application/javascript">
