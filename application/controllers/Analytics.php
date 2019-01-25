@@ -34,4 +34,8 @@ class Analytics extends CI_Controller {
         $data = array('content'=>'mods/mod_recruitment/analytics/departmentanalytics');
         $this->load->view('templates/MasterTemplate',$data);
     }
+    public function positionlevelanalytics() {
+        $data = array('content'=>'mods/mod_recruitment/analytics/positionlevelanalytics');
+        $this->load->view('templates/MasterTemplate',$data);
+    }
 }

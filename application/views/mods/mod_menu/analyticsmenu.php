@@ -162,13 +162,24 @@
             </div>
         </div>
     </div>
-<div class="form-group col-md-3">
+    <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
                 <a style="text-align: center" href="<?php echo base_url();?>analytics/departmentanalytics">
                     <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
                     <br><br>
                     Complement by Department Analytics
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <div class="panel">
+            <div class="panel-body" align="center">
+                <a style="text-align: center" href="<?php echo base_url();?>analytics/positionlevelanalytics">
+                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                    <br><br>
+                    Levels of Position Analytics
                 </a>
             </div>
         </div>
