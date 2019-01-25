@@ -74,6 +74,7 @@ class ModelPosition extends CI_Model{
         try {
             $admindb->select('*');
             $admindb->from($this->salaryTbl);
+            $admindb->order_by("cast(equivalent as unsigned)", "asc");
             $query = $admindb->get();
 
             if($query){

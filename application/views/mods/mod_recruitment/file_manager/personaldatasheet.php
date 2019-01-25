@@ -661,6 +661,12 @@
                     <label for="employmenttype" class="control-label">Date Entered the LGU <i>(if applicable)</i></label>
                     <input type="text" class="form-control clearField datepick" id="dateenteredlgu" placeholder="Pick a Date.." readonly>
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="employmenttype" class="control-label">Current Salary Grade <i>(if applicable)</i></label>
+                    <select class="form-control clearField" id="currsalarygrade">
+                        <option selected disabled>- Select Salary Grade -</option>
+                    </select>
+                </div>
                 <div class="col-md-12" align="left">
                     <p>
                         <br>
@@ -1173,8 +1179,36 @@ $(document).ready(function(){
         autoclose: true,
         format:"yyyy"
     });
-    loadPdsData();
+    loadSalaryGrade();
+
 });
+
+function loadSalaryGrade(){
+//    $("#loadingmodal").modal("show");
+    var select = $("#currsalarygrade");
+    select.empty();
+    $.ajax({
+        url: "<?php echo base_url();?>positionmanagement/getsalarygrade",
+        type: "POST",
+        dataType: "json",
+        success: function(data){
+            if(data.Code == "00"){
+                select.append("<option selected disabled>- Select Salary Grade -</option>");
+                for(var keys in data.details){
+                    select.append("<option rowid='"+data.details[keys].id+"' value='"+data.details[keys].salarygrade+"' equivalent='"+data.details[keys].equivalent+"'>"+data.details[keys].salarygrade+"</option>");
+                }
+                loadPdsData();
+            } else {
+                select.append("<option selected disabled>- No Salary Grade Available -</option>");
+            }
+        },
+        error: function(e){
+
+            select.append("<option selected disabled>- No Salary Grade Available -</option>");
+            console.log(e);
+        }
+    });
+}
 
 function loadExistingProvincess(){
     $("#loadingmodal").modal("show");
@@ -1548,6 +1582,7 @@ function loadPdsData(){
                    $(this).prop("disabled",true);
                 });
                 for(var keys in result.details){
+                    $("#currsalarygrade").val(result.details[keys].salarygrade);
                     $("#dateenteredlgu").val(result.details[keys].dateenteredlgu);
                     $("#employmenttype").val(result.details[keys].currentemploymenttype);
                     $("#surname").val(result.details[keys].lastname);
@@ -2356,6 +2391,7 @@ function submitData(){
                     "MOTHERMNAME":$("#mothermiddlename").val(),
                     "CURRENTPOSITION":$("#currentposition").val(),
                     "DATEENTEREDLGU":$("#dateenteredlgu").val(),
+                    "SALARYGRADE":$("#currsalarygrade option:selected").val() == "- Select Salary Grade -" ? "" : $("#currsalarygrade option:selected").val(),
                     "CHILDREN":children,
                     "ELEMENTARY":elementary,
                     "HIGHSCHOOL":highschool,

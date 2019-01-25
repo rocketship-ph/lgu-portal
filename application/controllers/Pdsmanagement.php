@@ -81,6 +81,7 @@ class PdsManagement extends CI_Controller {
             'currentemploymenttype' => $_REQUEST['EMPLOYMENTTYPE'],
             'currentposition' => strtoupper($_REQUEST['CURRENTPOSITION']),
             'dateenteredlgu' => $_REQUEST['DATEENTEREDLGU'],
+            'salarygrade' => $_REQUEST['SALARYGRADE'],
             'childrendetails' => @($_REQUEST['CHILDREN'] == "" || $_REQUEST['CHILDREN'] == null) ? "" : json_encode($_REQUEST['CHILDREN']),
             'elementary' => @($_REQUEST['ELEMENTARY'] == "" || $_REQUEST['ELEMENTARY'] == null) ? "" : json_encode($_REQUEST['ELEMENTARY']),
             'highschool' => @($_REQUEST['HIGHSCHOOL'] == "" || $_REQUEST['HIGHSCHOOL'] == null) ? "" : json_encode($_REQUEST['HIGHSCHOOL']),
