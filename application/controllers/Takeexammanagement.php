@@ -29,12 +29,19 @@ class TakeExamManagement extends CI_Controller {
     }
 
     public function displayexam(){
-        $questions = $this->ModelTakeExamManagement->getExam($this->session->userdata('requestnumber'),$_REQUEST['EVALUATOR']);
+        $questions = $this->ModelTakeExamManagement->getExam($this->session->userdata('requestnumber'));
+        $hasanswers = $this->ModelTakeExamManagement->hasAnswers($this->session->userdata('requestnumber'));
         if($questions){
             $result = json_encode(array(
                 'Code' => '00',
                 'Message' => 'Successfully Fetched Data',
                 'details' => $questions
+            ));
+            echo $result;
+        } else if($hasanswers){
+            $result = json_encode(array(
+                'Code' => '01',
+                'Message' => 'Examination already taken by the applicant. Please wait for evaluator assessment.'
             ));
             echo $result;
         } else {
@@ -51,29 +58,30 @@ class TakeExamManagement extends CI_Controller {
         $grppos = $_REQUEST['GROUPPOSITION'];
         $reqnum = $this->session->userdata('requestnumber');
         $exam = $_REQUEST['EXAM'];
-        $evaluator = $_REQUEST['EVALUATOR'];
         $applicantcode = $this->session->userdata('applicantcode');
 
-        $notif = array(
-            'requestnumber'=>$reqnum,
-            'notiftype'=>'TAKE EXAM',
-            'levelofapproval'=>'100',
-            'tonotif'=>$evaluator,
-            'fromnotif'=>$this->session->userdata('username'),
-            'status'=>'0',
-            'message'=>'Applicant '.$applicantcode.' has answered your examination under Position Request: '.$reqnum
-        );
         $insertData = array(
             'exam' => base64_encode(json_encode($exam)),
             'applicantcode' => $applicantcode,
             'groupposition' => $grppos,
             'requestnumber' => $reqnum,
-            'grouptbl' => json_encode($grptbl),
-            'evaluatorusername' => $evaluator
+            'grouptbl' => json_encode($grptbl)
         );
-
+        $evaluators = $this->ModelTakeExamManagement->getEvaluators($reqnum);
         $insert = $this->ModelTakeExamManagement->insert($insertData);
         if($insert){
+            foreach($evaluators as $key=>$value){
+                $notif = array(
+                    'requestnumber'=>$reqnum,
+                    'notiftype'=>'TAKE EXAM',
+                    'levelofapproval'=>'100',
+                    'tonotif'=>$value['evaluatorusername'],
+                    'fromnotif'=>$this->session->userdata('username'),
+                    'status'=>'0',
+                    'message'=>'Applicant '.$applicantcode.' has answered the examination under Position Request: '.$reqnum
+                );
+                $notifdata = $this->ModelNotificationManagement->insertNotif($notif);
+            }
             $auditdata = array(
                 'modulename'=>'Examination Module',
                 'action'=>'Take Exam ['.$reqnum.']['.$applicantcode.']',
@@ -81,7 +89,6 @@ class TakeExamManagement extends CI_Controller {
                 'ipaddress'=> $_SERVER['REMOTE_ADDR']
             );
             $audit = $this->ModelAuditTrail->insert($auditdata);
-            $notifdata = $this->ModelNotificationManagement->insertNotif($notif);
             $result = json_encode(array(
                 'Code' => '00',
                 'Message' => 'Examination answer successfully recorded. Please wait for the designated evaluator(s) to assess your answers.'

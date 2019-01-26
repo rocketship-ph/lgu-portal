@@ -63,6 +63,7 @@
         <hr>
     </div>
     <div class="col-md-12">
+
         <legend>List of Position Report</legend>
         <div class="row">
             <div class="col-md-12">
@@ -165,19 +166,23 @@ function loadReport() {
                     $(win.document.body).find('h1')
                         .text('List of Position')
                         .css('font-size', '15pt');
+                    $(win.document.body)
+                        .prepend( '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>');
+                    $(win.document.body)
+                        .append($("#divGraph").html());
                 }
             },
             {
                 extend: 'excelHtml5',
                 title: "ListOfPosition" + moment().format("YYYY-MM-DD")
-            },
-            {
-                extend: 'pdfHtml5',
-                title: "ListOfPosition" + moment().format("YYYY-MM-DD"),
-                message: 'List of Position',
-                orientation: 'landscape',
-                pageSize: 'LEGAL'
             }
+//            ,{
+//                extend: 'pdfHtml5',
+//                title: "ListOfPosition" + moment().format("YYYY-MM-DD"),
+//                message: 'List of Position',
+//                orientation: 'landscape',
+//                pageSize: 'LEGAL'
+//            }
         ]
     });
    

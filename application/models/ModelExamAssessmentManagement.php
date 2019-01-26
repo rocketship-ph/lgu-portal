@@ -9,7 +9,7 @@ class ModelExamAssessmentManagement extends CI_Model{
     function getRequestnumbers($username){
         try {
 
-            $statement = "select distinct requestnumber from tblexamanswers where evaluatorusername='".$username."' order by requestnumber desc;";
+            $statement = "select distinct requestnumber from tblexamanswers where requestnumber in (select requestnumber from tblevaluators where evaluatorusername='".$username."') order by requestnumber desc;";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
@@ -42,7 +42,7 @@ class ModelExamAssessmentManagement extends CI_Model{
     function getApplicantCode($reqnum){
         try {
             $username = $this->session->userdata('username');
-            $statement = "select a.applicantcode,a.requestnumber,u.firstname,u.middlename,u.lastname from tblapplicant a inner join tblusers u on a.username=u.username where a.applicantcode in (select applicantcode from tblexamanswers where requestnumber='".$reqnum."' and evaluatorusername='".$username."') and a.applicantcode not in (select applicantcode from tblexamassessment where requestnumber='".$reqnum."' and evaluatorusername='".$username."');";
+            $statement = "select a.applicantcode,a.requestnumber,u.firstname,u.middlename,u.lastname from tblapplicant a inner join tblusers u on a.username=u.username where a.applicantcode in (select applicantcode from tblexamanswers where requestnumber='".$reqnum."') and a.applicantcode not in (select applicantcode from tblexamassessment where requestnumber='".$reqnum."' and evaluatorusername='".$username."');";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
@@ -58,7 +58,7 @@ class ModelExamAssessmentManagement extends CI_Model{
 
     function getExamAnswer($reqnum,$username,$applicantcode){
         try {
-            $statement = "select requestnumber,evaluatorusername,applicantcode,exam,groupposition,grouptbl as criteria from tblexamanswers where evaluatorusername='".$username."' and requestnumber='".$reqnum."' and applicantcode='".$applicantcode."';";
+            $statement = "select requestnumber,evaluatorusername,applicantcode,exam,groupposition,grouptbl as criteria from tblexamanswers where requestnumber='".$reqnum."' and applicantcode='".$applicantcode."';";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();

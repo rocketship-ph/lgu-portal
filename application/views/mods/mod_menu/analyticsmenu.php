@@ -45,6 +45,7 @@
             <td align="center" width="20px">
                 &nbsp;&nbsp;
             </td>
+            <?php if(array_intersect($GLOBALS['NAVREPORTS_MGT'],$this->session->userdata('modules'))):?>
             <td>
                 <div class="panel panel-menu" align="center">
                     <a href="<?php echo base_url();?>main/reports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
@@ -57,6 +58,8 @@
             <td align="center" width="20px">
                 &nbsp;&nbsp;
             </td>
+            <?php endif;?>
+            <?php if(array_intersect($GLOBALS['NAVPDSANALYTICSMGT'],$this->session->userdata('modules'))):?>
             <td>
                 <div class="panel panel-menu" align="center"  id="panel_requestpersonnelreports">
                     <a href="<?php echo base_url();?>main/analytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
@@ -69,21 +72,23 @@
             <td align="center" width="20px">
                 &nbsp;&nbsp;
             </td>
-            <td>
-                <div class="panel panel-menu" align="center" >
-                    <a href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
-                        <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
-                        <br>
-                        CSC Required Reports
-                    </a>
-                </div>
-            </td>
+            <?php endif;?>
+<!--            <td>-->
+<!--                <div class="panel panel-menu" align="center" >-->
+<!--                    <a href="--><?php //echo base_url();?><!--main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">-->
+<!--                        <img src="--><?php //echo base_url();?><!--assets/img/icons/report_generation.png" height="40px">-->
+<!--                        <br>-->
+<!--                        CSC Required Reports-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </td>-->
         </tr>
     </table>
 <div class="row">
 <div class="col-md-12">
     <hr>
 </div>
+    <?php if(in_array($GLOBALS['NAV_AGERANGEANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -95,6 +100,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_EDUCATIONALATTAINMENTANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -106,6 +113,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_YEARSINCURRENTPOSITIONANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -117,6 +126,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_YEARSINPUBLICSERVICEANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -128,6 +139,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_EMPLOYMENTSTATUSANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -139,7 +152,8 @@
             </div>
         </div>
     </div>
-
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_SALARYGRADEANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -151,6 +165,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_FIELDOFEXPERTISEANALYTICS'],$this->session->userdata('modules'))):?>
 <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -162,6 +178,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_COMPLEMENTBYDEPARTMENTANALYTICS'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -173,6 +191,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_LEVELSOFPOSITIONANALYTICS'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -184,9 +204,7 @@
             </div>
         </div>
     </div>
-
-
-
+    <?php endif;?>
 </div>
 </div>
 <script type="application/javascript">

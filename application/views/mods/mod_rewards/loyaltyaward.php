@@ -41,7 +41,7 @@
             </td>
             <td>
                 <div class="panel" align="center" id="panel_loyalty">
-                    <a href="<?php echo base_url();?>main/opcr" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                    <a href="<?php echo base_url();?>main/loyaltyaward" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/loyalty.png" height="40px">
                         <br>
                         Loyalty Award

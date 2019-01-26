@@ -6,8 +6,7 @@ class ModelTakeExamManagement extends CI_Model{
 
     function getEvaluators($requestnumber){
         try {
-            $applicantcode = $this->session->userdata('applicantcode');
-            $statement = "select * from tblusers where username in (select distinct createdby from tblexamination where requestnumber='".$requestnumber."' and createdby not in (select evaluatorusername from tblexamanswers where requestnumber='".$requestnumber."' and applicantcode='".$applicantcode."'));";
+            $statement = "select evaluatorusername from tblevaluators where requestnumber='".$requestnumber."'";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
@@ -21,9 +20,27 @@ class ModelTakeExamManagement extends CI_Model{
         }
     }
 
-    function getExam($reqnum,$username){
+    function getExam($reqnum){
         try {
-            $statement = "select r.requestnumber,p.positioncode,p.name as positionname,p.description,p.groupposition,p.groupdesc,p.groupcode,e.exam,e.grouptbl as criteria from tblpersonnelrequest r inner join tblposition p on r.positioncode = p.positioncode inner join tblexamination e on e.requestnumber = r.requestnumber where e.requestnumber='".$reqnum."' and e.createdby='".$username."';";
+            $applicantcode = $this->session->userdata('applicantcode');
+            $statement = "select r.requestnumber,p.positioncode,p.name as positionname,p.description,p.groupposition,p.groupdesc,p.groupcode,e.exam,e.grouptbl as criteria from tblpersonnelrequest r inner join tblposition p on r.positioncode = p.positioncode inner join tblexamination e on e.requestnumber = r.requestnumber where e.requestnumber='".$reqnum."' and e.requestnumber not in (select requestnumber from tblexamanswers where applicantcode='".$applicantcode."')";
+            $query = $this->db->query($statement);
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
+    function hasAnswers($reqnum){
+        try {
+            $applicantcode = $this->session->userdata('applicantcode');
+            $statement = "select * from tblexamanswers where applicantcode='".$applicantcode."' and requestnumber='".$reqnum."'";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();

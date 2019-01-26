@@ -68,7 +68,8 @@ class ExaminationManagement extends CI_Controller {
             'groupposition' => $grppos,
             'requestnumber' => $reqnum,
             'grouptbl' => json_encode($grptbl),
-            'createdby' => $this->session->userdata('username')
+            'createdby' => $this->session->userdata('username'),
+            'lastmodifiedby' => $this->session->userdata('username')
         );
 
         $isanwered = $this->ModelExaminationManagement->isanswered($reqnum,$username);
@@ -96,6 +97,48 @@ class ExaminationManagement extends CI_Controller {
                 $result = json_encode(array(
                     'Code' => '01',
                     'Message' => 'Examination Creation Failed'
+                ));
+            }
+            echo $result;
+        }
+
+    }
+
+    public function updateexam(){
+        $reqnum = $_REQUEST['REQUESTNUMBER'];
+        $exam = $_REQUEST['EXAM'];
+        $username = $this->session->userdata('username');
+
+        $insertData = array(
+            'exam' => base64_encode(json_encode($exam)),
+            'lastmodifiedby' => $this->session->userdata('username')
+        );
+
+        $isanwered = $this->ModelExaminationManagement->isanswered($reqnum,$username);
+        if($isanwered){
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'This examination is already being answered by the applicants thus, further changes are prohibited.'
+            ));
+            echo $result;
+        } else {
+            $update = $this->ModelExaminationManagement->update($insertData,$reqnum);
+            if($update){
+                $auditdata = array(
+                    'modulename'=>'Examination Module',
+                    'action'=>'Update Examination Questions ['.$reqnum.']',
+                    'user'=>$this->session->userdata('username'),
+                    'ipaddress'=> $_SERVER['REMOTE_ADDR']
+                );
+                $audit = $this->ModelAuditTrail->insert($auditdata);
+                $result = json_encode(array(
+                    'Code' => '00',
+                    'Message' => 'Examination Successfully Updated'
+                ));
+            }else{
+                $result = json_encode(array(
+                    'Code' => '01',
+                    'Message' => 'Examination Update Failed'
                 ));
             }
             echo $result;

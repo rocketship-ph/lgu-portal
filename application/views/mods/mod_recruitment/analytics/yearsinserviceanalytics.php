@@ -804,8 +804,10 @@ function generateChart(data){
         chart.draw(data, options);
     }
 }
-  $('#exportPDF').click(function () {
-    window.print();
+$('#exportPDF').click(function(){
+    $("#container").print({
+        prepend: '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table><br><br>'
+    });
 });
 </script>
 <style type="text/css">
@@ -819,22 +821,22 @@ function generateChart(data){
         text-align: center;
     }
    @media print {
-       body * {
-           display:: none;
-           visibility: hidden;
-           top: 0;
-       }
+       /*body * {*/
+           /*display:: none;*/
+           /*visibility: hidden;*/
+           /*top: 0;*/
+       /*}*/
 
-       #container, #container * {
-           visibility: visible;
-       }
+       /*#container, #container * {*/
+           /*visibility: visible;*/
+       /*}*/
 
-       #container {
-           position: absolute;
-           left: 0;
-           top: 0;
-           margin-top: -650px;
-       }
+       /*#container {*/
+           /*position: absolute;*/
+           /*left: 0;*/
+           /*top: 0;*/
+           /*margin-top: -650px;*/
+       /*}*/
 
        #exportPDF {
            visibility: hidden;

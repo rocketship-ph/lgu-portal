@@ -40,7 +40,7 @@ class ModelExaminationManagement extends CI_Model{
 
     function getExistingExam($reqnum,$username){
         try {
-            $statement = "select r.requestnumber,p.positioncode,p.name as positionname,p.description,p.groupposition,p.groupdesc,p.groupcode,e.exam,e.grouptbl as criteria from tblpersonnelrequest r inner join tblposition p on r.positioncode = p.positioncode inner join tblexamination e on e.requestnumber = r.requestnumber where e.requestnumber='".$reqnum."' and e.createdby='".$username."';";
+            $statement = "select r.requestnumber,p.positioncode,p.name as positionname,p.description,p.groupposition,p.groupdesc,p.groupcode,e.exam,e.grouptbl as criteria from tblpersonnelrequest r inner join tblposition p on r.positioncode = p.positioncode inner join tblexamination e on e.requestnumber = r.requestnumber where e.requestnumber='".$reqnum."'";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
@@ -69,6 +69,22 @@ class ModelExaminationManagement extends CI_Model{
                 return false;
             }
 
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
+
+    public function update($data = array(),$reqnum) {
+        try {
+            $this->db->where('requestnumber',$reqnum);
+            $query = $this->db->update($this->examTbl,$data);
+            if($query){
+                return true;
+            } else {
+                return false;
+            }
         } catch(Exception $e){
             log_message('error', $e);
             return false;

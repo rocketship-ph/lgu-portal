@@ -32,12 +32,11 @@ class Main extends CI_Controller {
     }
     public function analytics()
     {
-//        if(in_array($GLOBALS['NAV_CREATEREQUESTPERSONNEL'],$this->session->userdata('modules'))){
-//            $data = array('content'=>'mods/mod_rsp/mod_recruitment/requestnewpersonnel');
-//        } else {
-//            $data = array('content'=>'mods/unauthorizedpage');
-//        }
-        $data = array('content'=>'mods/mod_menu/analyticsmenu');
+        if(array_intersect($GLOBALS['NAVPDSANALYTICSMGT'],$this->session->userdata('modules'))){
+            $data = array('content'=>'mods/mod_menu/analyticsmenu');
+        } else {
+            $data = array('content'=>'mods/unauthorizedpage');
+        }
         $this->load->view('templates/MasterTemplate',$data);
     }
     public function cscreports()

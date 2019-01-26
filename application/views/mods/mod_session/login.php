@@ -758,6 +758,7 @@ function generateChart(data){
    });
 
     function submitApplicationRequest(){
+        console.log("valid captcha");
         $("#loadingmodal").modal("show");
         var formdata = new FormData();
         var file = $('input[name=file]')[0].files[0];
