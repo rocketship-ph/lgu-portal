@@ -220,7 +220,7 @@ function countAgeRange(data){
         obj.push(item);
       
     }
-
+    sortByKeyAsc(obj, "sg");
     var newObj = {};
     for(i in obj){
             var item = obj[i];
@@ -264,7 +264,12 @@ function countAgeRange(data){
         $("#tbldata").append('<tr> <td><b>Grand Total</b></td> <td><b>'+ctrm+'</b></td> <td><b>'+ctrf+'</b></td> <td><b>'+sum(ctrm,ctrf)+'</b></td> </tr>');
     generateChart(cdata);
 }
-
+function sortByKeyAsc(array, key) {
+    return array.sort(function (a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
 function hasName(prop, value, data) {
     return data.some(function(obj) {
         return prop in obj && obj[prop] === value;

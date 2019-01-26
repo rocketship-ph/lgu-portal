@@ -36,7 +36,7 @@
             </td>
             <td>
                 <div class="panel panel-menu" align="center" id="panel_requestpersonnelreports">
-                    <a href="<?php echo base_url();?>analytics/yearsinserviceanalytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                    <a href="<?php echo base_url();?>analytics/departmentanalytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="40px">
                         <br>
                         Department Analytics
@@ -155,6 +155,7 @@
     var cdata =[];
     var   counts = {}
     var res = null;
+    var valCount = [];
     function countAgeRange2(data){
         var datax = [];
         var item = [];
@@ -316,13 +317,16 @@
         var obj = [];
         var cur = null;
         var sg = [];
-        var val = [];
         for(var i=0; i<datax.length;i++){
             var item = {}
             var d = datax[i][0];
             var dx = d.substring(5);
             item["sg"] = dx;
-            item["d"] = d.substring(0, 5);
+            item["d"] = datax[i][0].substring(0,5) + ""+datax[i][1];
+            var valx = {};
+            valx['key']=datax[i][0].substring(0,5);
+            valx['value']=datax[i][1];
+            valCount.push(valx);
             if(datax[i][0].substring(0, 2)=="*M"){
                 item["m"] = true;
                 item["value"] = parseInt(datax[i][1]);
@@ -336,6 +340,7 @@
             obj.push(item);
 
         }
+        valCount.sort();
         sortByKeyAsc(obj, "sg");
         var newObj = {};
         for(i in obj){
@@ -359,52 +364,51 @@
             }
             result.rows.push({'sg':i,'total':newObj[i],'m':m,'f':f,'d':item.d});
 
-
-            if(i==""){
                 $("#tbldata2").append(' <tr>\\n\' +\n' +
-                    '                \'                             <td>N/A</td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*MPE*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*FPE*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+sum(parseInt(countData("*MPE*"+i)),parseInt(countData("*FPE*"+i)))+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*MEL*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*FEL*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+sum(parseInt(countData("*MEL*"+i)),parseInt(countData("*FEL*"+i)))+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*MCT*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*FCT*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+sum(parseInt(countData("*MCT*"+i)),parseInt(countData("*FCT*"+i)))+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*MCA*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*FCA*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+sum(parseInt(countData("*MCA*"+i)),parseInt(countData("*FCA*"+i)))+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*MJO*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*FJO*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+sum(parseInt(countData("*MJO*"+i)),parseInt(countData("*FJO*"+i)))+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>X'+m+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>X'+f+'</span></td>\\n\' +\n' +
+                    '                \'                             <td>'+isEmpty(i)+'</td>\\n\' +\n' +
+                    '                \'                             <td><span id="MPET">'+countData("*MPE*"+i)+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="FPET">'+countData("*FPE*"+i)+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="PET">'+sum(parseInt(countData("*MPE*"+i)),parseInt(countData("*FPE*"+i)))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="MELT" >'+countData("*MEL*"+i)+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="FELT">'+countData("*FEL*"+i)+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="ELT">'+sum(parseInt(countData("*MEL*"+i)),parseInt(countData("*FEL*"+i)))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="MCTT">'+countData("*MCT*"+i)+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="FCTT">'+countData("*FCT*"+i)+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="CTT">'+sum(parseInt(countData("*MCT*"+i)),parseInt(countData("*FCT*"+i)))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="MCAT">'+countData("*MCA*"+i)+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="FCAT">'+countData("*FCA*"+i)+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="CAT">'+sum(parseInt(countData("*MCA*"+i)),parseInt(countData("*FCA*"+i)))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="MJOT">'+countData("*MJO*"+i)+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="FJOT">'+countData("*FJO*"+i)+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span id="JOT">'+sum(parseInt(countData("*MJO*"+i)),parseInt(countData("*FJO*"+i)))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span>'+sumAllTotal(countData("*MPE*"+i),countData("*MEL*"+i),countData("*MCT*"+i),countData("*MCA*"+i),countData("*MJO*"+i))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><span>'+sumAllTotal(countData("*FPE*"+i),countData("*FEL*"+i),countData("*FCT*"+i),countData("*FCA*"+i),countData("*FJO*"+i))+'</span></td>\\n\' +\n' +
                     '                \'                             <td><span><b>'+newObj[i]+'</b></span></td>\\n\' +\n' +
                     '                \'                          </tr>');
-            } else {
-                $("#tbldata2").append(' <tr>\\n\' +\n' +
-                    '                \'                             <td>'+i+'</td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*MPE*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*FPE*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+sum(parseInt(countData("*MPE*"+i)),parseInt(countData("*FPE*"+i)))+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*MEL*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*FEL*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+sum(parseInt(countData("*MEL*"+i)),parseInt(countData("*FEL*"+i)))+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*MCT*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*FCT*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+sum(parseInt(countData("*MCT*"+i)),parseInt(countData("*FCT*"+i)))+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*MCA*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*FCA*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+sum(parseInt(countData("*MCA*"+i)),parseInt(countData("*FCA*"+i)))+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*MJO*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span >'+countData("*FJO*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+sum(parseInt(countData("*MJO*"+i)),parseInt(countData("*FJO*"+i)))+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+m+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span>'+f+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span><b>'+newObj[i]+'</b></span></td>\\n\' +\n' +
-                    '                \'                          </tr>');
-            }
+           // }
+//            else {
+//                $("#tbldata2").append(' <tr>\\n\' +\n' +
+//                    '                \'                             <td>'+i+'</td>\\n\' +\n' +
+//                    '                \'                             <td><span >'+countData("*MPE*"+i)+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span >'+countData("*FPE*"+i)+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span>'+sum(parseInt(countData("*MPE*"+i)),parseInt(countData("*FPE*"+i)))+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span >'+countData("*MEL*"+i)+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span >'+countData("*FEL*"+i)+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span>'+sum(parseInt(countData("*MEL*"+i)),parseInt(countData("*FEL*"+i)))+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span >'+countData("*MCT*"+i)+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span >'+countData("*FCT*"+i)+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span>'+sum(parseInt(countData("*MCT*"+i)),parseInt(countData("*FCT*"+i)))+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span >'+countData("*MCA*"+i)+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span >'+countData("*FCA*"+i)+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span>'+sum(parseInt(countData("*MCA*"+i)),parseInt(countData("*FCA*"+i)))+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span >'+countData("*MJO*"+i)+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span >'+countData("*FJO*"+i)+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span>'+sum(parseInt(countData("*MJO*"+i)),parseInt(countData("*FJO*"+i)))+'</span></td>\\n\' +\n' +
+//                    '                \'                             <td><span></span></td>\\n\' +\n' +
+//                    '                \'                             <td><span></span></td>\\n\' +\n' +
+//                    '                \'                             <td><span><b>'+newObj[i]+'</b></span></td>\\n\' +\n' +
+//                    '                \'                          </tr>');
+//            }
 
 
         }
@@ -423,36 +427,43 @@
             '                \'                             <td><b>Grand Total</b></td>\\n\' +\n' +
             '                \'                             <td><span >'+sumTotal("*MPE*")+'</span></td>\\n\' +\n' +
             '                \'                             <td><span >'+sumTotal("*FPE*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span>'+sumTotal("*MPE*")+'</span></td>\\n\' +\n' +
+            '                \'                             <td><span> <b>'+sum(sumTotal("*MPE*"),sumTotal("*FPE*"))+'</span></b></td>\\n\' +\n' +
             '                \'                             <td><span >'+sumTotal("*MEL*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span>'+sumTotal("*FEL*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span >'+sumTotal("*MEL*")+'</span></td>\\n\' +\n' +
+            '                \'                             <td><span> '+sumTotal("*FEL*")+'</span></td>\\n\' +\n' +
+            '                \'                             <td><span ><b>'+sum(sumTotal("*MEL*"),sumTotal("*FEL*"))+'</span></b></td>\\n\' +\n' +
             '                \'                             <td><span >'+sumTotal("*MCT*")+'</span></td>\\n\' +\n' +
             '                \'                             <td><span >'+sumTotal("*FCT*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span >'+sumTotal("*MCT*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span>'+sumTotal("*MCA*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span>'+sumTotal("*FCA*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span>'+sumTotal("*MCA*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span>'+sumTotal("*MJO*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span>'+sumTotal("*FJO*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span>'+sumTotal("*MJO*")+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span>'+ctrm+'</span></td>\\n\' +\n' +
-            '                \'                             <td><span>'+ctrf+'</span></td>\\n\' +\n' +
+            '                \'                             <td><span ><b>'+sum(sumTotal("*MCT*"),sumTotal("*FCT*"))+'</span></b></td>\\n\' +\n' +
+            '                \'                             <td><span> '+sumTotal("*MCA*")+'</span></td>\\n\' +\n' +
+            '                \'                             <td><span> '+sumTotal("*FCA*")+'</span></td>\\n\' +\n' +
+            '                \'                             <td><span> <b>'+sum(sumTotal("*MCA*"),sumTotal("*FCA*"))+'</span></b></td>\\n\' +\n' +
+            '                \'                             <td><span> '+sumTotal("*MJO*")+'</span></td>\\n\' +\n' +
+            '                \'                             <td><span> '+sumTotal("*FJO*")+'</span></td>\\n\' +\n' +
+            '                \'                             <td><span> <b>'+sum(sumTotal("*MJO*"),sumTotal("*FJO*"))+'</span></b></td>\\n\' +\n' +
+            '                \'                             <td><span> <b>'+ctrm+'</span></td>\\n\' +\n' +
+            '                \'                             <td><span> <b>'+ctrf+'</span></td>\\n\' +\n' +
             '                \'                             <td><span><b>'+sum(ctrm,ctrf)+'</b></span></td>\\n\' +\n' +
             '                \'                          </tr>');
 
         generateChart(cdata);
     }
+    function sumAllTotal(a,b,c,d,e){
+        console.log(a +" " + b + " " + c + " " + d + " " + e);
+        return parseInt(a)+parseInt(b)+parseInt(c)+parseInt(d)+parseInt(e);
+    }
+
+    function isEmpty(val) {
+        if(val==""){
+            return "N/A";
+        }
+        return val;
+    }
 
     function sumTotal(name){
         var count = 0;
-        for (var i = 0; i< res.length; i++) {
-            if(res[i].d===name){
-                if(name.charAt(1)==='M'){
-                    count+=res[i].m;
-                }else {
-                    count+=res[i].f;
-                }
+        for (var i = 0; i< valCount.length; i++) {
+            if(valCount[i].key===name){
+                count+=parseInt(valCount[i].value);
             }
         }
         return count;

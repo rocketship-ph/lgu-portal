@@ -62,7 +62,7 @@
         <div class="col-md-12">
             <hr>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" >
             <legend>Employee List Based on Educational Background</legend>
             <div class="row">
                 <div class="col-md-12">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" id="divPrint">
                     <h5 id="tblmsg1" style="display:none"></h5>
                     <div class="table-responsive" id="tblcont1" style="display: none">
                             <div class="col-md-12">
@@ -98,7 +98,7 @@
                                    </div>
                                </div>
                             </div>
-                        <table id="tblreport1" class="display compact responsive" cellspacing="0" width="100%" >
+                        <table id="tblreport1" class="cell-border display compact responsive tbl row-border" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>EMPLOYEE NAME</th>
@@ -340,7 +340,7 @@ function generateChart(data){
                 format: ' '
             },
             legend: 'none',
-            bar: {groupWidth: '95%'}
+            bar: {groupWidth: '50%'}
         };
         var chart = new google.visualization.BarChart(document.getElementById('divGraph'));   var height = data.getNumberOfRows() * 41 + 30;
         $("#divGraph").height(height);
@@ -348,6 +348,14 @@ function generateChart(data){
     }
 }
     $("#btnPrint").click(function(){
-        $("#tblcont1").print();
+
+        $("#divPrint").prepend( '<table id="divLogo" align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>');
+        $("#divPrint").print();
+        $("#divLogo").css('display','none');
     });
 </script>
+<style type="text/css">
+    @media print {
+    }
+
+</style>

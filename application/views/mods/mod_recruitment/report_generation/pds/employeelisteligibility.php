@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        <table id="tblreport1" class="table table-bordered" cellspacing="0" width="100%" >
+                        <table id="tblreport1" class="table table-bordered tbl" cellspacing="0" width="100%"  >
                             <thead align="center" style="text-align: center">
                             <tr>
                                 <th style="text-align: center;vertical-align: middle" align="center" rowspan="3">EMPLOYEE NAME</th>
@@ -215,8 +215,12 @@
     }
 
     $("#btnPrint").click(function(){
+        $("#tblcont1").prepend( '<table id="divLogo" align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>');
         $("#tblcont1").print({
             noPrintSelector: ".divPrint"
         });
+        $("#divLogo").css('display','none');
+
+
     });
 </script>

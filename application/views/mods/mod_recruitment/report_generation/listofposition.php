@@ -69,7 +69,7 @@
             <div class="col-md-12">
                 <h5 id="tblmsg1" style="display:none"></h5>
                 <div class="table-responsive" id="tblcont1" style="display: none">
-                    <table id="tblreport1" class="display compact responsive" cellspacing="0" width="100%" >
+                    <table id="tblreport1" class="display compact responsive cell-border" cellspacing="0" width="100%" >
                         <thead>
                         <tr>
                             <th>DATECREATED</th>
@@ -251,7 +251,7 @@ function generateChart(data){
                 format: ' '
             },
             legend: 'none',
-            bar: {groupWidth: '95%'}
+            bar: {groupWidth: '50%'}
         };
         var chart = new google.visualization.BarChart(document.getElementById('divGraph'));
         var height = data.getNumberOfRows() * 41 + 30;

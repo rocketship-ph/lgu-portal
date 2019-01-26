@@ -85,7 +85,7 @@
 
                     <h5 id="tblmsg1" style="display:none"></h5>
                     <div class="table-responsive" id="tblcont1" style="display: none">
-                        <table id="tblreport1" class="display compact responsive" cellspacing="0" width="100%" >
+                        <table id="tblreport1" class="display compact responsive cell-border" cellspacing="0" width="100%" >
                             <thead>
                             <tr>
                                 <th>DATE APPLIED</th>
@@ -187,18 +187,15 @@
                         $(win.document.body).find('h1')
                             .text('List of '+$("#type option:selected").val()+' Applicants')
                             .css('font-size', '15pt');
+                        $(win.document.body)
+                            .prepend( '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>');
+                        $(win.document.body)
+                            .append($("#divGraph").html());
                     }
                 },
                 {
                     extend: 'excelHtml5',
                     title: "ListOf"+$("#type option:selected").val()+"Applicants" + moment().format("YYYY-MM-DD")
-                },
-                {
-                    extend: 'pdfHtml5',
-                    title: "ListOf"+$("#type option:selected").val()+"Applicants" + moment().format("YYYY-MM-DD"),
-                    message: 'List of '+$("#type option:selected").val()+' Applicants',
-                    orientation: 'landscape',
-                    pageSize: 'LEGAL'
                 }
             ]
         });
