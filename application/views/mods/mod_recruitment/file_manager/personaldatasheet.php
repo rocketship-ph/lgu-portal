@@ -914,7 +914,7 @@
             <input type="text" class="form-control clearField exp6" id="a39yesexplanation" placeholder="">
         </div>
     </div><hr>
-    <label class="control-label">Have you ever been a candidate in a national or local election (except Barangay Election)?</label>
+    <label class="control-label">a. Have you ever been a candidate in a national or local election (except Barangay Election)?</label>
     <div class="form-group">
         <div class="radio">
             <label>
@@ -929,6 +929,40 @@
         <div class="form-group">
             <label for="a40yesexplanation" class="control-label">if YES, give details</label>
             <input type="text" class="form-control clearField exp7" id="a40yesexplanation" placeholder="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">b. Have you resigned from the government service during the three (3)-month period before the last election to promote/actively campaign for a national or local candidate?</label>
+        <div class="radio">
+            <label>
+                <input type="radio" name="b40" id="b40yes" value="yes" class="c11 clearField">
+                Yes
+            </label>
+            <label>
+                <input type="radio" name="b40" id="b40no" value="no" class="c11 clearField">
+                No
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="b40yesexplanation" class="control-label">if YES, give details</label>
+            <input type="text" class="form-control clearField exp11" id="b40yesexplanation" placeholder="">
+        </div>
+    </div><hr>
+    <div class="form-group">
+        <label class="control-label">Have you acquired the status of an immigrant or permanent resident of another country?</label>
+        <div class="radio">
+            <label>
+                <input type="radio" name="a42" id="a42yes" value="yes" class="c12 clearField">
+                Yes
+            </label>
+            <label>
+                <input type="radio" name="a42" id="a42no" value="no" class="c12 clearField">
+                No
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="a42yesexplanation" class="control-label">if YES, give details (country)</label>
+            <input type="text" class="form-control clearField exp12" id="a42yesexplanation" placeholder="">
         </div>
     </div><hr>
     <label class="control-label">Pursuant to: (a) Indigenous People's Act (RA 8371); (b) Magna Carta for DIsabled Persons (RA 7277); and (c) Solo Parents Welfare Act (RA 8972), please answer the following items?</label><br><label class="control-label">a. Are you a member of any indigenous group?</label>
@@ -1020,6 +1054,7 @@
     <button class="btn btn-danger btn-block" id="btnEdit">EDIT</button>
     <button class="btn btn-primary btn-block" id="btnDelete">DELETE</button>
     <button class="btn btn-success btn-block" id="btnSave">SAVE</button>
+    <button class="btn btn-info btn-block" id="btnPrint"><i class="fa fa-save"></i>&nbsp;EXPORT PDF</button>
 </div>
 </div>
 </div>
@@ -1110,6 +1145,10 @@
 </div>
 <script type="application/javascript">
 $(document).ready(function(){
+    toDataURL('<?php echo base_url()?>assets/pds/1.jpg', function(dataUrl) {window.p1=dataUrl;});
+    toDataURL('<?php echo base_url()?>assets/pds/2.jpg', function(dataUrl) {window.p2=dataUrl;});
+    toDataURL('<?php echo base_url()?>assets/pds/3.jpg', function(dataUrl) {window.p3=dataUrl;});
+    toDataURL('<?php echo base_url()?>assets/pds/4.jpg', function(dataUrl) {window.p4=dataUrl;;});
     window.sex = "";
     window.civilstatus = "";
     window.isUpdate = false;
@@ -1180,6 +1219,7 @@ $(document).ready(function(){
         format:"yyyy"
     });
     loadSalaryGrade();
+    $("#btnPrint").prop("disabled",true);
 
 });
 
@@ -1678,6 +1718,7 @@ function loadPdsData(){
 
                     if(!(result.details[keys].civilservice == "" || result.details[keys].civilservice == null)){
                         var cse = JSON.parse(result.details[keys].civilservice);
+                        window.printcse = cse;
                         var cl = $("[class*='cseligibility']").length;
                         for(var c in cse){
                             var ctr = 1;
@@ -1708,6 +1749,7 @@ function loadPdsData(){
 
                     if(!(result.details[keys].workexperience == "" || result.details[keys].workexperience == null)){
                         var workexp = JSON.parse(result.details[keys].workexperience);
+                        window.printworkexp = workexp;
                         var cl = $("[class*='workex']").length;
                         for(var ex in workexp){
                             var ctr = 1;
@@ -1745,6 +1787,7 @@ function loadPdsData(){
 
                     if(!(result.details[keys].voluntarywork == "" || result.details[keys].voluntarywork == null)){
                         var volwork = JSON.parse(result.details[keys].voluntarywork);
+                        window.printvolwork = volwork;
                         var vw = $("[class*='volwork']").length;
                         for(var vw in volwork) {
                             var ctr = 1;
@@ -1774,6 +1817,7 @@ function loadPdsData(){
 
                     if(!(result.details[keys].training == "" || result.details[keys].training == null)){
                         var training = JSON.parse(result.details[keys].training);
+                        window.printtraining = training;
                         var tp = $("[class*='trainingprogs']").length;
                         for(var tp in training) {
                             var ctr = 1;
@@ -1802,6 +1846,7 @@ function loadPdsData(){
 
                     if(!(result.details[keys].others1 == "" || result.details[keys].others1 == null)){
                         var other1 = JSON.parse(result.details[keys].others1);
+                        window.printother1 = other1;
                         var ot = $("[class*='otherinfoone']").length;
                         for(var ot in other1) {
                             var ctr = 1;
@@ -1824,6 +1869,7 @@ function loadPdsData(){
 
                     if(!(result.details[keys].characterref == "" || result.details[keys].characterref == null)){
                         var references = JSON.parse(result.details[keys].characterref);
+                        window.printreferences = references;
                         var rf = $("[class*='characterref']").length;
                         for(var rf in references) {
                             var ctr = 1;
@@ -1870,6 +1916,7 @@ function loadPdsData(){
 
 
                     var qas = JSON.parse(result.details[keys].qas);
+                    window.printqas = qas;
                     window.q1 = qas[0].answer;
                     window.q2 = qas[1].answer;
                     window.q3 = qas[2].answer;
@@ -1880,6 +1927,8 @@ function loadPdsData(){
                     window.q8 = qas[7].answer;
                     window.q9 = qas[8].answer;
                     window.q10 = qas[9].answer;
+                    window.q11 = qas[10].answer;
+                    window.q12 = qas[11].answer;
                     for(var q in qas){
                         var i = parseInt(q)+1;
                         if(!(qas[q].answer == "" || qas[q].answer == null)){
@@ -1893,6 +1942,8 @@ function loadPdsData(){
                 applyDatepicker();
                 $(".placeholderinputs").show();
                 $(".addressinput").hide();
+
+                $("#btnPrint").prop("disabled",false);
             } else {
                 $(".placeholderinputs").hide();
                 $(".addressinput").show();
@@ -1901,6 +1952,7 @@ function loadPdsData(){
                 $("#btnEdit").prop("disabled",true);
                 $("#btnDelete").prop("disabled",true);
                 loadProvinces();
+                $("#btnPrint").prop("disabled",true);
             }
         },
         error: function(e){
@@ -1960,6 +2012,16 @@ $('input[name="b41"]').click(function(){
 $('input[name="c41"]').click(function(){
     window.q10 = $(this).val();
     console.log(window.q10);
+});
+
+$('input[name="b40"]').click(function(){
+    window.q11 = $(this).val();
+    console.log(window.q11);
+});
+
+$('input[name="a42"]').click(function(){
+    window.q12 = $(this).val();
+    console.log(window.q12);
 });
 
 $("#btnCseAdd").click(function(){
@@ -2330,7 +2392,7 @@ function submitData(){
             return;
         } else {
             var qas = [];
-            for(var i=0;i<10;i++){
+            for(var i=0;i<12;i++){
                 var ans =  $("input:radio.c"+(i+1)+":checked").val();
                 qas.push({
                     answer: (ans == "" || ans == null || ans == undefined) ? "" : ans,
@@ -2579,24 +2641,28 @@ function validatePersonalInfo(){
 function validateChoices(){
     if(window.q1 == "yes"){
         if($("#a36yesexplanation").val() == "" || $("#a36yesexplanation").val() == null){
+            console.log("no explaination q1");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
         }
     }
     if(window.q2 == "yes"){
         if($("#b36yesexplanation").val() == "" || $("#b36yesexplanation").val() == null){
+            console.log("no explaination q2");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
         }
     }
     if(window.q3 == "yes"){
         if($("#a37yesexplanation").val() == "" || $("#a37yesexplanation").val() == null){
+            console.log("no explaination q3");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
         }
     }
     if(window.q4 == "yes"){
         if($("#b37yesexplanation").val() == "" || $("#b37yesexplanation").val() == null){
+            console.log("no explaination q4");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
         }
@@ -2604,6 +2670,7 @@ function validateChoices(){
 
     if(window.q5 == "yes"){
         if($("#a38yesexplanation").val() == "" || $("#a38yesexplanation").val() == null){
+            console.log("no explaination q5");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
         }
@@ -2611,6 +2678,7 @@ function validateChoices(){
 
     if(window.q6 == "yes"){
         if($("#a39yesexplanation").val() == "" || $("#a39yesexplanation").val() == null){
+            console.log("no explaination q6");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
         }
@@ -2618,24 +2686,44 @@ function validateChoices(){
 
     if(window.q7 == "yes"){
         if($("#a40yesexplanation").val() == "" || $("#a40yesexplanation").val() == null){
+            console.log("no explaination q7");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
         }
     }
     if(window.q8 == "yes"){
         if($("#a41yesexplanation").val() == "" || $("#a41yesexplanation").val() == null){
+            console.log("no explaination q8");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
         }
     }
     if(window.q9 == "yes"){
         if($("#b41yesexplanation").val() == "" || $("#b41yesexplanation").val() == null){
+            console.log("no explaination q9");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
         }
     }
     if(window.q10 == "yes"){
         if($("#c41yesexplanation").val() == "" || $("#c41yesexplanation").val() == null){
+            console.log("no explaination q10");
+            messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
+            return false;
+        }
+    }
+
+    if(window.q11 == "yes"){
+        if($("#b40yesexplanation").val() == "" || $("#b40yesexplanation").val() == null){
+            console.log("no explaination q11");
+            messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
+            return false;
+        }
+    }
+
+    if(window.q12 == "yes"){
+        if($("#a42yesexplanation").val() == "" || $("#a42yesexplanation").val() == null){
+            console.log("no explaination q12");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
         }
@@ -2654,4 +2742,322 @@ $("#btnMsg").click(function(){
 });
 
 
+$("#btnPrint").click(function(){
+    var pdf = new jsPDF("p", "mm", "a4");
+
+    var width = pdf.internal.pageSize.width;
+    var height = pdf.internal.pageSize.height;
+
+    //PAGE 1
+    pdf.addImage(p1, 'JPEG', 0, 0, width, height);
+    pdf.setFontSize(7);
+    //PERSONAL INFORMATION
+    pdf.text(44,41,$("#surname").val());
+    pdf.text(44,46.5,$("#firstname").val());
+    pdf.text(160,46.5,$("#nameextension").val());
+    pdf.text(44,52.5,$("#middlename").val());
+    pdf.text(44,59.5,$("#dob").val());
+    pdf.text(44,67.5,$("#pob").val());
+    //gender
+    if($(":radio[name='sexRadios'][value='MALE']").is(":checked")){
+        pdf.text(44,73.5,"X");
+    } else {
+        pdf.text(72.5,73.5,"X");
+    }
+    //civil status
+    if($(":radio[name='csRadios'][value='SINGLE']").is(":checked")){
+        pdf.text(44,79.5,"X");
+    } else if($(":radio[name='csRadios'][value='MARRIED']").is(":checked")){
+        pdf.text(72.5,79.5,"X");
+    } else if($(":radio[name='csRadios'][value='WIDOWED']").is(":checked")){
+        pdf.text(44,82.5,"X");
+    } else if($(":radio[name='csRadios'][value='SEPARATED']").is(":checked")){
+        pdf.text(72.5,82.5,"X");
+    } else if($(":radio[name='csRadios'][value='ANNULLED']").is(":checked")){
+        pdf.text(44,86.5,"X");
+        pdf.text(57,86.5,"Annulled");
+    } else {
+        pdf.text(44,87.5,"X");
+    }
+    pdf.text(44,93,$("#height").val());
+    pdf.text(44,99,$("#weight").val());
+    pdf.text(44,105,$("#bloodtype").val());
+    pdf.text(44,111.5,$("#gsisno").val());
+    pdf.text(44,118,$("#pagibigno").val());
+    pdf.text(44,124.5,$("#philhealthno").val());
+    pdf.text(44,131,$("#sssno").val());
+    pdf.text(44,137,$("#tin").val());
+    pdf.text(44,143.5,$("#agencyno").val());
+
+    if(($("#citizenship").val()).toUpperCase() == "FILIPINO" || ($("#citizenship").val()).toUpperCase() == "PILIPINO"){
+        pdf.text(137,59,"X");
+    } else {
+        pdf.text(137,74,$("#citizenship").val());
+    }
+    pdf.text(120,79,$("#residentialaddress").val());
+    pdf.text(173,86,$("#resbrgy0").val());
+    pdf.text(120,92,$("#rescitymun0").val());
+    pdf.text(171,92,$("#resprovince0").val());
+    pdf.text(120,100,$("#rzipcode").val());
+    pdf.text(120,104,$("#permanentaddress").val());
+    pdf.text(173,110,$("#perbrgy0").val());
+    pdf.text(120,117,$("#percitymun0").val());
+    pdf.text(171,117,$("#perprovince0").val());
+    pdf.text(120,124.5,$("#pzipcode").val());
+    pdf.text(120,131,$("#ptelephonenumber").val());
+    pdf.text(120,137.5,$("#cellphoneno").val());
+    pdf.text(120,143.5,$("#email").val());
+    //FAMILY BACKGROUND
+    pdf.text(44,154,$("#spousesurname").val());
+    pdf.text(44,159.5,$("#spousefirstname").val());
+    pdf.text(44,165,$("#spousemiddlename").val());
+    //no name ext on gui
+//    pdf.text(44,158.5,$("#").val());
+    pdf.text(44,170,$("#spouseoccupation").val());
+    pdf.text(44,175.5,$("#spouseemployerbusinessname").val());
+    pdf.text(44,181.5,$("#spousebusinessaddress").val());
+    pdf.text(44,186.5,$("#spousetelephoneno").val());
+    pdf.text(44,192,$("#fathersurname").val());
+    pdf.text(44,197.5,$("#fatherfirstname").val());
+    pdf.text(44,202.5,$("#fathermiddlename").val());
+    pdf.text(44,213.5,$("#mothersurname").val());
+    pdf.text(44,219,$("#motherfirstname").val());
+    pdf.text(44,224.5,$("#mothermiddlename").val());
+
+    var ypos = 159.5;
+    var ctr = 0;
+    $(".child[dt='childname']").each(function(){
+        ctr+=1;
+        pdf.text(120,ypos,$(this).val());
+        pdf.text(178,ypos,$(".childbday"+ctr).val());
+        ypos+=5;
+    });
+
+    var spliteschool = pdf.splitTextToSize($("#eschool").val(), 42);
+    pdf.text(44,247,spliteschool);
+    var splitedegree = pdf.splitTextToSize($("#edegree").val(), 42);
+    pdf.text(90,247,splitedegree);
+    pdf.setFontSize(6);
+    pdf.text(133.5,248,$("#efrom").val());
+    pdf.text(146,248,$("#eto").val());
+    pdf.setFontSize(7);
+    pdf.text(179,248,$("#eyeargraduated").val());
+    pdf.setFontSize(5);
+    var escholarshiporacademichonorsreceived = ($("#escholarshiporacademichonorsreceived").val()).split(" ");
+    var epos = 245;
+    for(var i=0;i<escholarshiporacademichonorsreceived.length;i++){
+        pdf.text(189.5,epos,escholarshiporacademichonorsreceived[i]);
+        epos+=2.5;
+    }
+
+    pdf.setFontSize(7);
+    var splithschool = pdf.splitTextToSize($("#hschool").val(), 42);
+    pdf.text(44,254,splithschool);
+    var splithdegree = pdf.splitTextToSize($("#hdegree").val(), 42);
+    pdf.text(90,254,splithdegree);
+    pdf.setFontSize(6);
+    pdf.text(133.5,255,$("#hfrom").val());
+    pdf.text(146,255,$("#hto").val());
+    pdf.setFontSize(7);
+    pdf.text(179,255,$("#hyeargraduated").val());
+    pdf.setFontSize(5);
+    var hscholarshiporacademichonorsreceived = ($("#hscholarshiporacademichonorsreceived").val()).split(" ");
+    var hpos = 253;
+    for(var i=0;i<hscholarshiporacademichonorsreceived.length;i++){
+        pdf.text(189.5,hpos,hscholarshiporacademichonorsreceived[i]);
+        hpos+=2.5;
+    }
+
+    pdf.setFontSize(7);
+    var splitvchool = pdf.splitTextToSize($("#vschool").val(), 42);
+    pdf.text(44,261,splitvchool);
+    var splitvdegree = pdf.splitTextToSize($("#vdegree").val(), 42);
+    pdf.text(90,261,splitvdegree);
+    pdf.setFontSize(6);
+    pdf.text(133.5,262,$("#vfrom").val());
+    pdf.text(146,262,$("#vto").val());
+    pdf.setFontSize(7);
+    pdf.text(179,262,$("#vyeargraduated").val());
+    pdf.setFontSize(5);
+    var vscholarshiporacademichonorsreceived = ($("#vscholarshiporacademichonorsreceived").val()).split(" ");
+    var vpos = 260;
+    for(var i=0;i<vscholarshiporacademichonorsreceived.length;i++){
+        pdf.text(189.5,vpos,vscholarshiporacademichonorsreceived[i]);
+        vpos+=2.5;
+    }
+
+    pdf.setFontSize(7);
+    var splitcschool = pdf.splitTextToSize($("#cschool").val(), 42);
+    pdf.text(44,269,splitcschool);
+    var splitcdegree = pdf.splitTextToSize($("#cdegree").val(), 42);
+    pdf.text(90,269,splitcdegree);
+    pdf.setFontSize(6);
+    pdf.text(133.5,270,$("#cfrom").val());
+    pdf.text(146,270,$("#cto").val());
+    pdf.setFontSize(7);
+    pdf.text(179,270,$("#cyeargraduated").val());
+    pdf.setFontSize(5);
+    var cscholarshiporacademichonorsreceived = ($("#cscholarshiporacademichonorsreceived").val()).split(" ");
+    var cpos = 267;
+    for(var i=0;i<cscholarshiporacademichonorsreceived.length;i++){
+        pdf.text(189.5,cpos,cscholarshiporacademichonorsreceived[i]);
+        cpos+=2.5;
+    }
+
+    pdf.setFontSize(7);
+    var splitgschool = pdf.splitTextToSize($("#gschool").val(), 42);
+    pdf.text(44,276,splitgschool);
+    var splitgdegree = pdf.splitTextToSize($("#gdegree").val(), 42);
+    pdf.text(90,276,splitgdegree);
+    pdf.setFontSize(6);
+    pdf.text(133.5,277,$("#gfrom").val());
+    pdf.text(146,277,$("#gto").val());
+    pdf.setFontSize(7);
+    pdf.text(179,277,$("#gyeargraduated").val());
+    pdf.setFontSize(5);
+    var gscholarshiporacademichonorsreceived = ($("#gscholarshiporacademichonorsreceived").val()).split(" ");
+    var gpos = 275;
+    for(var i=0;i<gscholarshiporacademichonorsreceived.length;i++){
+        pdf.text(189.5,gpos,gscholarshiporacademichonorsreceived[i]);
+        gpos+=2.5;
+    }
+
+
+    //PAGE 2
+    pdf.addPage();
+    pdf.addImage(p2, 'JPEG', 0, 0, width, height);
+    pdf.setFontSize(7);
+
+    if(window.printcse){
+        var cse = window.printcse;
+        var ypos = 27;
+        for(var keys in cse){
+            pdf.setFontSize(7);
+            pdf.text(10,ypos,cse[keys].careerservice);
+            pdf.text(75,ypos,cse[keys].rating);
+            pdf.text(91,ypos,cse[keys].examdate);
+            pdf.text(114,ypos,cse[keys].examplace);
+            pdf.text(173,ypos,cse[keys].licenseno);
+            pdf.setFontSize(6);
+            pdf.text(191,ypos,cse[keys].licensedate);
+            ypos+=8;
+        }
+    }
+
+    if(window.printworkexp){
+        var workexp = window.printworkexp;
+        var ypos = 102.5;
+        for(var keys in workexp){
+            pdf.setFontSize(6);
+            pdf.text(8,ypos,workexp[keys].fromdate);
+            pdf.text(24,ypos,workexp[keys].todate);
+            pdf.setFontSize(7);
+            pdf.text(40,ypos,workexp[keys].position);
+            pdf.text(90.5,ypos,workexp[keys].company);
+            pdf.text(143,ypos,workexp[keys].salary);
+            pdf.text(156.5,ypos,workexp[keys].salarygrade);
+            pdf.text(174,ypos,workexp[keys].appointmentstatus);
+            pdf.text(195,ypos,(workexp[keys].govtservice == "YES" ? "Y" : "N"));
+            ypos+=7;
+
+        }
+    }
+
+
+    //PAGE 3
+    pdf.addPage();
+    pdf.addImage(p3, 'JPEG', 0, 0, width, height);
+    pdf.setFontSize(7);
+
+    if(window.printvolwork){
+        var volwork = window.printvolwork;
+        console.log(volwork);
+        var ypos = 26;
+        for(var keys in volwork){
+            pdf.text(8,ypos,volwork[keys].organization);
+            pdf.setFontSize(6);
+            pdf.text(93,ypos,volwork[keys].fromdate);
+            pdf.text(109,ypos,volwork[keys].todate);
+            pdf.setFontSize(7);
+            pdf.text(125,ypos,volwork[keys].hours);
+            pdf.text(139,ypos,volwork[keys].position);
+            ypos+=7;
+        }
+    }
+
+    if(window.printtraining){
+        var training = window.printtraining;
+        console.log(training);
+        var ypos = 97.5;
+        for(var keys in training){
+            pdf.text(8,ypos,training[keys].title);
+            pdf.setFontSize(6);
+            pdf.text(93,ypos,training[keys].fromdate);
+            pdf.text(109,ypos,training[keys].todate);
+            pdf.setFontSize(7);
+            pdf.text(125,ypos,training[keys].hours);
+            pdf.text(155,ypos,training[keys].conductedby);
+            ypos+=7;
+        }
+    }
+
+    if(window.printother1){
+        var printother1 = window.printother1;
+        console.log(printother1);
+        var ypos = 242;
+        for(var keys in printother1){
+            pdf.text(8,ypos,printother1[keys].specialskills);
+            pdf.text(58,ypos,printother1[keys].recognitions);
+            pdf.text(155,ypos,printother1[keys].membership);
+            ypos+=6;
+        }
+    }
+
+    //PAGE 4
+    pdf.addPage();
+    pdf.addImage(p4, 'JPEG', 0, 0, width, height);
+    pdf.setFontSize(7);
+    if(window.printqas){
+        var qas = window.printqas;
+        console.log(qas);
+        if(qas[0].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(135,21.5,"X");
+            pdf.setFontSize(6);
+            pdf.text(137,35.5,qas[0].explanation+" "+qas[1].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(157,21.5,"X");
+        }
+
+        if(qas[1].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(135,26.5,"X");
+            pdf.setFontSize(6);
+            pdf.text(137,36.5,qas[0].explanation+" "+qas[1].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(156,26.5,"X");
+        }
+
+    }
+
+    pdf.save("<?php echo $this->session->userdata('firstname').'_'.$this->session->userdata('lastname')?>_PDS.pdf");
+});
+
+
+//convert image to base64
+function toDataURL(url, callback) {
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onload = function() {
+        var fileReader = new FileReader();
+        fileReader.onloadend = function() {
+            callback(fileReader.result);
+        }
+        fileReader.readAsDataURL(httpRequest.response);
+    };
+    httpRequest.open('GET', url);
+    httpRequest.responseType = 'blob';
+    httpRequest.send();
+}
 </script>

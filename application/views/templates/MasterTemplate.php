@@ -47,7 +47,8 @@
     <script defer src="<?php echo base_url()?>assets/fullcalendar-3.9.0/fullcalendar.min.js"></script>
 
     <script type="text/javascript" charset="utf8" src="<?php echo base_url();?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/jsPDF-1.2.60/dist/jspdf.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/jsPDF-1.2.60/dist/jspdf.plugin.autotable.js"></script>
     <style>
         /*.modal{*/
             /*top: 40px !important;*/
