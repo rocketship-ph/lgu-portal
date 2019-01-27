@@ -73,6 +73,7 @@
             &nbsp;&nbsp;
         </td>
         <?php endif;?>
+        <?php if(array_intersect($GLOBALS['NAVCSCREPORTSMGT'],$this->session->userdata('modules'))):?>
         <td>
             <div class="panel panel-menu" align="center" >
                 <a href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
@@ -82,6 +83,7 @@
                 </a>
             </div>
         </td>
+        <?php endif;?>
     </tr>
 </table>
 <div class="row">

@@ -45,6 +45,7 @@
             <td align="center" width="20px">
                 &nbsp;&nbsp;
             </td>
+            <?php if(array_intersect($GLOBALS['NAVREPORTS_MGT'],$this->session->userdata('modules'))):?>
             <td>
                 <div class="panel panel-menu" align="center">
                     <a href="<?php echo base_url();?>main/reports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
@@ -57,6 +58,8 @@
             <td align="center" width="20px">
                 &nbsp;&nbsp;
             </td>
+            <?php endif;?>
+            <?php if(array_intersect($GLOBALS['NAVPDSANALYTICSMGT'],$this->session->userdata('modules'))):?>
             <td>
                 <div class="panel panel-menu" align="center">
                     <a href="<?php echo base_url();?>main/analytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
@@ -69,6 +72,8 @@
             <td align="center" width="20px">
                 &nbsp;&nbsp;
             </td>
+            <?php endif;?>
+            <?php if(array_intersect($GLOBALS['NAVCSCREPORTSMGT'],$this->session->userdata('modules'))):?>
             <td>
                 <div class="panel panel-menu" align="center"   id="panel_requestpersonnelreports">
                     <a href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
@@ -78,6 +83,7 @@
                     </a>
                 </div>
             </td>
+            <?php endif;?>
         </tr>
     </table>
 <div class="row">
@@ -87,6 +93,7 @@
     <div class="col-md-12">
         <legend>Workforce Profile</legend>
     </div>
+    <?php if(in_array($GLOBALS['NAV_CSCEMPLOYMENTSTATUS'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -98,6 +105,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCSALARYGRADE'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -109,6 +118,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCAGERANGE'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -120,7 +131,8 @@
             </div>
         </div>
     </div>
-
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCEDUCATIONALATTAINMENT'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -132,7 +144,8 @@
             </div>
         </div>
     </div>
-
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCFIELDOFEXPERTISE'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -144,6 +157,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCLEVELOFPOSITION'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -155,6 +170,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCYEARSINCURRENTPOSITION'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -166,6 +183,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCYEARSINPUBLICSERVICE'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -177,10 +196,12 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
 
     <div class="col-md-12">
         <hr>
     </div>
+    <?php if(in_array($GLOBALS['NAV_CSCSELECTIONCRITERIAFORVACANTPOSITION'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -192,6 +213,7 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
 
 </div>
 
