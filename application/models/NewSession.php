@@ -6,16 +6,9 @@
          $this->userdetailsTbl = 'tbluserdetails';
      }
 
-     function getRows($params = array()){
+     function getRows($username){
          try {
-             $this->db->select('tblusers.*,tbluserdetails.*');
-             $this->db->from($this->userTbl);
-             $this->db->join($this->userdetailsTbl, 'tblusers.username = tbluserdetails.username');
-
-             foreach ($params as $key => $value) {
-                 $this->db->where($key,$value);
-             }
-             $query = $this->db->get();
+             $query = $this->db->query("select u.*,d.*,p.currentposition from tblusers u inner join tbluserdetails d on u.username=d.username left join tblpdsdetails p on u.username=p.username where u.username='".$username."' and u.status='0'");;
              $result = ($query->num_rows() > 0) ? $query->row_array() : false;
 
              //return fetched data
