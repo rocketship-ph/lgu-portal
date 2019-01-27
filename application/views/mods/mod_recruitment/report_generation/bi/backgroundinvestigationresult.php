@@ -153,7 +153,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
             </div>
             <div class="modal-body">
-                <p>No requirements found for this request number. <a href='http://uat.prime-hrd.info/lgu-portal/transaction/requirementchecklist'>Click here to add requirements</a></p>
+                <p>No requirements found for this request number. <a href='<?php echo base_url();?>transaction/requirementchecklist'>Click here to add requirements</a></p>
             </div>
             <div class="modal-footer">
                 <input type="button" id="btnmessagedialogmodal" class="btn btn-success" data-dismiss="modal" value="Ok">
