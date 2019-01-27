@@ -44,11 +44,7 @@ class Homepage extends CI_Controller {
         $username = $_REQUEST['USERNAME'];
         $password = $_REQUEST['PASSWORD'];
 
-        $userdata = array(
-            'tblusers.username'=>$username,
-            'tblusers.status'=>'0'
-        );
-        $checkLogin = $this->NewSession->getRows($userdata);
+        $checkLogin = $this->NewSession->getRows($username);
         $getlogo = $this->ModelLogoFetcher->hasRows();
         $requestnumber = $this->NewSession->getRequestnumber($checkLogin['username']);
         if($requestnumber){
@@ -81,6 +77,7 @@ class Homepage extends CI_Controller {
                         'filename'=>$checkLogin['filename'],
                         'filepath'=>$checkLogin['filepath'],
                         'department'=>$checkLogin['department'],
+                        'position'=>$checkLogin['currentposition'],
                         'modules'=>$modules,
                         'requestnumber'=>$reqnum,
                         'applicantcode'=>$applicantcode,
