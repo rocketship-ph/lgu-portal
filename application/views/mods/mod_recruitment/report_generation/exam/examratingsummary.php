@@ -98,7 +98,7 @@
                     <div id="tblcont1" style="display: none">
                         <div class="row">
                             <div class="col-md-12" align="right">
-                                <button class="btn btn-danger" id="btnPrint"><i class="fa fa-print"></i>&nbsp;Print</button>
+                                <button class="btn btn-success" id="btnPrint"><i class="fa fa-print"></i>&nbsp;Print</button>
                             </div>
                             <div class="col-md-12">
                                 <table style="width: 100%">
@@ -336,7 +336,7 @@ function generateChart(data){
                 format: ' '
             },
             legend: 'none',
-            bar: {groupWidth: '95%'}
+            bar: {groupWidth: '50%'}
         };
         var chart = new google.visualization.BarChart(document.getElementById('divGraph'));   
         var height = data.getNumberOfRows() * 41 + 30;
@@ -345,9 +345,18 @@ function generateChart(data){
     }
 }
     $("#btnPrint").click(function(){
-       $("#tblcont1").print({
-           noPrintSelector : "#btnPrint"
-       });
+        $("#tblcont1").prepend( '<table id="divLogo" align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>');
+        $("#btnPrint").css('display','none');
+        $("#tblcont1")
+            .append($("#divGraph").html());
+        $("#tblcont1").print({
+            noPrintSelector: ".divPrint"
+        });
+        $("#divLogo").css('display','none');
+        $("#btnPrint").show();
+        $("#divGraph").hide();
+
+
     });
     $("#btnClear").click(function(){
        clearField();

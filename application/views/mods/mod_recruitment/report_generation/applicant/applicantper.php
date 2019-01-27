@@ -69,7 +69,7 @@
                 <div class="col-md-12">
                     <h5 id="tblmsg1" style="display:none"></h5>
                     <div class="table-responsive" id="tblcont1" style="display: none">
-                        <table id="tblreport1" class="display compact responsive" cellspacing="0" width="100%" >
+                        <table id="tblreport1" class="display compact responsive cell-border" cellspacing="0" width="100%" >
                             <thead>
                             <tr>
                                 <th>DATE APPLIED</th>
@@ -171,18 +171,15 @@ function loadReport() {
                     $(win.document.body).find('h1')
                         .text('List of Applicants Per Area, Address and Position')
                         .css('font-size', '15pt');
+                    $(win.document.body)
+                        .prepend( '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>');
+                    $(win.document.body)
+                        .append($("#divGraph").html());
                 }
             },
             {
                 extend: 'excelHtml5',
                 title: "ListOfApplicantsPerAreaAddressPosition" + moment().format("YYYY-MM-DD")
-            },
-            {
-                extend: 'pdfHtml5',
-                title: "ListOfApplicantsPerAreaAddressPosition" + moment().format("YYYY-MM-DD"),
-                message: 'List of Applicants Per Area, Address and Position',
-                orientation: 'landscape',
-                pageSize: 'LEGAL'
             }
         ]
     });
@@ -244,7 +241,7 @@ function generateChart(data){
         var options = {
             title: chartObj.chartTitle,
             chartArea: {
-                width: '65%',
+                width: '50%',
                 right: 15
             },
             colors: ['#0D913E'],
@@ -254,7 +251,7 @@ function generateChart(data){
                 format: ' '
             },
             legend: 'none',
-            bar: {groupWidth: '95%'}
+            bar: {groupWidth: '50%'}
         };
         var chart = new google.visualization.BarChart(document.getElementById('divGraph'));
            var height = data.getNumberOfRows() * 41 + 30;

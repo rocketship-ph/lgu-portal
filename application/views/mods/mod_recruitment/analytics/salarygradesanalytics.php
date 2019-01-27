@@ -301,7 +301,7 @@ function generateChart(data){
             chartArea: {
                 width: 500,
                 right: 10,
-                left:50
+                left:100
             },
             legend: { position: 'bottom', alignment: 'start' },
             colors: ['#1976d2','#e53935'],

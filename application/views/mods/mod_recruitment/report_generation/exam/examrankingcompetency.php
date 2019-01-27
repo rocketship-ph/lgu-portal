@@ -96,7 +96,7 @@
                                 <h4 style="margin-top: 0;" id="appcode"></h4>
                             </div>
                         </div>
-                        <table id="tblreport1" class="display compact responsive" cellspacing="0" width="100%" >
+                        <table id="tblreport1" class="display compact responsive cell-border" cellspacing="0" width="100%" >
                             <thead>
                             <tr>
                                 <th align="center" style="text-align: center">RANK</th>
@@ -250,7 +250,9 @@
                     return (data.E5 == null || data.E5 == "") ? "-" : data.E5;
                 }},
                 {"data": "cumulativescore"},
-                {"data": "totalscore"},
+                {"data": function (data) {
+                    return parseFloat(data.totalscore).toFixed(2);
+                }}
             ],
             "sDom": 'Blrftip',
             "buttons": [
@@ -267,6 +269,8 @@
                         $(win.document.body).find('h1')
                             .text('Examination Ranking Per Competency - '+$("#competency option:selected").val() + ' ')
                             .css('font-size', '15pt');
+                        $(win.document.body)
+                            .prepend( '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>');
                     }
                 }
             ]

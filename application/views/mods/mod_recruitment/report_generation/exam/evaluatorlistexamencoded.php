@@ -83,14 +83,13 @@
                             <br>
                            <button class="btn btn-success" id="btnGenerate">Generate Report</button>
                             <button class="btn btn-default" id="btnClear">Clear</button>
-                            <button class="btn btn-danger" id="btnPrint" style="float: right;display: none"><i class="fa fa-print"></i>&nbsp;Print</button>
+                            <button class="btn btn-success" id="btnPrint" style="float: right;display: none"><i class="fa fa-print"></i>&nbsp;Print</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <h5 id="tblmsg1" style="display:none"></h5>
                     <div class="table-responsive" id="tblcont1" style="display: none">
-                        <hr>
                         <table style="width: 100%">
                             <tr>
                                 <td align="left">
@@ -103,7 +102,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <table id="tblreport1" class="display compact responsive" cellspacing="0" width="100%" >
+                        <table id="tblreport1" class="display compact responsive cell-border" cellspacing="0" width="100%" >
                             <thead>
                             <tr>
                                 <th>COMPETENCY TITLE</th>
@@ -241,7 +240,9 @@
                 "columns": [
                     {"data": "title"},
                     {"data": "criteriatype"},
-                    {"data": "level"},
+                    {"data": function (data) {
+                        return data.level.toUpperCase();
+                    }},
                     {"data": "q"}
                 ],
                 "sDom": 't'
@@ -250,7 +251,13 @@
     });
 
     $("#btnPrint").click(function(){
-        $("#tblcont1").print();
+        $("#tblcont1").prepend( '<table id="divLogo" align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>');
+        $("#tblcont1").print({
+            noPrintSelector: ".divPrint"
+        });
+        $("#divLogo").css('display','none');
+
+
     });
 
     $("#btnClear").click(function(){
