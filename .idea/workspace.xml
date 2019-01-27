@@ -2,49 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7903af-8286-4bc1-9f57-08ca6058d8e3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/criteriaforvacantposition.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/educationalattainment.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/fieldofexpertise.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/positionlevel.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/yearsincurrentposition.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/yearsinservice.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Cscreports.php" afterPath="$PROJECT_DIR$/application/controllers/Cscreports.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_menu/analyticsmenu.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_menu/analyticsmenu.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_menu/cscreportsmenu.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_menu/cscreportsmenu.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_menu/reportsmenu.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_menu/reportsmenu.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/agerangeanalytics.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/agerangeanalytics.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/departmentanalytics.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/departmentanalytics.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/educationalattainmentanalytics.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/educationalattainmentanalytics.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/employmentstatusanalytics.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/employmentstatusanalytics.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/fieldofexpertiseanalytics.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/fieldofexpertiseanalytics.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/positionlevelanalytics.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/positionlevelanalytics.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/salarygradesanalytics.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/salarygradesanalytics.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantlocalnonlocal.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantlocalnonlocal.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantnotqualified.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantnotqualified.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantper.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantqualified.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantqualified.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantrecords.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantrecords.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/qualifiedemployees.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/qualifiedemployees.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/behavorialcompetencybaseindex.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/behavorialcompetencybaseindex.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/bi/backgroundinvestigationexam.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/bi/backgroundinvestigationexam.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/bi/backgroundinvestigationresult.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/bi/backgroundinvestigationresult.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/bi/backgroundinvestigator.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/bi/backgroundinvestigator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/competencyperposition.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/competencyperposition.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/corecompetencybaseindex.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/corecompetencybaseindex.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorapplicantassessment.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorapplicantassessment.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorlist.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorlist.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorlistexamencoded.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorlistexamencoded.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorperpositionrequest.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorperpositionrequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/examinees.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/examinees.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/examrankingcompetency.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/examrankingcompetency.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/examrating.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/examrating.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/examratingsummary.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/examratingsummary.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/listofposition.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/listofposition.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/casualemployee.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/casualemployee.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/coterminousemployee.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/coterminousemployee.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/departmenthead.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/departmenthead.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelist.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelist.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistcommunityservice.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistcommunityservice.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistdepartmentassigned.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistdepartmentassigned.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisteducational.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisteducational.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisteligibility.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisteligibility.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistenterlgu.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistenterlgu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisttraining.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisttraining.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/joborderemployee.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/joborderemployee.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/plantillaemployee.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/plantillaemployee.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequestapproved.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequestapproved.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequestnew.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequestnew.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequestrejected.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequestrejected.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequests.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequests.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/yearsincurrentpositionanalytics.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/yearsincurrentpositionanalytics.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/yearsinserviceanalytics.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/yearsinserviceanalytics.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/agerange.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/agerange.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/employmentstatus.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/employmentstatus.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/salarygrades.php" afterPath="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/salarygrades.php" />
     </list>
     <ignored path=".idea/" />
     <ignored path="application/logs/" />
@@ -63,93 +43,105 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="applicantnotqualified.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantnotqualified.php">
+      <file leaf-file-name="cscreportsmenu.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_menu/cscreportsmenu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="70" column="92" lean-forward="false" selection-start-line="70" selection-start-column="92" selection-end-line="70" selection-end-column="92" />
+            <state relative-caret-position="461">
+              <caret line="189" column="20" lean-forward="false" selection-start-line="189" selection-start-column="20" selection-end-line="189" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="applicantper.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantper.php">
+      <file leaf-file-name="Cscreports.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Cscreports.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="71" column="92" lean-forward="false" selection-start-line="71" selection-start-column="92" selection-end-line="71" selection-end-column="92" />
+            <state relative-caret-position="477">
+              <caret line="37" column="91" lean-forward="false" selection-start-line="37" selection-start-column="66" selection-end-line="37" selection-end-column="91" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="applicantlocalnonlocal.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantlocalnonlocal.php">
+      <file leaf-file-name="criteriaforvacantposition.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/criteriaforvacantposition.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="87" column="92" lean-forward="false" selection-start-line="87" selection-start-column="92" selection-end-line="87" selection-end-column="92" />
+            <state relative-caret-position="101">
+              <caret line="158" column="53" lean-forward="true" selection-start-line="158" selection-start-column="53" selection-end-line="158" selection-end-column="53" />
+              <folding>
+                <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h5#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h4#0;n#center#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <marker date="1548591521306" expanded="true" signature="6116:6127" ph="..." />
+                <marker date="1548591521306" expanded="true" signature="6181:6192" ph="..." />
+                <marker date="1548591521306" expanded="true" signature="6313:6325" ph="..." />
+                <marker date="1548591521306" expanded="true" signature="6488:6507" ph="..." />
+                <marker date="1548591521306" expanded="true" signature="7110:7128" ph="..." />
+                <marker date="1548591521306" expanded="true" signature="7692:7704" ph="..." />
+                <marker date="1548591521306" expanded="true" signature="7748:7760" ph="..." />
+                <marker date="1548591521306" expanded="true" signature="8127:8153" ph="..." />
+                <marker date="1548591521306" expanded="true" signature="8160:8218" ph="data:" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewSession.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/NewSession.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="34" lean-forward="true" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+              <folding>
+                <marker date="1548342329728" expanded="true" signature="1025:1147" ph="select disti... tbluserconfiguration" />
+                <marker date="1548342329728" expanded="true" signature="1874:1957" ph="select reque... tblapplicant" />
+                <marker date="1548342329728" expanded="true" signature="2345:2399" ph="select role tblpmt" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MasterTemplate.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/templates/MasterTemplate.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="105" column="154" lean-forward="false" selection-start-line="105" selection-start-column="145" selection-end-line="105" selection-end-column="154" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="applicantrecords.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantrecords.php">
+      <file leaf-file-name="Main.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Main.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="71" column="92" lean-forward="false" selection-start-line="71" selection-start-column="92" selection-end-line="71" selection-end-column="92" />
+            <state relative-caret-position="180">
+              <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="qualifiedemployees.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/qualifiedemployees.php">
+      <file leaf-file-name="yearsinservice.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/yearsinservice.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="80" column="92" lean-forward="false" selection-start-line="80" selection-start-column="92" selection-end-line="80" selection-end-column="92" />
-              <folding />
+            <state relative-caret-position="192">
+              <caret line="804" column="0" lean-forward="false" selection-start-line="804" selection-start-column="0" selection-end-line="808" selection-end-column="3" />
+              <folding>
+                <marker date="1548577498138" expanded="true" signature="26485:26497" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="employeelist.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelist.php">
+      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_session/login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="71" column="92" lean-forward="false" selection-start-line="71" selection-start-column="92" selection-end-line="71" selection-end-column="92" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="departmentanalytics.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/departmentanalytics.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="427" column="99" lean-forward="false" selection-start-line="427" selection-start-column="99" selection-end-line="427" selection-end-column="99" />
-              <caret line="428" column="99" lean-forward="false" selection-start-line="428" selection-start-column="99" selection-end-line="428" selection-end-column="99" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fieldofexpertiseanalytics.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/fieldofexpertiseanalytics.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="222" column="28" lean-forward="false" selection-start-line="222" selection-start-column="28" selection-end-line="222" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="employmentstatusanalytics.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/employmentstatusanalytics.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1194">
-              <caret line="215" column="54" lean-forward="true" selection-start-line="215" selection-start-column="54" selection-end-line="215" selection-end-column="54" />
-              <folding />
+            <state relative-caret-position="278">
+              <caret line="664" column="21" lean-forward="true" selection-start-line="659" selection-start-column="20" selection-end-line="664" selection-end-column="21" />
+              <folding>
+                <element signature="e#53#59#0#HTML" expanded="true" />
+                <marker date="1548478438933" expanded="true" signature="41766:41786" ph="..." />
+                <marker date="1548478438933" expanded="true" signature="44061:44116" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -162,6 +154,14 @@
       <find>prepe</find>
       <find>Print</find>
       <find>sortByKeyAsc</find>
+      <find>generateChart</find>
+      <find>Analytics</find>
+      <find>generateC</find>
+      <find>\n</find>
+      <find>viewJobPosting</find>
+      <find>session</find>
+      <find>position</find>
+      <find>userle</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -170,15 +170,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/config/database.php" />
-        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisteducational.php" />
-        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisteligibility.php" />
-        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistcommunityservice.php" />
-        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisttraining.php" />
-        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistenterlgu.php" />
-        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistdepartmentassigned.php" />
-        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/departmenthead.php" />
-        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/casualemployee.php" />
         <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/plantillaemployee.php" />
         <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/joborderemployee.php" />
         <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/coterminousemployee.php" />
@@ -208,10 +199,28 @@
         <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantrecords.php" />
         <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/qualifiedemployees.php" />
         <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelist.php" />
-        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/salarygradesanalytics.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_menu/reportsmenu.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/agerangeanalytics.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/educationalattainmentanalytics.php" />
         <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/employmentstatusanalytics.php" />
         <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/fieldofexpertiseanalytics.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/positionlevelanalytics.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/salarygradesanalytics.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/yearsincurrentpositionanalytics.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/yearsinserviceanalytics.php" />
         <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/departmentanalytics.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/agerange.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/employmentstatus.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/salarygrades.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_menu/analyticsmenu.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/educationalattainment.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/fieldofexpertise.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/positionlevel.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/yearsincurrentposition.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/yearsinservice.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_menu/cscreportsmenu.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Cscreports.php" />
+        <option value="$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/criteriaforvacantposition.php" />
       </list>
     </option>
   </component>
@@ -262,7 +271,13 @@
               <item name="lgu-portal" type="b2602c69:ProjectViewProjectNode" />
               <item name="lgu-portal" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="lgu-portal" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lgu-portal" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="models" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="lgu-portal" type="b2602c69:ProjectViewProjectNode" />
@@ -276,6 +291,14 @@
               <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="mods" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="lgu-portal" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lgu-portal" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="mods" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="mod_menu" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="lgu-portal" type="b2602c69:ProjectViewProjectNode" />
@@ -301,7 +324,7 @@
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="mods" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="mod_recruitment" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="report_generation" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="cscreports" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="lgu-portal" type="b2602c69:ProjectViewProjectNode" />
@@ -309,49 +332,14 @@
               <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="mods" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="mod_recruitment" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="report_generation" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="applicant" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="mod_session" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="lgu-portal" type="b2602c69:ProjectViewProjectNode" />
               <item name="lgu-portal" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="mods" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="mod_recruitment" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="report_generation" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="bi" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="lgu-portal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lgu-portal" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="mods" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="mod_recruitment" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="report_generation" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="exam" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="lgu-portal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lgu-portal" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="mods" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="mod_recruitment" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="report_generation" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="pds" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="lgu-portal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lgu-portal" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="mods" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="mod_recruitment" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="report_generation" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="request_personnel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -366,6 +354,11 @@
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../lgu-admin" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\personal\rocketship\lgu-portal\application\views\mods\mod_recruitment\cscreports" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -389,25 +382,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1548478879248</updated>
-      <workItem from="1548478904327" duration="12314000" />
+      <workItem from="1548478904327" duration="14702000" />
+      <workItem from="1548574393085" duration="11232000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12512000" />
+    <option name="totallyTimeSpent" value="26132000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24164134" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28951368" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22844176" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.73519737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.91611844" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36019737" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6332237" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -461,250 +455,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/config/email.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="55" lean-forward="false" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
-          <folding>
-            <marker date="1548342329377" expanded="true" signature="0:63" ph="&lt;IfModule authz_core_module&gt;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_menu/reportsmenu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1575">
-          <caret line="22" column="5" lean-forward="false" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="102" column="35" lean-forward="false" selection-start-line="102" selection-start-column="19" selection-end-line="102" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicantreports.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10398">
-          <caret line="19" column="41" lean-forward="false" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/backgroundinvestigation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/agerangeanalytics.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12734">
-          <caret line="22" column="37" lean-forward="true" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-          <folding>
-            <marker date="1548478438849" expanded="true" signature="28022:28034" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisteducational.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="353" column="44" lean-forward="true" selection-start-line="351" selection-start-column="7" selection-end-line="353" selection-end-column="44" />
-          <folding>
-            <marker date="1548484722820" expanded="true" signature="8679:8685" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="8763:8769" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="8828:8834" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="8889:8895" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="8958:8964" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="9457:9463" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="9541:9547" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="9606:9612" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="9667:9673" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="9736:9742" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="10234:10240" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="10303:10309" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="10387:10393" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="10507:10513" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="10576:10582" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="11071:11077" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="11140:11146" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="11224:11230" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="11289:11295" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="11350:11356" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="11419:11425" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="11915:11921" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="11984:11990" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="12068:12074" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="12133:12139" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="12194:12200" ph=" " />
-            <marker date="1548484722820" expanded="true" signature="12263:12269" ph=" " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistcommunityservice.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1062">
-          <caret line="202" column="7" lean-forward="false" selection-start-line="202" selection-start-column="7" selection-end-line="202" selection-end-column="7" />
-          <folding>
-            <marker date="1548485174752" expanded="true" signature="7379:7401" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="7483:7505" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="7619:7641" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="7765:7783" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="7877:7895" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="7985:8003" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="8091:8109" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="8196:8214" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="8405:8423" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="8517:8535" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="8625:8643" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="8731:8749" ph="..." />
-            <marker date="1548485174752" expanded="true" signature="8836:8854" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelisttraining.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="202" column="7" lean-forward="false" selection-start-line="202" selection-start-column="7" selection-end-line="202" selection-end-column="7" />
-          <folding>
-            <marker date="1548485291838" expanded="true" signature="7358:7380" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="7462:7484" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="7598:7620" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="7744:7762" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="7849:7867" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="7957:7975" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="8063:8081" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="8168:8186" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="8380:8398" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="8485:8503" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="8593:8611" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="8699:8717" ph="..." />
-            <marker date="1548485291838" expanded="true" signature="8804:8822" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistenterlgu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="71" column="92" lean-forward="false" selection-start-line="71" selection-start-column="92" selection-end-line="71" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelistdepartmentassigned.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="206" column="426" lean-forward="false" selection-start-line="206" selection-start-column="426" selection-end-line="206" selection-end-column="426" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/departmenthead.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="169" column="426" lean-forward="false" selection-start-line="169" selection-start-column="426" selection-end-line="169" selection-end-column="426" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/casualemployee.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="171" column="44" lean-forward="true" selection-start-line="171" selection-start-column="44" selection-end-line="171" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/plantillaemployee.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="258" column="33" lean-forward="false" selection-start-line="258" selection-start-column="33" selection-end-line="258" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/coterminousemployee.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="257" column="33" lean-forward="false" selection-start-line="257" selection-start-column="33" selection-end-line="257" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/bi/backgroundinvestigationexam.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="171" column="17" lean-forward="false" selection-start-line="171" selection-start-column="17" selection-end-line="171" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/bi/backgroundinvestigator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="177" column="17" lean-forward="false" selection-start-line="177" selection-start-column="17" selection-end-line="177" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/bi/backgroundinvestigationresult.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="293" column="422" lean-forward="false" selection-start-line="293" selection-start-column="422" selection-end-line="293" selection-end-column="422" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequestnew.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="177" column="17" lean-forward="false" selection-start-line="177" selection-start-column="17" selection-end-line="177" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequestapproved.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="187" column="426" lean-forward="true" selection-start-line="186" selection-start-column="23" selection-end-line="187" selection-end-column="426" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequestrejected.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="168" column="426" lean-forward="false" selection-start-line="168" selection-start-column="426" selection-end-line="168" selection-end-column="426" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/request_personnel/personnelrequests.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -785,14 +535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorapplicantassessment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="244" column="23" lean-forward="false" selection-start-line="244" selection-start-column="23" selection-end-line="244" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorlist.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
@@ -813,14 +555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
           <caret line="198" column="426" lean-forward="false" selection-start-line="198" selection-start-column="426" selection-end-line="198" selection-end-column="426" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/listofposition.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="71" column="77" lean-forward="false" selection-start-line="71" selection-start-column="77" selection-end-line="71" selection-end-column="88" />
           <folding />
         </state>
       </provider>
@@ -859,7 +593,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantnotqualified.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
+        <state relative-caret-position="1050">
           <caret line="70" column="92" lean-forward="false" selection-start-line="70" selection-start-column="92" selection-end-line="70" selection-end-column="92" />
           <folding />
         </state>
@@ -867,7 +601,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
+        <state relative-caret-position="1065">
           <caret line="71" column="92" lean-forward="false" selection-start-line="71" selection-start-column="92" selection-end-line="71" selection-end-column="92" />
           <folding />
         </state>
@@ -875,7 +609,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantlocalnonlocal.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
+        <state relative-caret-position="1305">
           <caret line="87" column="92" lean-forward="false" selection-start-line="87" selection-start-column="92" selection-end-line="87" selection-end-column="92" />
           <folding />
         </state>
@@ -883,7 +617,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/applicantrecords.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
+        <state relative-caret-position="1065">
           <caret line="71" column="92" lean-forward="false" selection-start-line="71" selection-start-column="92" selection-end-line="71" selection-end-column="92" />
           <folding />
         </state>
@@ -891,7 +625,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/applicant/qualifiedemployees.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
+        <state relative-caret-position="1200">
           <caret line="80" column="92" lean-forward="false" selection-start-line="80" selection-start-column="92" selection-end-line="80" selection-end-column="92" />
           <folding />
         </state>
@@ -899,32 +633,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/pds/employeelist.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
+        <state relative-caret-position="1065">
           <caret line="71" column="92" lean-forward="false" selection-start-line="71" selection-start-column="92" selection-end-line="71" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/salarygradesanalytics.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="303" column="23" lean-forward="false" selection-start-line="303" selection-start-column="23" selection-end-line="303" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/fieldofexpertiseanalytics.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="222" column="28" lean-forward="false" selection-start-line="222" selection-start-column="28" selection-end-line="222" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/yearsincurrentpositionanalytics.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -939,20 +649,281 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Analytics.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="26" column="60" lean-forward="true" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_menu/reportsmenu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="80" column="40" lean-forward="true" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#0;n#td#10;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/listofposition.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="158" column="77" lean-forward="false" selection-start-line="158" selection-start-column="36" selection-end-line="158" selection-end-column="77" />
+          <folding>
+            <element signature="n#style#0;n#h5#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/agerangeanalytics.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="843" column="410" lean-forward="false" selection-start-line="843" selection-start-column="410" selection-end-line="843" selection-end-column="498" />
+          <folding>
+            <marker date="1548575906957" expanded="true" signature="28023:28035" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/educationalattainmentanalytics.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="326" column="490" lean-forward="false" selection-start-line="326" selection-start-column="490" selection-end-line="326" selection-end-column="490" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/employmentstatusanalytics.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1194">
-          <caret line="215" column="54" lean-forward="true" selection-start-line="215" selection-start-column="54" selection-end-line="215" selection-end-column="54" />
+        <state relative-caret-position="240">
+          <caret line="327" column="446" lean-forward="false" selection-start-line="327" selection-start-column="446" selection-end-line="327" selection-end-column="446" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/fieldofexpertiseanalytics.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="327" column="446" lean-forward="false" selection-start-line="327" selection-start-column="446" selection-end-line="327" selection-end-column="446" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/positionlevelanalytics.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="322" column="446" lean-forward="true" selection-start-line="322" selection-start-column="446" selection-end-line="322" selection-end-column="446" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/yearsincurrentpositionanalytics.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="807" column="446" lean-forward="true" selection-start-line="807" selection-start-column="446" selection-end-line="807" selection-end-column="446" />
+          <folding>
+            <marker date="1548576050420" expanded="true" signature="26351:26363" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/yearsinserviceanalytics.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="808" column="446" lean-forward="true" selection-start-line="808" selection-start-column="446" selection-end-line="808" selection-end-column="446" />
+          <folding>
+            <marker date="1548576049728" expanded="true" signature="26333:26345" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/salarygradesanalytics.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="330" column="5" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="353" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/analytics/departmentanalytics.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="427" column="99" lean-forward="false" selection-start-line="427" selection-start-column="99" selection-end-line="427" selection-end-column="99" />
-          <caret line="428" column="99" lean-forward="false" selection-start-line="428" selection-start-column="99" selection-end-line="428" selection-end-column="99" />
+        <state relative-caret-position="402">
+          <caret line="382" column="75" lean-forward="false" selection-start-line="382" selection-start-column="75" selection-end-line="382" selection-end-column="75" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/agerange.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="26" column="163" lean-forward="false" selection-start-line="26" selection-start-column="163" selection-end-line="26" selection-end-column="163" />
+          <folding>
+            <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1548576750999" expanded="true" signature="29926:29938" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/employmentstatus.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="26" column="163" lean-forward="false" selection-start-line="26" selection-start-column="163" selection-end-line="26" selection-end-column="163" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/salarygrades.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="26" column="163" lean-forward="false" selection-start-line="26" selection-start-column="163" selection-end-line="26" selection-end-column="163" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_menu/analyticsmenu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="37" column="148" lean-forward="false" selection-start-line="37" selection-start-column="148" selection-end-line="37" selection-end-column="148" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/positionlevel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="38" column="77" lean-forward="false" selection-start-line="38" selection-start-column="64" selection-end-line="38" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/yearsincurrentposition.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="84" column="82" lean-forward="false" selection-start-line="84" selection-start-column="82" selection-end-line="84" selection-end-column="82" />
+          <folding>
+            <marker date="1548577347534" expanded="true" signature="26504:26516" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/educationalattainment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="59" column="12" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="59" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/fieldofexpertise.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="59" column="12" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="358" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Cscreports.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="37" column="91" lean-forward="false" selection-start-line="37" selection-start-column="66" selection-end-line="37" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_menu/cscreportsmenu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="189" column="20" lean-forward="false" selection-start-line="189" selection-start-column="20" selection-end-line="189" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/report_generation/exam/evaluatorapplicantassessment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="136" column="23" lean-forward="true" selection-start-line="135" selection-start-column="7" selection-end-line="136" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_session/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="664" column="21" lean-forward="true" selection-start-line="659" selection-start-column="20" selection-end-line="664" selection-end-column="21" />
+          <folding>
+            <element signature="e#53#59#0#HTML" expanded="true" />
+            <marker date="1548478438933" expanded="true" signature="41766:41786" ph="..." />
+            <marker date="1548478438933" expanded="true" signature="44061:44116" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/yearsinservice.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="804" column="0" lean-forward="false" selection-start-line="804" selection-start-column="0" selection-end-line="808" selection-end-column="3" />
+          <folding>
+            <marker date="1548577498138" expanded="true" signature="26485:26497" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/templates/MasterTemplate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="105" column="154" lean-forward="false" selection-start-line="105" selection-start-column="145" selection-end-line="105" selection-end-column="154" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="59" lean-forward="true" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/NewSession.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="34" lean-forward="true" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+          <folding>
+            <marker date="1548342329728" expanded="true" signature="1025:1147" ph="select disti... tbluserconfiguration" />
+            <marker date="1548342329728" expanded="true" signature="1874:1957" ph="select reque... tblapplicant" />
+            <marker date="1548342329728" expanded="true" signature="2345:2399" ph="select role tblpmt" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mods/mod_recruitment/cscreports/criteriaforvacantposition.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="158" column="53" lean-forward="true" selection-start-line="158" selection-start-column="53" selection-end-line="158" selection-end-column="53" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h5#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h4#0;n#center#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1548591521306" expanded="true" signature="6116:6127" ph="..." />
+            <marker date="1548591521306" expanded="true" signature="6181:6192" ph="..." />
+            <marker date="1548591521306" expanded="true" signature="6313:6325" ph="..." />
+            <marker date="1548591521306" expanded="true" signature="6488:6507" ph="..." />
+            <marker date="1548591521306" expanded="true" signature="7110:7128" ph="..." />
+            <marker date="1548591521306" expanded="true" signature="7692:7704" ph="..." />
+            <marker date="1548591521306" expanded="true" signature="7748:7760" ph="..." />
+            <marker date="1548591521306" expanded="true" signature="8127:8153" ph="..." />
+            <marker date="1548591521306" expanded="true" signature="8160:8218" ph="data:" />
+          </folding>
         </state>
       </provider>
     </entry>

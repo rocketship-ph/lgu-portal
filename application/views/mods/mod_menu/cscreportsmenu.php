@@ -35,7 +35,7 @@
                 &nbsp;
             </td>
             <td>
-                <h4>Welcome! <span style="font-weight: 700;margin-top: 5px;"><?php echo $this->session->userdata('firstname');?></span> to Report Generation Menu</h4>
+                <h4>Welcome! <span style="font-weight: 700;margin-top: 5px;"><?php echo $this->session->userdata('firstname');?></span> to CSC Required Reports Menu</h4>
                 <h4 style="font-size: 12pt">Click the Link Under Menu to make a selection</h4>
             </td>
             <td align="center" width="20px">
@@ -121,10 +121,80 @@
         </div>
     </div>
 
+    <div class="form-group col-md-3">
+        <div class="panel">
+            <div class="panel-body" align="center">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/educationalattainment">
+                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                    <br><br>
+                    Educational Attainment
+                </a>
+            </div>
+        </div>
+    </div>
 
+    <div class="form-group col-md-3">
+        <div class="panel">
+            <div class="panel-body" align="center">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/fieldofexpertise">
+                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                    <br><br>
+                    Field of Expertise
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <div class="panel">
+            <div class="panel-body" align="center">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/positionlevel">
+                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                    <br><br>
+                    Levels of Position
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <div class="panel">
+            <div class="panel-body" align="center">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/yearsincurrentposition">
+                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                    <br><br>
+                    Years in Current Position
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <div class="panel">
+            <div class="panel-body" align="center">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/yearsinservice">
+                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                    <br><br>
+                    Years in Public Service
+                </a>
+            </div>
+        </div>
+    </div>
 
+    <div class="col-md-12">
+        <hr>
+    </div>
+    <div class="form-group col-md-3">
+        <div class="panel">
+            <div class="panel-body" align="center">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/criteriaforvacantposition">
+                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                    <br><br>
+                    Selection Criteria for the Vacant Position
+                </a>
+            </div>
+        </div>
+    </div>
 
 </div>
+
 </div>
 <script type="application/javascript">
     $(document).ready(function(){

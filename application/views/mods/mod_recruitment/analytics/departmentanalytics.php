@@ -368,19 +368,19 @@
                     '                \'                             <td>'+isEmpty(i)+'</td>\\n\' +\n' +
                     '                \'                             <td><span id="MPET">'+countData("*MPE*"+i)+'</span></td>\\n\' +\n' +
                     '                \'                             <td><span id="FPET">'+countData("*FPE*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span id="PET">'+sum(parseInt(countData("*MPE*"+i)),parseInt(countData("*FPE*"+i)))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><b><span id="PET">'+sum(parseInt(countData("*MPE*"+i)),parseInt(countData("*FPE*"+i)))+'</span></b></td>\\n\' +\n' +
                     '                \'                             <td><span id="MELT" >'+countData("*MEL*"+i)+'</span></td>\\n\' +\n' +
                     '                \'                             <td><span id="FELT">'+countData("*FEL*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span id="ELT">'+sum(parseInt(countData("*MEL*"+i)),parseInt(countData("*FEL*"+i)))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><b><span id="ELT">'+sum(parseInt(countData("*MEL*"+i)),parseInt(countData("*FEL*"+i)))+'</span></b></td>\\n\' +\n' +
                     '                \'                             <td><span id="MCTT">'+countData("*MCT*"+i)+'</span></td>\\n\' +\n' +
                     '                \'                             <td><span id="FCTT">'+countData("*FCT*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span id="CTT">'+sum(parseInt(countData("*MCT*"+i)),parseInt(countData("*FCT*"+i)))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><b><span id="CTT">'+sum(parseInt(countData("*MCT*"+i)),parseInt(countData("*FCT*"+i)))+'</span></b></td>\\n\' +\n' +
                     '                \'                             <td><span id="MCAT">'+countData("*MCA*"+i)+'</span></td>\\n\' +\n' +
                     '                \'                             <td><span id="FCAT">'+countData("*FCA*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span id="CAT">'+sum(parseInt(countData("*MCA*"+i)),parseInt(countData("*FCA*"+i)))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><b><span id="CAT">'+sum(parseInt(countData("*MCA*"+i)),parseInt(countData("*FCA*"+i)))+'</span></b></td>\\n\' +\n' +
                     '                \'                             <td><span id="MJOT">'+countData("*MJO*"+i)+'</span></td>\\n\' +\n' +
                     '                \'                             <td><span id="FJOT">'+countData("*FJO*"+i)+'</span></td>\\n\' +\n' +
-                    '                \'                             <td><span id="JOT">'+sum(parseInt(countData("*MJO*"+i)),parseInt(countData("*FJO*"+i)))+'</span></td>\\n\' +\n' +
+                    '                \'                             <td><b><span id="JOT">'+sum(parseInt(countData("*MJO*"+i)),parseInt(countData("*FJO*"+i)))+'</span></b></td>\\n\' +\n' +
                     '                \'                             <td><span>'+sumAllTotal(countData("*MPE*"+i),countData("*MEL*"+i),countData("*MCT*"+i),countData("*MCA*"+i),countData("*MJO*"+i))+'</span></td>\\n\' +\n' +
                     '                \'                             <td><span>'+sumAllTotal(countData("*FPE*"+i),countData("*FEL*"+i),countData("*FCT*"+i),countData("*FCA*"+i),countData("*FJO*"+i))+'</span></td>\\n\' +\n' +
                     '                \'                             <td><span><b>'+newObj[i]+'</b></span></td>\\n\' +\n' +
@@ -693,7 +693,7 @@
 
 $('#exportPDF').click(function(){
     $("#container").print({
-        prepend: '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table><br><br>'
+        prepend: '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table><br><br><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+moment().format("MMM DD YYYY hh:mm:ss A")+'</span>'
     });
 });
 </script>

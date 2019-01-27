@@ -12,58 +12,58 @@
     }
 </style>
 <div class="well">
-<table>
-    <tr>
-        <td rowspan="2">
-            <div style="height: 70px;width:70px;background-color: #42A5F5;text-align: center;border-radius: 5px;">
-                <br>
-                <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="50px">
-            </div>
-        </td>
-        <td rowspan="2" width="15px">
-            &nbsp;
-        </td>
-        <td colspan="4">
-            <h4>Welcome! <span style="font-weight: 700;margin-top: 5px;"><?php echo $this->session->userdata('firstname');?></span> to <br>Analytics Menu</h4>
-            <h4 style="font-size: 12pt">Click the Link Under Menu to make a selection</h4>
-        </td>
-        <td align="center" width="20px">
-            &nbsp;&nbsp;
-        </td>
-        <td style="border: 1px solid #d1d1d1">
-        <td align="center" width="20px">
-            &nbsp;&nbsp;
-        </td>
-        <td>
-            <div class="panel panel-menu" align="center" id="panel_requestpersonnelreports">
-                <a href="<?php echo base_url();?>analytics/yearsincurrentpositionanalytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
-                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="40px">
+    <table>
+        <tr>
+            <td rowspan="2">
+                <div style="height: 70px;width:70px;background-color: #42A5F5;text-align: center;border-radius: 5px;">
                     <br>
-                    Years in Current Position Analytics
-                </a>
-            </div>
-        </td>
-        <td align="center" width="20px">
-            &nbsp;&nbsp;
-        </td>
-        <td>
-            <div class="panel panel-menu" align="center" id="panel_applicantreports">
-                <a  href="<?php echo base_url();?>main/analytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
-                    <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
-                    <br>
-                    Analytics Menu
-                </a>
-            </div>
-        </td>
-        </td>
-    </tr>
-</table>
+                    <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="50px">
+                </div>
+            </td>
+            <td rowspan="2" width="15px">
+                &nbsp;
+            </td>
+            <td colspan="4">
+                <h4>Welcome! <span style="font-weight: 700;margin-top: 5px;"><?php echo $this->session->userdata('firstname');?></span> to <br>CSC Required Reports Menu</h4>
+                <h4 style="font-size: 12pt">Click the Link Under Menu to make a selection</h4>
+            </td>
+            <td align="center" width="20px">
+                &nbsp;&nbsp;
+            </td>
+            <td style="border: 1px solid #d1d1d1">
+            <td align="center" width="20px">
+                &nbsp;&nbsp;
+            </td>
+            <td>
+                <div class="panel panel-menu" align="center" id="panel_requestpersonnelreports">
+                    <a href="<?php echo base_url();?>cscreports/yearsinservice" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                        <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="40px">
+                        <br>
+                        Years in Public Service
+                    </a>
+                </div>
+            </td>
+            <td align="center" width="20px">
+                &nbsp;&nbsp;
+            </td>
+            <td>
+                <div class="panel panel-menu" align="center" id="panel_applicantreports">
+                    <a  href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                        <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
+                        <br>
+                        CSC Required Reports Menu
+                    </a>
+                </div>
+            </td>
+            </td>
+        </tr>
+    </table>
 <div class="row">
     <div class="col-md-12">
         <hr>
     </div>
     <div class="col-md-12" id="container">
-        <legend>Years in Current Position Analytics</legend>
+        <legend>Years in Public Service </legend>
          <button id="exportPDF" class="btn btn-success btn-xs pull-right">Export as PDF</button><br><br>
         <div class="row">
             <div class="col-md-12">
@@ -82,10 +82,10 @@
                         <tbody>
                         </tbody>
                     </table> -->
-                    <table class="tblanalytics2" style="width: 100%;" border="2">
+                    <table class="tblanalytics2" style="width: 100%; display: none" border="2">
                        <tbody>
                           <tr>
-                             <td rowspan="2" width="10%"><b>Years in Current Position</b></td>
+                             <td rowspan="2" width="10%"><b>Years in Public Service</b></td>
                              <td colspan="2"><b>Permanent</b></td>
                              <td rowspan="2"><b>TOTAL</b></td>
                              <td colspan="2"><b>Elected</b></td>
@@ -241,9 +241,7 @@
                           </tr>
                        </tbody>
                     </table>
-                    <br>
                 </div>
-                <br>
                  <table cellspacing="0" width="100%">
                     <tr>
                         <td>
@@ -281,8 +279,8 @@ function loadReport() {
                 $("#loadingmodal").modal("hide");
                 if(data.Code == "00"){
                     countAgeRange(data.details);
-                    generateChart(data.details);
-                    console.log(data.details);
+//                    generateChart(data.details);
+//                    console.log(data.details);
                     $('#tblcont1').show();
                     $("#tblmsg1").hide();
                 } else {
@@ -312,11 +310,12 @@ var age66to70F = [];var age66to70FP = [];var age66to70FE = [];var age66to70FCT =
     var m =0;
     var f =0;
 function countAgeRange(data){
+    
     for(var i=0;i<data.length;i++) {
-        var value = data[i]['yearsincurrentposition'];
-        if(value!="" && value!=null && value!="null"){
+        var value = data[i]['yearsofservice'];
+        if(value!=""&&value!=null&&value!="null"){
             if(value>=0 && value<=10){
-                if(data[i]['employmentstatus'].toUpperCase()=="CASUAL"){
+                 if(data[i]['employmentstatus'].toUpperCase()=="CASUAL"){
                     if(data[i]['gender']=="MALE"){
                         age21to35MC.push(value);
                     } else {
@@ -512,7 +511,7 @@ function countAgeRange(data){
                 }
             }
         } else {
-            if(data[i]['employmentstatus'].toUpperCase()=="CASUAL"){
+              if(data[i]['employmentstatus'].toUpperCase()=="CASUAL"){
                     if(data[i]['gender']=="MALE"){
                         age21to35MC.push(value);
                     } else {
@@ -552,7 +551,7 @@ function countAgeRange(data){
                 }
         }
     }
-    $("#tblcont1").append('<table class="tblanalytics"  style="width: 100%;" border="2" cellpadding="10" > <tbody> <tr> <td><b>Years in Current Position</b></td> <td width="15%"><b>Male</b></td> <td width="15%"><b>Female</b></td> <td width="15%"><b>Total</b></td> </tr> <tr> <td>1-10 years</td> <td>'+age21to35M.length+'</td> <td>'+age21to35F.length+'</td> <td><b>'+sum(age21to35M.length,age21to35F.length)+'</b></td> </tr> <tr> <td>11-20 years</td> <td>'+ age36to45M.length +'</td> <td>'+age36to45F.length+'</td> <td><b>'+sum(age36to45M.length,age36to45F.length)+'</b></td> </tr> <tr> <td>21-30 years</td> <td>'+age46to55M.length+'</td> <td>'+age46to55F.length+'</td> <td><b>'+sum(age46to55M.length,age46to55F.length)+'</b></td> </tr> <tr> <td>31-40 years</td> <td>'+age56to65M.length+'</td> <td>'+age56to65F.length+'</td> <td><b>'+sum(age56to65M.length,age56to65F.length)+'</b></td> </tr> <tr> <td>41 years and above</td> <td>'+age66to70M.length+'</td> <td>'+age66to70M.length+'</td> <td><b>'+sum(age66to70M.length,age66to70F.length)+'</b></td> </tr> <tr> <td><b>Grand Total</b></td> <td><b>'+m+'</b></td> <td><b>'+f+'</b></td> <td><b>'+sum(m,f)+'</b></td> </tr> </tbody> </table>');
+    $("#tblcont1").append('<table class="tblanalytics"  style="width: 100%;" border="2" cellpadding="10" > <tbody> <tr> <td><b>Years in Public Service</b></td> <td width="15%"><b>Male</b></td> <td width="15%"><b>Female</b></td> <td width="15%"><b>Total</b></td> </tr> <tr> <td>1-10 years</td> <td>'+age21to35M.length+'</td> <td>'+age21to35F.length+'</td> <td><b>'+sum(age21to35M.length,age21to35F.length)+'</b></td> </tr> <tr> <td>11-20 years</td> <td>'+ age36to45M.length +'</td> <td>'+age36to45F.length+'</td> <td><b>'+sum(age36to45M.length,age36to45F.length)+'</b></td> </tr> <tr> <td>21-30 years</td> <td>'+age46to55M.length+'</td> <td>'+age46to55F.length+'</td> <td><b>'+sum(age46to55M.length,age46to55F.length)+'</b></td> </tr> <tr> <td>31-40 years</td> <td>'+age56to65M.length+'</td> <td>'+age56to65F.length+'</td> <td><b>'+sum(age56to65M.length,age56to65F.length)+'</b></td> </tr> <tr> <td>41 years and above</td> <td>'+age66to70M.length+'</td> <td>'+age66to70M.length+'</td> <td><b>'+sum(age66to70M.length,age66to70F.length)+'</b></td> </tr> <tr> <td><b>Grand Total</b></td> <td><b>'+m+'</b></td> <td><b>'+f+'</b></td> <td><b>'+sum(m,f)+'</b></td> </tr> </tbody> </table>');
 
  $("#below21STM").text(age21to35M.length);
     $("#below21STF").text(age21to35F.length);
@@ -769,21 +768,21 @@ function composeData() {
 function generateChart(data){
     var chartObj = new Object();
     chartObj['chartName'] = 'engDiv';
-    chartObj['chartTitle'] = 'Years in Current Position';
+    chartObj['chartTitle'] = 'Years in Public Service';
     chartObj['data'] = composeData();
     google.charts.setOnLoadCallback(function() {
         drawChart();
     });
     function drawChart() {
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Years in Current Position Analytics');
+        data.addColumn('string', 'Years in Public Service ');
         data.addColumn('number', 'Total Number of Male Employees');
         data.addColumn('number', 'Total Number of Female Employees');
 
         data.addRows(chartObj.data);
         var options = {
             title: chartObj.chartTitle,
-           chartArea: {
+          chartArea: {
                 width: 500,
                 right: 10,
                 left:150
@@ -819,26 +818,26 @@ $('#exportPDF').click(function(){
         color: black;
         text-align: center;
     }
-  @media print {
-      /*body * {*/
-          /*display:: none;*/
-          /*visibility: hidden;*/
-          /*top: 0;*/
-      /*}*/
+   @media print {
+       /*body * {*/
+           /*display:: none;*/
+           /*visibility: hidden;*/
+           /*top: 0;*/
+       /*}*/
 
-      /*#container, #container * {*/
-          /*visibility: visible;*/
-      /*}*/
+       /*#container, #container * {*/
+           /*visibility: visible;*/
+       /*}*/
 
-      /*#container {*/
-          /*position: absolute;*/
-          /*left: 0;*/
-          /*top: 0;*/
-          /*margin-top: -650px;*/
-      /*}*/
+       /*#container {*/
+           /*position: absolute;*/
+           /*left: 0;*/
+           /*top: 0;*/
+           /*margin-top: -650px;*/
+       /*}*/
 
-      #exportPDF {
-          visibility: hidden;
-      }
-  }
+       #exportPDF {
+           visibility: hidden;
+       }
+   }
 </style>

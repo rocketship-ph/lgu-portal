@@ -73,15 +73,15 @@
             &nbsp;&nbsp;
         </td>
         <?php endif;?>
-<!--        <td>-->
-<!--            <div class="panel panel-menu" align="center" >-->
-<!--                <a href="--><?php //echo base_url();?><!--main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">-->
-<!--                    <img src="--><?php //echo base_url();?><!--assets/img/icons/report_generation.png" height="40px">-->
-<!--                    <br>-->
-<!--                    CSC Required Reports-->
-<!--                </a>-->
-<!--            </div>-->
-<!--        </td>-->
+        <td>
+            <div class="panel panel-menu" align="center" >
+                <a href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                    <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
+                    <br>
+                    CSC Required Reports
+                </a>
+            </div>
+        </td>
     </tr>
 </table>
 <div class="row">

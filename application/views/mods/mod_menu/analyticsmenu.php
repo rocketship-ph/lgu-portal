@@ -35,7 +35,7 @@
                 &nbsp;
             </td>
             <td>
-                <h4>Welcome! <span style="font-weight: 700;margin-top: 5px;"><?php echo $this->session->userdata('firstname');?></span> to Report Generation Menu</h4>
+                <h4>Welcome! <span style="font-weight: 700;margin-top: 5px;"><?php echo $this->session->userdata('firstname');?></span> to Analytics Menu</h4>
                 <h4 style="font-size: 12pt">Click the Link Under Menu to make a selection</h4>
             </td>
             <td align="center" width="20px">
@@ -73,15 +73,15 @@
                 &nbsp;&nbsp;
             </td>
             <?php endif;?>
-<!--            <td>-->
-<!--                <div class="panel panel-menu" align="center" >-->
-<!--                    <a href="--><?php //echo base_url();?><!--main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">-->
-<!--                        <img src="--><?php //echo base_url();?><!--assets/img/icons/report_generation.png" height="40px">-->
-<!--                        <br>-->
-<!--                        CSC Required Reports-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </td>-->
+            <td>
+                <div class="panel panel-menu" align="center" >
+                    <a href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                        <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
+                        <br>
+                        CSC Required Reports
+                    </a>
+                </div>
+            </td>
         </tr>
     </table>
 <div class="row">
@@ -205,6 +205,7 @@
         </div>
     </div>
     <?php endif;?>
+
 </div>
 </div>
 <script type="application/javascript">

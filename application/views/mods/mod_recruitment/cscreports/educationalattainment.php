@@ -12,34 +12,34 @@
     }
 </style>
 <div class="well">
-<table>
-    <tr>
-        <td rowspan="2">
-            <div style="height: 70px;width:70px;background-color: #42A5F5;text-align: center;border-radius: 5px;">
-                <br>
-                <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="50px">
-            </div>
-        </td>
-        <td rowspan="2" width="15px" >
-         
-        </td>
-        <td colspan="4">
-            <h4>Welcome! <span style="font-weight: 700;margin-top: 5px;"><?php echo $this->session->userdata('firstname');?></span> to <br>Analytics Menu</h4>
-            <h4 style="font-size: 12pt">Click the Link Under Menu to make a selection</h4>
-        </td>
-        <td align="center" width="20px">
-          
-        </td>
-        <td style="border: 1px solid #d1d1d1" >
-            <td align="center" width="20px" >
-          
+    <table>
+        <tr>
+            <td rowspan="2">
+                <div style="height: 70px;width:70px;background-color: #42A5F5;text-align: center;border-radius: 5px;">
+                    <br>
+                    <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="50px">
+                </div>
+            </td>
+            <td rowspan="2" width="15px">
+                &nbsp;
+            </td>
+            <td colspan="4">
+                <h4>Welcome! <span style="font-weight: 700;margin-top: 5px;"><?php echo $this->session->userdata('firstname');?></span> to <br>CSC Required Reports Menu</h4>
+                <h4 style="font-size: 12pt">Click the Link Under Menu to make a selection</h4>
+            </td>
+            <td align="center" width="20px">
+                &nbsp;&nbsp;
+            </td>
+            <td style="border: 1px solid #d1d1d1">
+            <td align="center" width="20px">
+                &nbsp;&nbsp;
             </td>
             <td>
                 <div class="panel panel-menu" align="center" id="panel_requestpersonnelreports">
-                    <a href="<?php echo base_url();?>analytics/fieldofexpertiseanalytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                    <a href="<?php echo base_url();?>cscreports/educationalattainment" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="40px">
                         <br>
-                        Field of Expertise Analytics
+                        Educational Attainment
                     </a>
                 </div>
             </td>
@@ -48,23 +48,23 @@
             </td>
             <td>
                 <div class="panel panel-menu" align="center" id="panel_applicantreports">
-                    <a  href="<?php echo base_url();?>main/analytics" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                    <a  href="<?php echo base_url();?>main/cscreports" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/report_generation.png" height="40px">
                         <br>
-                        Analytics Menu
+                        CSC Required Reports Menu
                     </a>
                 </div>
             </td>
-        </td>
-    </tr>
-</table>
+            </td>
+        </tr>
+    </table>
 <div class="row">
     <div class="col-md-12">
         <hr>
     </div>
     <div class="col-md-12" id="container">
-        <legend>Field of Expertise Analytics</legend>
-           <button id="exportPDF" class="btn btn-success btn-xs pull-right">Export as PDF</button><br><br>
+        <legend>Highest Educational Attainment </legend>
+         <button id="exportPDF" class="btn btn-success btn-xs pull-right">Export as PDF</button><br><br>
         <div class="row">
             <div class="col-md-12">
                 <h5 id="tblmsg1" style="display:none"></h5>
@@ -112,8 +112,8 @@ function loadReport() {
                 $("#loadingmodal").modal("hide");
                 if(data.Code == "00"){
                     countAgeRange(data.details);
-                    generateChart(data.details);
-                    console.log(data.details);
+//                    generateChart(data.details);
+//                    console.log(data.details);
                     $('#tblcont1').show();
                     $("#tblmsg1").hide();
                 } else {
@@ -152,7 +152,7 @@ function countAgeRange(data){
     var ctrm =0;
     var ctrf =0;
     for(var i=0;i<data.length;i++) {
-        var value = data[i]['fieldofexpertise'].toUpperCase();
+        var value = data[i]['highesteduc'].toUpperCase();
         var val =[];
         if(value!=""&&value!=null&&value!="null"){
             if(data[i]['gender']=="MALE"){
@@ -197,7 +197,7 @@ function countAgeRange(data){
         temp.push(cnt);
         datax.push(temp);
     }
-    $("#tbldata").append('<tr> <td><b>Field of Expertise/Specialization</b></td> <td width="15%"><b>Male</b></td> <td width="15%"><b>Female</b></td> <td width="15%"><b>Total</b></td> </tr>');
+    $("#tbldata").append('<tr> <td><b>Highest Educational Attainment</b></td> <td width="15%"><b>Male</b></td> <td width="15%"><b>Female</b></td> <td width="15%"><b>Total</b></td> </tr>');
      var obj = [];
     var cur = null;
     var sg = [];
@@ -220,7 +220,7 @@ function countAgeRange(data){
         obj.push(item);
       
     }
-    sortByKeyAsc(obj, "sg");
+
     var newObj = {};
     for(i in obj){
             var item = obj[i];
@@ -231,7 +231,6 @@ function countAgeRange(data){
     }
     var result = {};
     result.rows = [];
-
 
     for(i in newObj){
           var m =0, f=0;
@@ -244,6 +243,8 @@ function countAgeRange(data){
           }
         }
           result.rows.push({'sg':i,'total':newObj[i],'m':m,'f':f});
+
+        
         if(i==""){
             $("#tbldata").append('<tr> <td>N/A</td> <td>'+m+'</td> <td>'+f+'</td> <td><b>'+newObj[i]+'</b></td> </tr>');
         } else {
@@ -251,25 +252,23 @@ function countAgeRange(data){
         }
         
         var cobj=[];
-         if(i==""){
+
+        if(i==""){
              cobj.push("N/A");
          } else {
             cobj.push(i);
          }
+       
         cobj.push(m);
         cobj.push(f);
         cdata.push(cobj);
     }
+    console.log(JSON.stringify(result.rows));
 
         $("#tbldata").append('<tr> <td><b>Grand Total</b></td> <td><b>'+ctrm+'</b></td> <td><b>'+ctrf+'</b></td> <td><b>'+sum(ctrm,ctrf)+'</b></td> </tr>');
-    generateChart(cdata);
+//    generateChart(cdata);
 }
-function sortByKeyAsc(array, key) {
-    return array.sort(function (a, b) {
-        var x = a[key]; var y = b[key];
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-    });
-}
+
 function hasName(prop, value, data) {
     return data.some(function(obj) {
         return prop in obj && obj[prop] === value;
@@ -289,14 +288,14 @@ function sum(m,f){
 function generateChart(data){
     var chartObj = new Object();
     chartObj['chartName'] = 'engDiv';
-    chartObj['chartTitle'] = 'Field of Expertise';
+    chartObj['chartTitle'] = 'Highest Educational Attainment';
     chartObj['data'] = cdata;
     google.charts.setOnLoadCallback(function() {
         drawChart();
     });
     function drawChart() {
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Field of Expertise Analytics');
+        data.addColumn('string', 'Highest Educational Attainment ');
         data.addColumn('number', 'Total Number of Male Employees');
         data.addColumn('number', 'Total Number of Female Employees');
 
@@ -334,26 +333,26 @@ $('#exportPDF').click(function(){
         padding: 5px;
         color: black;
     }
-    @media print {
-        /*body * {*/
-            /*display:: none;*/
-            /*visibility: hidden;*/
-            /*top: 0;*/
-        /*}*/
+      @media print {
+          /*body * {*/
+              /*display:: none;*/
+              /*visibility: hidden;*/
+              /*top: 0;*/
+          /*}*/
 
-        /*#container, #container * {*/
-            /*visibility: visible;*/
-        /*}*/
+          /*#container, #container * {*/
+              /*visibility: visible;*/
+          /*}*/
 
-        /*#container {*/
-            /*position: absolute;*/
-            /*left: 0;*/
-            /*top: 0;*/
-            /*margin-top: -650px;*/
-        /*}*/
+          /*#container {*/
+              /*position: absolute;*/
+              /*left: 0;*/
+              /*top: 0;*/
+              /*margin-top: -650px;*/
+          /*}*/
 
-        #exportPDF {
-            visibility: hidden;
-        }
-    }
+          #exportPDF {
+              visibility: hidden;
+          }
+      }
 </style>
