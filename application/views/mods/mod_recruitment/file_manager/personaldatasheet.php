@@ -811,8 +811,8 @@
 <legend></legend>
 <legend>Other Information 2</legend>
 <div class="form-group">
-    <label class="control-label">Are you related by consanguinity or affinity to any of the following:</label><br>
-    <label class="control-label">a. Within the third degree (for National Goovernment Employees) appointing authority, recommending authority, chief office/bureau/department or person who has immediate supervision over you in the Office, Bureau, or Department where you will be appointed?</label>
+    <label class="control-label">Are you related by consanguinity or affinity to the appointing or recommending authority, or to the chief of bureau or office or to the person who has immediate supervision over you in the Office, Bureau or Department where you will be apppointed,</label><br>
+    <label class="control-label">a. Within the third degree?</label>
     <div class="form-group">
         <div class="radio">
             <label>
@@ -829,7 +829,7 @@
             <input type="text" class="form-control clearField exp1" id="a36yesexplanation" placeholder="">
         </div>
     </div>
-    <label class="control-label">b. Within the fourth degree (for National Goovernment Employees) appointing authority or recommending authority where you will be appointed?</label>
+    <label class="control-label">b.  within the fourth degree (for Local Government Unit - Career Employees)?</label>
     <div class="form-group">
         <div class="radio">
             <label>
@@ -846,7 +846,7 @@
             <input type="text" class="form-control clearField exp2" id="b36yesexplanation" placeholder="">
         </div>
     </div> <hr>
-    <label class="control-label">Have you ever been formally charged?</label>
+    <label class="control-label">Have you ever been found guilty of any administrative offense?</label>
     <div class="form-group">
         <div class="radio">
             <label>
@@ -863,7 +863,7 @@
             <input type="text" class="form-control clearField exp3" id="a37yesexplanation" placeholder="">
         </div>
     </div>
-    <label class="control-label">Have you ever been guilty of any administrative offense?</label>
+    <label class="control-label">Have you been criminally charged before any court?</label>
     <div class="form-group">
         <div class="radio">
             <label>
@@ -876,11 +876,11 @@
             </label>
         </div>
         <div class="form-group">
-            <label for="b37yesexplanation" class="control-label">if YES, give details</label>
-            <input type="text" class="form-control clearField exp4" id="b37yesexplanation" placeholder="">
+            <label for="b37yesexplanation" class="control-label">if YES, give details in this format: <b>Date Filed (mm/dd/yyyy);Status of Case(s)</b></label>
+            <input type="text" class="form-control clearField exp4" id="b37yesexplanation" placeholder="ex. 01/01/2010;DISMISSED">
         </div>
     </div><hr>
-    <label class="control-label">Have you ever been convicted of any crime or violation of law, decree, ordinance or regulation by any court or tribunal?</label>
+    <label class="control-label">Have you ever been convicted of any crime or violation of any law, decree, ordinance or regulation by any court or tribunal?</label>
     <div class="form-group">
         <div class="radio">
             <label>
@@ -897,7 +897,7 @@
             <input type="text" class="form-control clearField exp5" id="a38yesexplanation" placeholder="">
         </div>
     </div><hr>
-    <label class="control-label">Have you ever been separated from the service in any of the following modes: resignation, retirement, dropped from the rolls, dismissal, termination, end of term, finished contract, AWOL, or phased out, in the public or private sector?</label>
+    <label class="control-label">Have you ever been separated from the service in any of the following modes: resignation, retirement, dropped from the rolls, dismissal, termination, end of term, finished contract or phased out (abolition) in the public or private sector?</label>
     <div class="form-group">
         <div class="radio">
             <label>
@@ -914,7 +914,7 @@
             <input type="text" class="form-control clearField exp6" id="a39yesexplanation" placeholder="">
         </div>
     </div><hr>
-    <label class="control-label">a. Have you ever been a candidate in a national or local election (except Barangay Election)?</label>
+    <label class="control-label">a. Have you ever been a candidate in a national or local election held within the last year (except Barangay election)?</label>
     <div class="form-group">
         <div class="radio">
             <label>
@@ -965,7 +965,7 @@
             <input type="text" class="form-control clearField exp12" id="a42yesexplanation" placeholder="">
         </div>
     </div><hr>
-    <label class="control-label">Pursuant to: (a) Indigenous People's Act (RA 8371); (b) Magna Carta for DIsabled Persons (RA 7277); and (c) Solo Parents Welfare Act (RA 8972), please answer the following items?</label><br><label class="control-label">a. Are you a member of any indigenous group?</label>
+    <label class="control-label">Pursuant to: (a) Indigenous People's Act (RA 8371); (b) Magna Carta for Disabled Persons (RA 7277); and (c) Solo Parents Welfare Act of 2000 (RA 8972), please answer the following items:</label><br><label class="control-label">a. Are you a member of any indigenous group?</label>
     <div class="form-group">
         <div class="radio">
             <label>
@@ -981,7 +981,7 @@
             <label for="a41yesexplanation" class="control-label">if YES, give details</label>
             <input type="text" class="form-control clearField exp8" id="a41yesexplanation" placeholder="">
         </div>
-    </div><label class="control-label">b. Are you differently abled?</label>
+    </div><label class="control-label">b. Are you a person with disability?</label>
     <div class="form-group">
         <div class="radio">
             <label>
@@ -2679,6 +2679,14 @@ function validateChoices(){
             console.log("no explaination q4");
             messageDialogModal("Required Field","Please provide details for answering the questions you answered with 'YES'.");
             return false;
+        } else {
+            var ans = $("#b37yesexplanation").val();
+            var parts = ans.split(";");
+            if(parts.length<2){
+                console.log("not 2 parts");
+                messageDialogModal("Required Field","Please provide answer in the indicated answer format");
+                return false;
+            }
         }
     }
 
@@ -3067,7 +3075,15 @@ $("#btnPrint").click(function(){
             pdf.setFontSize(7);
             pdf.text(135,57,"X");
             pdf.setFontSize(6);
-            pdf.text(158,65,qas[3].explanation);
+            var ans = qas[3].explanation;
+            var part = ans.split(";");
+            if(part.length < 2){
+                pdf.text(158,65,qas[3].explanation);
+            } else {
+                pdf.text(158,65,part[0]);
+                pdf.text(158,70,part[1]);
+            }
+
         } else {
             pdf.setFontSize(7);
             pdf.text(157,57,"X");
