@@ -644,7 +644,7 @@
         <fieldset>
             <legend></legend>
             <legend>Work Experience</legend>
-            <p style="font-weight: bold;font-style: italic">Include Private Employment. Start from your current work</p>
+            <p style="font-weight: bold;font-style: italic">Include Private Employment</p>
             <hr>
             <div class="row">
                 <div class="form-group col-md-6">
@@ -662,9 +662,9 @@
                     <input type="text" class="form-control clearField datepick" id="dateenteredlgu" placeholder="Pick a Date.." readonly>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="employmenttype" class="control-label">Current Salary Grade <i>(if applicable)</i></label>
-                    <select class="form-control clearField" id="currsalarygrade">
-                        <option selected disabled>- Select Salary Grade -</option>
+                    <label for="currentposition" class="control-label">Current Position <i>(if applicable)</i></label>
+                    <select class="form-control clearField" id="currentposition">
+                        <option selected disabled>- Select Current Position -</option>
                     </select>
                 </div>
                 <div class="col-md-12" align="left">
@@ -694,14 +694,14 @@
                 </thead>
                 <tbody id="tbodywork">
                 <tr class="workex0">
-                    <td><input type="text" class="form-control clearField datefrom weDatefrom1" dt="fromdate" readonly></td>
+                    <td><input type="text" class="form-control clearField datefrom weDatefrom1" dt="fromdate" id="autodatefrom" readonly></td>
                     <td><input type="text" class="form-control clearField dateto weDateto1" dt="todate" readonly></td>
-                    <td><input type="text" class="form-control clearField wePosition1" dt="position" id="currentposition"></td>
-                    <td><input type="text" class="form-control clearField weCompany1" dt="company"></td>
-                    <td><input type="text" class="form-control clearField weSalary1" dt="salary"></td>
-                    <td><input type="text" class="form-control clearField weSalaryGrade1" dt="salarygrade"></td>
-                    <td><input type="text" class="form-control clearField weAppointment1" dt="appointmentstatus"></td>
-                    <td><select class="form-control clearField weGovtService1" dt="govtservice"><option value="YES">YES</option><option value="NO">NO</option></select></td>
+                    <td><input type="text" class="form-control clearField wePosition1" dt="position" id="autocurrpos"></td>
+                    <td><input type="text" class="form-control clearField weCompany1" dt="company" id="autocomp"></td>
+                    <td><input type="text" class="form-control clearField weSalary1" dt="salary" id="autosalary"></td>
+                    <td><input type="text" class="form-control clearField weSalaryGrade1" dt="salarygrade" id="autosalarygrade"></td>
+                    <td><input type="text" class="form-control clearField weAppointment1" dt="appointmentstatus" id="autostatus"></td>
+                    <td><select class="form-control clearField weGovtService1" dt="govtservice" id="autogovtservice"><option value="YES">YES</option><option value="NO">NO</option></select></td>
                 </tr>
                 </tbody>
             </table>
@@ -1218,37 +1218,51 @@ $(document).ready(function(){
         autoclose: true,
         format:"yyyy"
     });
-    loadSalaryGrade();
+    loadCurrentPositions();
     $("#btnPrint").prop("disabled",true);
 
 });
 
-function loadSalaryGrade(){
-//    $("#loadingmodal").modal("show");
-    var select = $("#currsalarygrade");
+function loadCurrentPositions(){
+    var select  = $("#currentposition");
     select.empty();
     $.ajax({
-        url: "<?php echo base_url();?>positionmanagement/getsalarygrade",
+        url: "<?php echo base_url();?>positionmanagement/getpositions",
         type: "POST",
         dataType: "json",
         success: function(data){
             if(data.Code == "00"){
-                select.append("<option selected disabled>- Select Salary Grade -</option>");
+                $("#loadingmodal").modal("hide");
+                select.append("<option selected disabled>- Select Current Position -</option>");
                 for(var keys in data.details){
-                    select.append("<option rowid='"+data.details[keys].id+"' value='"+data.details[keys].salarygrade+"' equivalent='"+data.details[keys].equivalent+"'>"+data.details[keys].salarygrade+"</option>");
+                    select.append("<option salary-equivalent='"+data.details[keys].salaryequivalent+"' salary-grade='"+data.details[keys].salarygrade+"' value='"+data.details[keys].name+"'>"+data.details[keys].name+"</option>");
                 }
                 loadPdsData();
             } else {
-                select.append("<option selected disabled>- No Salary Grade Available -</option>");
+                select.append("<option selected disabled>- No Position Available -</option>");
             }
         },
         error: function(e){
-
-            select.append("<option selected disabled>- No Salary Grade Available -</option>");
+            $("#loadingmodal").modal("hide");
+            select.append("<option selected disabled>- No Position Available -</option>");
             console.log(e);
         }
     });
 }
+
+
+$("#currentposition").change(function(){
+    $("#autocurrpos").val($("#currentposition option:selected").val());
+    $("#autocomp").val("<?php echo strtoupper($this->session->userdata('department'));?>");
+    $("#autosalary").val($("#currentposition option:selected").attr("salary-equivalent"));
+    $("#autosalarygrade").val($("#currentposition option:selected").attr("salary-grade"));
+    $("#autostatus").val("ACTIVE");
+    $("#autogovtservice").val("YES");
+});
+
+$("#dateenteredlgu").change(function(){
+   $("#autodatefrom").val($(this).val());
+});
 
 function loadExistingProvincess(){
     $("#loadingmodal").modal("show");
@@ -1622,7 +1636,7 @@ function loadPdsData(){
                    $(this).prop("disabled",true);
                 });
                 for(var keys in result.details){
-                    $("#currsalarygrade").val(result.details[keys].salarygrade);
+                    $("#currentposition").val(result.details[keys].currentposition);
                     $("#dateenteredlgu").val(result.details[keys].dateenteredlgu);
                     $("#employmenttype").val(result.details[keys].currentemploymenttype);
                     $("#surname").val(result.details[keys].lastname);
@@ -2451,9 +2465,9 @@ function submitData(){
                     "MOTHERLNAME":$("#mothersurname").val(),
                     "MOTHERFNAME":$("#motherfirstname").val(),
                     "MOTHERMNAME":$("#mothermiddlename").val(),
-                    "CURRENTPOSITION":$("#currentposition").val(),
+                    "CURRENTPOSITION":$("#currentposition option:selected").val()  == "- Select Current Position -" ? "" : $("#currentposition option:selected").val(),
                     "DATEENTEREDLGU":$("#dateenteredlgu").val(),
-                    "SALARYGRADE":$("#currsalarygrade option:selected").val() == "- Select Salary Grade -" ? "" : $("#currsalarygrade option:selected").val(),
+                    "SALARYGRADE":$("#currentposition option:selected").attr("salary-grade"),
                     "CHILDREN":children,
                     "ELEMENTARY":elementary,
                     "HIGHSCHOOL":highschool,
@@ -3024,23 +3038,140 @@ $("#btnPrint").click(function(){
             pdf.setFontSize(7);
             pdf.text(135,21.5,"X");
             pdf.setFontSize(6);
-            pdf.text(137,35.5,qas[0].explanation+" "+qas[1].explanation);
+            pdf.text(137,35,qas[0].explanation+" "+qas[1].explanation);
         } else {
             pdf.setFontSize(7);
-            pdf.text(157,21.5,"X");
+            pdf.text(156,21.5,"X");
         }
 
         if(qas[1].answer == "yes"){
             pdf.setFontSize(7);
             pdf.text(135,26.5,"X");
             pdf.setFontSize(6);
-            pdf.text(137,36.5,qas[0].explanation+" "+qas[1].explanation);
         } else {
             pdf.setFontSize(7);
             pdf.text(156,26.5,"X");
         }
 
+        if(qas[2].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(135,41.5,"X");
+            pdf.setFontSize(6);
+            pdf.text(137,49.5,qas[2].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(156.5,41,"X");
+        }
+
+        if(qas[3].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(135,57,"X");
+            pdf.setFontSize(6);
+            pdf.text(158,65,qas[3].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(157,57,"X");
+        }
+
+        if(qas[4].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(134.5,76.5,"X");
+            pdf.setFontSize(6);
+            pdf.text(137,85,qas[4].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(158,76.5,"X");
+        }
+
+        if(qas[5].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(134.5,92,"X");
+            pdf.setFontSize(6);
+            pdf.text(137,98.5,qas[5].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(158.5,92,"X");
+        }
+
+        if(qas[6].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(134.5,105,"X");
+            pdf.setFontSize(6);
+            pdf.text(159,109,qas[6].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(160,105,"X");
+        }
+
+        if(qas[10].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(134.5,114.5,"X");
+            pdf.setFontSize(6);
+            pdf.text(159,119,qas[10].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(160.5,114.5,"X");
+        }
+
+        if(qas[11].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(134.5,126,"X");
+            pdf.setFontSize(6);
+            pdf.text(137,133.5,qas[11].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(160.5,126,"X");
+        }
+
+        if(qas[7].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(134.5,149,"X");
+            pdf.setFontSize(6);
+            pdf.text(171,152,qas[7].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(160.5,149,"X");
+        }
+
+        if(qas[8].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(134.5,157,"X");
+            pdf.setFontSize(6);
+            pdf.text(171,160.5,qas[8].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(160.5,157,"X");
+        }
+
+        if(qas[9].answer == "yes"){
+            pdf.setFontSize(7);
+            pdf.text(134.5,165,"X");
+            pdf.setFontSize(6);
+            pdf.text(171,168,qas[9].explanation);
+        } else {
+            pdf.setFontSize(7);
+            pdf.text(160.5,165,"X");
+        }
     }
+
+    if(window.printreferences){
+
+        var references = window.printreferences;
+        var ypos = 188;
+        for(var keys in references){
+            pdf.setFontSize(8);
+            pdf.text(8,ypos,references[keys].name);
+            pdf.setFontSize(7);
+            pdf.text(83,ypos,references[keys].address);
+            pdf.text(132,ypos,references[keys].telno);
+            ypos+=7;
+        }
+    }
+
+    //SIGNATORY
+    pdf.setFontSize(8);
+    var fullname = $("#firstname").val() + " " + $("#middlename").val() + " " + $("#surname").val();
+    pdf.text(95,243,fullname);
 
     pdf.save("<?php echo $this->session->userdata('firstname').'_'.$this->session->userdata('lastname')?>_PDS.pdf");
 });
