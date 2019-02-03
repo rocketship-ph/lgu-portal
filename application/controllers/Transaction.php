@@ -73,5 +73,15 @@ class Transaction extends CI_Controller {
         $this->load->view('templates/MasterTemplate',$data);
     }
 
+    public function interviewmenu()
+    {
+        if(array_intersect($GLOBALS['NAVINTERVIEW_MGT'],$this->session->userdata('modules'))){
+            $data = array('content'=>'mods/mod_menu/interviewmenu');
+        } else {
+            $data = array('content'=>'mods/unauthorizedpage');
+        }
+        $this->load->view('templates/MasterTemplate',$data);
+    }
+
 
 }
