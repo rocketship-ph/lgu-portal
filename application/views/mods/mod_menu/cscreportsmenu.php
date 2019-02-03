@@ -214,6 +214,40 @@
         </div>
     </div>
     <?php endif;?>
+    <div class="form-group col-md-3">
+        <div class="panel">
+            <div class="panel-body" align="center">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/applicantprofile">
+                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                    <br><br>
+                    Profile of Applicants
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <div class="panel">
+            <div class="panel-body" align="center">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/individualapplicantprofile">
+                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                    <br><br>
+                    Individual Applicant's Profile
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <div class="panel">
+            <div class="panel-body" align="center">
+                <a style="text-align: center" href="<?php echo base_url();?>cscreports/competencyrequirement">
+                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                    <br><br>
+                    Competency Requirement Per Position
+                </a>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 

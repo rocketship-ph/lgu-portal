@@ -24,4 +24,22 @@ class AnalyticsManagement extends CI_Controller {
         }
         echo $result;
     }
+    public function getapplicantprofile(){
+        $month = $_REQUEST['MONTH'];
+        $year = $_REQUEST['YEAR'];
+        $report = $this->ModelAnalyticsManagement->getapplicantprofile($month,$year);
+        if($report){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $report
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
 }

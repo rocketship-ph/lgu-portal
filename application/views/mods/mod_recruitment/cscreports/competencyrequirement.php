@@ -31,10 +31,10 @@
             </td>
             <td>
                 <div class="panel panel-menu" align="center" id="panel_requestpersonnelreports">
-                    <a href="<?php echo base_url();?>cscreports/criteriaforvacantposition" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
+                    <a href="<?php echo base_url();?>cscreports/competencyrequirement" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
                         <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="40px">
                         <br>
-                        Criteria for the Vacant Position
+                        Competency Requirement
                     </a>
                 </div>
             </td>
@@ -58,7 +58,7 @@
             <hr>
         </div>
         <div class="col-md-12" >
-            <legend>Selection Criteria for the Vacant Position </legend>
+            <legend>Competency Requirement Per Position </legend>
             <div class="row">
                 <div class="col-md-6 form-group">
                     <select class="form-control clearField" id="position">

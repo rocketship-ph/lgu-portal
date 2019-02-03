@@ -36,5 +36,21 @@ class ModelAnalyticsManagement extends CI_Model{
         }
     }
 
+    function getapplicantprofile($month,$year){
+        try {
+            $query = $this->db->query("SELECT * FROM csc_applicantsprofile WHERE YEAR(dateapplied) = ".$year." AND MONTH(dateapplied) = ".$month);
+
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
 
 }
