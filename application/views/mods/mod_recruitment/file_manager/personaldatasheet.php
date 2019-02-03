@@ -2955,13 +2955,13 @@ $("#btnPrint").click(function(){
         var ypos = 27;
         for(var keys in cse){
             pdf.setFontSize(7);
-            pdf.text(10,ypos,cse[keys].careerservice);
-            pdf.text(75,ypos,cse[keys].rating);
-            pdf.text(91,ypos,cse[keys].examdate);
-            pdf.text(114,ypos,cse[keys].examplace);
-            pdf.text(173,ypos,cse[keys].licenseno);
+            pdf.text(10,ypos,cse[keys].careerservice || cse[keys].careerservice != undefined ? cse[keys].careerservice : "");
+            pdf.text(75,ypos,cse[keys].rating || cse[keys].rating != undefined ? cse[keys].rating : "");
+            pdf.text(91,ypos,cse[keys].examdate || cse[keys].examdate != undefined ? cse[keys].examdate : "");
+            pdf.text(114,ypos,cse[keys].examplace || cse[keys].examplace != undefined ? cse[keys].examplace : "");
+            pdf.text(173,ypos,cse[keys].licenseno || cse[keys].licenseno != undefined ? cse[keys].licenseno : "");
             pdf.setFontSize(6);
-            pdf.text(191,ypos,cse[keys].licensedate);
+            pdf.text(191,ypos,cse[keys].licensedate || cse[keys].licensedate != undefined ? cse[keys].licensedate : "");
             ypos+=8;
         }
     }
@@ -2971,14 +2971,14 @@ $("#btnPrint").click(function(){
         var ypos = 102.5;
         for(var keys in workexp){
             pdf.setFontSize(6);
-            pdf.text(8,ypos,workexp[keys].fromdate);
-            pdf.text(24,ypos,workexp[keys].todate);
+            pdf.text(8,ypos,workexp[keys].fromdate || workexp[keys].fromdate != undefined ? workexp[keys].fromdate : "");
+            pdf.text(24,ypos,workexp[keys].todate || workexp[keys].todate != undefined ? workexp[keys].todate : "");
             pdf.setFontSize(7);
-            pdf.text(40,ypos,workexp[keys].position);
-            pdf.text(90.5,ypos,workexp[keys].company);
-            pdf.text(143,ypos,workexp[keys].salary);
-            pdf.text(156.5,ypos,workexp[keys].salarygrade);
-            pdf.text(174,ypos,workexp[keys].appointmentstatus);
+            pdf.text(40,ypos,workexp[keys].position || workexp[keys].position != undefined ? workexp[keys].position : "");
+            pdf.text(90.5,ypos,workexp[keys].company || workexp[keys].company != undefined ? workexp[keys].company : "");
+            pdf.text(143,ypos,workexp[keys].salary || workexp[keys].salary != undefined ? workexp[keys].salary : "");
+            pdf.text(156.5,ypos,workexp[keys].salarygrade || workexp[keys].salarygrade != undefined ? workexp[keys].salarygrade : "");
+            pdf.text(174,ypos,workexp[keys].appointmentstatus || workexp[keys].appointmentstatus != undefined ? workexp[keys].appointmentstatus : "");
             pdf.text(195,ypos,(workexp[keys].govtservice == "YES" ? "Y" : "N"));
             ypos+=7;
 
@@ -2996,13 +2996,13 @@ $("#btnPrint").click(function(){
         console.log(volwork);
         var ypos = 26;
         for(var keys in volwork){
-            pdf.text(8,ypos,volwork[keys].organization);
+            pdf.text(8,ypos,volwork[keys].organization || volwork[keys].organization != undefined ? volwork[keys].organization : "");
             pdf.setFontSize(6);
-            pdf.text(93,ypos,volwork[keys].fromdate);
-            pdf.text(109,ypos,volwork[keys].todate);
+            pdf.text(93,ypos,volwork[keys].fromdate || volwork[keys].fromdate != undefined ? volwork[keys].fromdate : "");
+            pdf.text(109,ypos,volwork[keys].todate || volwork[keys].todate != undefined ? volwork[keys].todate : "");
             pdf.setFontSize(7);
-            pdf.text(125,ypos,volwork[keys].hours);
-            pdf.text(139,ypos,volwork[keys].position);
+            pdf.text(125,ypos,volwork[keys].hours || volwork[keys].hours != undefined ? volwork[keys].hours : "");
+            pdf.text(139,ypos,volwork[keys].position || volwork[keys].position != undefined ? volwork[keys].position : "");
             ypos+=7;
         }
     }
@@ -3012,13 +3012,13 @@ $("#btnPrint").click(function(){
         console.log(training);
         var ypos = 97.5;
         for(var keys in training){
-            pdf.text(8,ypos,training[keys].title);
+            pdf.text(8,ypos,training[keys].title || training[keys].title != undefined ? training[keys].title : "");
             pdf.setFontSize(6);
-            pdf.text(93,ypos,training[keys].fromdate);
-            pdf.text(109,ypos,training[keys].todate);
+            pdf.text(93,ypos,training[keys].fromdate  || training[keys].fromdate != undefined ? training[keys].fromdate : "");
+            pdf.text(109,ypos,training[keys].todate || training[keys].todate != undefined? training[keys].todate : "");
             pdf.setFontSize(7);
-            pdf.text(125,ypos,training[keys].hours);
-            pdf.text(155,ypos,training[keys].conductedby);
+            pdf.text(125,ypos,training[keys].hours || training[keys].hours != undefined ? training[keys].hours : "");
+            pdf.text(155,ypos,training[keys].conductedby || training[keys].conductedby != undefined ? training[keys].conductedby : "");
             ypos+=7;
         }
     }
@@ -3028,9 +3028,9 @@ $("#btnPrint").click(function(){
         console.log(printother1);
         var ypos = 242;
         for(var keys in printother1){
-            pdf.text(8,ypos,printother1[keys].specialskills);
-            pdf.text(58,ypos,printother1[keys].recognitions);
-            pdf.text(155,ypos,printother1[keys].membership);
+            pdf.text(8,ypos,printother1[keys].specialskills || printother1[keys].specialskills != undefined ? printother1[keys].specialskills : "");
+            pdf.text(58,ypos,printother1[keys].recognitions || printother1[keys].recognitions != undefined ? printother1[keys].recognitions : "");
+            pdf.text(155,ypos,printother1[keys].membership || printother1[keys].membership != undefined ? printother1[keys].membership : "");
             ypos+=6;
         }
     }
