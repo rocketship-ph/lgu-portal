@@ -276,7 +276,4 @@
         border-color: transparent;
     }
 
-    .error{
-        border-color: red;
-    }
 </style>

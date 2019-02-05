@@ -51,6 +51,21 @@ class ModelAnalyticsManagement extends CI_Model{
             return false;
         }
     }
+    function getprofiles(){
+        try {
+            $query = $this->db->query("SELECT * FROM csc_individualapplicantprofile ORDER BY lastname");
+
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
 
 
 }

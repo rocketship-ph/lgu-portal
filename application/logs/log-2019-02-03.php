@@ -2378,3 +2378,7 @@ DEBUG - 2019-02-03 16:05:14 --> Session: "sess_save_path" is empty; using "sessi
 ERROR - 2019-02-03 16:05:14 --> Severity: Notice --> Undefined index: MONTH C:\wamp64\www\personal\rocketship\lgu-portal\application\controllers\Analyticsmanagement.php 28
 ERROR - 2019-02-03 16:05:14 --> Severity: Notice --> Undefined index: YEAR C:\wamp64\www\personal\rocketship\lgu-portal\application\controllers\Analyticsmanagement.php 29
 ERROR - 2019-02-03 16:05:14 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND MONTH(dateapplied) =' at line 1 - Invalid query: SELECT * FROM csc_applicantsprofile WHERE YEAR(dateapplied) =  AND MONTH(dateapplied) = 
+DEBUG - 2019-02-03 16:06:52 --> UTF-8 Support Enabled
+DEBUG - 2019-02-03 16:06:52 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-02-03 16:06:52 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-02-03 16:06:52 --> Total execution time: 0.1013
