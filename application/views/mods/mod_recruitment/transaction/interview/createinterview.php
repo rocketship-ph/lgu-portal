@@ -5,6 +5,9 @@
         width: 150px;
         border: 1px solid #d8d8d8;
     }
+    .disabled-btn-add{
+        pointer-events: none;
+    }
 </style>
 <div class="well">
     <table>
@@ -77,7 +80,7 @@
         <div class="col-lg-12">
             <div class="form-horizontal">
                 <fieldset>
-                    <legend>Create Question - Background Investigation</legend>
+                    <legend>Applicant Interview</legend>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="requestNumber" class="col-lg-4 control-label">Request Number</label>
@@ -101,11 +104,35 @@
                                 </div>
                                 <label id="grouppositiondescription" class="col-lg-12 control-label"></label>
                             </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive" id="tblcompetencycontainer" style="/*display: none;">
+                                        <table id="tblcompetency" class="display responsive compact" cellspacing="0" width="100%" >
+                                            <thead>
+                                            <tr>
+                                                <th>TITLE</th>
+                                                <th>DESCRIPTION</th>
+                                                <th>ACTION</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <div style="text-align: right;" id="divQuestion">
-                            <textarea rows="6" style="resize: none; " id="question" class="form-control clearField" placeholder="Enter Background Investigation Question Here.." required="" ></textarea>
+                    <div class="form-group col-md-6" style="padding-top: 128px;display: none" id="divQuestions">
+                        <legend>Interview Questions</legend>
+                        <div style="text-align: right;">
+                            <textarea rows="6" style="resize: none;" readonly id="question" class="form-control clearField" placeholder="Select from competency titles table to add question here.." required="" ></textarea>
+                        </div>
+                        <hr>
+                        <div>
+                            <label class="control-label"><b>Additional Question:</b></label>
+                            <textarea rows="6" style="resize: none; " id="additionalquestion" class="form-control clearField" placeholder="Enter Additional Interview Question Here.." required="" ></textarea>
                         </div>
                         <hr>
                         <div class="col-md-12" style="margin-bottom: 20px;" align="right">
@@ -128,7 +155,7 @@
             <div class="modal-body">
                 <h4 style="margin-top: 5px;">Confirmation</h4>
                 <hr>
-                <span>Are you sure you want to remove background investigation question for this request number <b id="delReqNum"></b> ?</span>
+                <span>Are you sure you want to remove applicant interview question for this request number <b id="delReqNum"></b> ?</span>
                 <hr>
                 <div align="right">
                     <input type="button" class="btn btn-primary" id="btnProceedDelete" value="DELETE">
@@ -138,6 +165,25 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade bs-example-modal-sm" id="modalConfirm" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-body">
+                <h4 style="margin-top: 5px;">Server Message</h4>
+                <hr>
+                <p>It seems like the selected position request <b>does not have</b> the required Technical competency included in its associated Position Group<br>
+                <i><b>Would you like to load all the Technical competencies instead?</b></i></p>
+                <hr>
+                <div align="right">
+                    <input type="button" class="btn btn-primary" id="btnProceedYes" value="YES">
+                    <input type="button" class="btn btn-secondary" id="btnProceedNo"  value="NO">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <script type="application/javascript">
@@ -156,7 +202,39 @@ $(document).ready(function(){
     $("#btnSave").prop("disabled",true);
 
     loadRequestnumbers();
+
+    $("#tblcompetency").dataTable({
+        "destroy":true,
+        "responsive" : true,
+        "sDOM": 'frt',
+        "oLanguage": {
+            "sSearch": "Search:",
+            "sEmptyTable": "No Technical Competencies Available"
+        },
+        "columns":[
+            {"data":"competencytitle"},
+            {"data":function(data){
+                return atob(data.description);
+            }},
+            {"data":function(data){
+                function especialJSONStringify (data) {
+                    return JSON.stringify(data).
+                        replace(/&/g, "&amp;").
+                        replace(/</g, "&lt;").
+                        replace(/>/g, "&gt;").
+                        replace(/"/g, "&quot;").
+                        replace(/'/g, "&#039;");
+                }
+                return "<a class='btn btn-success btn-sm btn-add-question' title='Add Title' href='javascript:actionAdd("+especialJSONStringify(data)+");'>Add Question</a>";
+            }}
+        ]
+    });
 });
+
+function actionAdd(data){
+    $("#question").val(atob(data.description));
+    $("#question").attr("competency-id",data.id);
+}
 
 function loadRequestnumbers(){
     $("#loadingmodal").modal("show");
@@ -172,7 +250,15 @@ function loadRequestnumbers(){
             if(result.Code == "00"){
                 select.append('<option selected disabled>- Select Request Number -</option>');
                 for(var keys in result.details){
-                    select.append('<option position-code="'+result.details[keys].positioncode+'" group-code="'+result.details[keys].groupcode+'" value="'+result.details[keys].requestnumber+'" position="'+result.details[keys].position+'" group-position="'+result.details[keys].groupposition+'" group-desc="'+result.details[keys].groupdesc+'">'+result.details[keys].requestnumber+'</option>');
+                    var technical = "";
+                    var crit = JSON.parse(result.details[keys].criteria);
+                    for(var k in crit){
+                        if(crit[k].type == "TECHNICAL"){
+                            technical = crit[k].titles;
+                        }
+                    }
+                    var t = technical != "" ? technical : "none";
+                    select.append('<option technical-title="'+t+'" position-code="'+result.details[keys].positioncode+'" group-code="'+result.details[keys].groupcode+'" value="'+result.details[keys].requestnumber+'" position="'+result.details[keys].position+'" group-position="'+result.details[keys].groupposition+'" group-desc="'+result.details[keys].groupdesc+'">'+result.details[keys].requestnumber+'</option>');
                 }
             } else {
                 select.append('<option selected disabled>- No Request Number(s) Available -</option>');
@@ -188,8 +274,29 @@ function loadRequestnumbers(){
 }
 
 $("#requestNumber").change(function(){
+    var techtitle = $("#requestNumber option:selected").attr("technical-title");
     var reqnum = $(this).val();
-    var groupcode = $("#requestNumber option:selected").attr("group-code");
+    if(techtitle == "none"){
+        $("#modalConfirm").modal("show");
+    } else {
+        loadTechnicalData(reqnum,techtitle);
+    }
+});
+
+$("#btnProceedYes").click(function(){
+    $("#modalConfirm").modal("hide");
+    loadTechnicalData($("#requestNumber option:selected").val(),"ALL");
+});
+
+$("#btnProceedNo").click(function(){
+    $("#modalConfirm").modal("hide");
+   messageDialogModal("Server Message","Unable to create interview question for the selected position");
+    $("#btnmessagedialogmodal").click(function(){
+       location.reload();
+    });
+});
+
+function loadTechnicalData(reqnum,title){
     $("#divRequestDetails").show();
     $("#lblposition").text($("#requestNumber option:selected").attr("position"));
     $("#lblgroupposition").text($("#requestNumber option:selected").attr("group-position"));
@@ -201,15 +308,24 @@ $("#requestNumber").change(function(){
         dataType: "json",
         data: {
             "REQUESTNUMBER":reqnum,
-            "GROUPCODE":groupcode
+            "TECHNICAL":title
         },
         success: function(result){
+            console.log(result);
             $("#loadingmodal").modal("hide");
             if(result.Code == "00"){
+                $("#divQuestions").show();
+                var tbl = $("#tblcompetency").dataTable();
+                tbl.fnClearTable();
+                tbl.fnAddData(result.details);
                 if(result.existing){
                     $("#question").prop("disabled",true);
+                    $("#additionalquestion").prop("disabled",true);
+                    $(".btn-add-question").addClass("disabled-btn-add");
                     for(var keys in result.existing){
+                        $("#question").attr("competencyid",result.existing[keys].competencyid);
                         $("#question").val(atob(result.existing[keys].question));
+                        $("#additionalquestion").val(atob(result.existing[keys].amendment));
                         $("#question").attr("rowid",result.existing[keys].id);
                     }
                     $("#btnAdd").prop("disabled",true);
@@ -218,7 +334,10 @@ $("#requestNumber").change(function(){
                     $("#btnDelete").prop("disabled",false);
                 } else {
                     $("#question").val("");
+                    $("#additionalquestion").val("");
                     $("#question").prop("disabled",false);
+                    $("#additionalquestion").prop("disabled",false);
+                    $(".btn-add-question").removeClass("disabled-btn-add");
 
                     $("#btnAdd").prop("disabled",false);
                     $("#btnEdit").prop("disabled",true);
@@ -228,6 +347,7 @@ $("#requestNumber").change(function(){
             } else {
                 messageDialogModal("Server Message",result.Message);
                 $("#divRequestDetails").hide();
+                $("#divQuestions").hide();
                 $("#question").prop("disabled",true);
             }
         },
@@ -237,19 +357,23 @@ $("#requestNumber").change(function(){
 
         }
     });
-});
+}
 
 $("#btnAdd").click(function(){
     if($("#question").val() == "" || $("#question").val() == null){
-        messageDialogModal("Required","Please provide background investigation question")
+        messageDialogModal("Required","Please provide interview question")
+    } else if($("#additionalquestion").val() == "" || $("#additionalquestion").val() == null){
+        messageDialogModal("Required","Please provide additional interview question")
     } else {
         $("#loadingmodal").modal("show");
         $.ajax({
-            url: "<?php echo base_url();?>backgroundinvestigationmanagement/newquestion",
+            url: "<?php echo base_url();?>applicantinterviewmanagement/newquestion",
             type: "POST",
             dataType: "json",
             data: {
                 "QUESTION":$("#question").val(),
+                "COMPETENCYID":$("#question").attr("competency-id"),
+                "ADDITIONAL":$("#additionalquestion").val(),
                 "REQUESTNUMBER": $("#requestNumber option:selected").val()
             },
             success: function(result){
@@ -258,6 +382,7 @@ $("#btnAdd").click(function(){
                     messageDialogModal("Server Message",result.Message);
                     clearField();
                     $("#divRequestDetails").hide();
+                    $("#divQuestions").hide();
                     $("#lblposition").text("");
                     $("#lblgroupposition").text("");
                     $("#grouppositiondescription").text("");
@@ -276,7 +401,7 @@ $("#btnEdit").click(function(){
     $("#loadingmodal").modal("show");
     console.log($("#requestNumber option:selected").val());
     $.ajax({
-        url: "<?php echo base_url();?>backgroundinvestigationmanagement/inquirechanges",
+        url: "<?php echo base_url();?>applicantinterviewmanagement/inquirechanges",
         type: "POST",
         dataType: "json",
         data: {
@@ -290,6 +415,8 @@ $("#btnEdit").click(function(){
                 $("#btnSave").prop("disabled",false);
                 $("#btnDelete").prop("disabled",false);
                 $("#question").prop("disabled",false);
+                $("#additionalquestion").prop("disabled",false);
+                $(".btn-add-question").removeClass("disabled-btn-add");
             } else {
                 messageDialogModal("Server Message",result.Message);
             }
@@ -303,15 +430,19 @@ $("#btnEdit").click(function(){
 
 $("#btnSave").click(function(){
     if($("#question").val() == "" || $("#question").val() == null){
-        messageDialogModal("Required","Please provide background investigation question");
+        messageDialogModal("Required","Please provide interview question")
+    } else if($("#additionalquestion").val() == "" || $("#additionalquestion").val() == null){
+        messageDialogModal("Required","Please provide additional interview question")
     } else {
         $("#loadingmodal").modal("show");
         $.ajax({
-            url: "<?php echo base_url();?>backgroundinvestigationmanagement/editquestion",
+            url: "<?php echo base_url();?>applicantinterviewmanagement/editquestion",
             type: "POST",
             dataType: "json",
             data: {
                 "QUESTION":$("#question").val(),
+                "COMPETENCYID":$("#question").attr("competency-id"),
+                "ADDITIONAL":$("#additionalquestion").val(),
                 "ROWID": $("#question").attr("rowid"),
                 "REQUESTNUMBER": $("#requestNumber option:selected").val()
             },
@@ -324,6 +455,7 @@ $("#btnSave").click(function(){
                         $(this).prop("disabled",true);
                     });
                     $("#divRequestDetails").hide();
+                    $("#divQuestions").hide();
                     $("#lblposition").text("");
                     $("#lblgroupposition").text("");
                     $("#grouppositiondescription").text("");
@@ -342,7 +474,7 @@ $("#btnDelete").click(function(){
     $("#loadingmodal").modal("show");
     console.log($("#requestNumber option:selected").val());
     $.ajax({
-        url: "<?php echo base_url();?>backgroundinvestigationmanagement/inquirechanges",
+        url: "<?php echo base_url();?>applicantinterviewmanagement/inquirechanges",
         type: "POST",
         dataType: "json",
         data: {
@@ -356,6 +488,7 @@ $("#btnDelete").click(function(){
                 $("#btnSave").prop("disabled",true);
                 $("#btnDelete").prop("disabled",false);
                 $("#question").prop("disabled",false);
+                $("#additionalquestion").prop("disabled",false);
                 $("#delReqNum").text($("#requestNumber option:selected").val());
                 $("#modaldelete").modal("show");
             } else {
@@ -374,7 +507,7 @@ $("#btnProceedDelete").click(function(){
     $("#loadingmodal").modal("show");
     console.log($("#requestNumber option:selected").val());
     $.ajax({
-        url: "<?php echo base_url();?>backgroundinvestigationmanagement/deletequestion",
+        url: "<?php echo base_url();?>applicantinterviewmanagement/deletequestion",
         type: "POST",
         dataType: "json",
         data: {
@@ -387,6 +520,7 @@ $("#btnProceedDelete").click(function(){
                 messageDialogModal("Server Message",result.Message);
                 clearField();
                 $("#divRequestDetails").hide();
+                $("#divQuestions").hide();
                 $("#lblposition").text("");
                 $("#lblgroupposition").text("");
                 $("#grouppositiondescription").text("");

@@ -7,7 +7,22 @@ class ModelApplicationManagement extends CI_Model{
         $this->configtbl = 'tbluserconfiguration';
     }
 
-    function getApplicantNumber(){
+    function getApplicantRowNumber(){
+        try {
+            $query = $this->db->query("select lpad(max(id)+1,5,'0') as approw from tblapplicant;");
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
+ function getApplicantNumber(){
         try {
             $username = $this->session->userdata('username');
             $query = $this->db->query("select lpad(id,4,'0') as appnumber from tblapplicant where username='".$username."';");

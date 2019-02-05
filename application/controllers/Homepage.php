@@ -219,6 +219,7 @@ class Homepage extends CI_Controller {
     }
 
     public function requestAccess(){
+        $applicantno = $this->ModelApplicationManagement->getApplicantRowNumber();
         $reqnum = $_REQUEST['REQUESTNUMBER'];
         $firstname = $_REQUEST['FIRSTNAME'];
         $lastname = $_REQUEST['LASTNAME'];
@@ -241,7 +242,11 @@ class Homepage extends CI_Controller {
             $imagename = $_SESSION['getfilename'];
         }
 
-        $tempacc = strtoupper(substr($firstname,0,3).substr($lastname,0,3).$reqnum);
+
+        foreach($applicantno as $key=>$value){
+            $approw = $value['approw'];
+        }
+        $tempacc = strtoupper(substr($firstname,0,3).substr($lastname,0,3).$reqnum.'-'.$approw);
 
         $resumename = '';
         $dir_resume ="uploads/applicant_resume/";

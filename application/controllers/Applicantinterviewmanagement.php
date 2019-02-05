@@ -30,7 +30,7 @@ class ApplicantInterviewManagement extends CI_Controller {
     public function displayrequestdetails(){
         $existing = $this->ModelApplicantInterviewManagement->getEncodedInterview($_REQUEST['REQUESTNUMBER']);
         if($existing){
-            $details = $this->ModelApplicantInterviewManagement->getRequestdetails($_REQUEST['REQUESTNUMBER'],$_REQUEST['GROUPCODE']);
+            $details = $this->ModelApplicantInterviewManagement->getRequestdetails($_REQUEST['TECHNICAL']);
             if($details){
                 $result = json_encode(array(
                     'Code' => '00',
@@ -46,7 +46,7 @@ class ApplicantInterviewManagement extends CI_Controller {
             }
             echo $result;
         } else {
-            $details = $this->ModelApplicantInterviewManagement->getRequestdetails($_REQUEST['REQUESTNUMBER']);
+            $details = $this->ModelApplicantInterviewManagement->getRequestdetails($_REQUEST['TECHNICAL']);
             if($details){
                 $result = json_encode(array(
                     'Code' => '00',
@@ -67,26 +67,30 @@ class ApplicantInterviewManagement extends CI_Controller {
     public function newquestion(){
         $reqnum = $_REQUEST['REQUESTNUMBER'];
         $question = $_REQUEST['QUESTION'];
+        $additional = $_REQUEST['ADDITIONAL'];
+        $competencyid = $_REQUEST['COMPETENCYID'];
         $username = $this->session->userdata('username');
 
         $insertData = array(
             'question' => base64_encode($question),
+            'amendment' => base64_encode($additional),
             'requestnumber' => $reqnum,
-            'encodedby' => $username
+            'competencyid' => $competencyid,
+            'createdby' => $username
         );
 
         $insert = $this->ModelApplicantInterviewManagement->insert($insertData);
         if($insert){
             $auditdata = array(
-                'modulename'=>'Background Investigation Module',
-                'action'=>'Create New Question ['.$reqnum.']['.$username.']',
+                'modulename'=>'Applicant Interview Module',
+                'action'=>'Create New Interview Question ['.$reqnum.']',
                 'user'=>$this->session->userdata('username'),
                 'ipaddress'=> $_SERVER['REMOTE_ADDR']
             );
             $audit = $this->ModelAuditTrail->insert($auditdata);
             $result = json_encode(array(
                 'Code' => '00',
-                'Message' => 'Background Investigation Question Successfully Created'
+                'Message' => 'Applicant Interview Question Successfully Created'
             ));
         }else{
             $result = json_encode(array(
@@ -102,23 +106,28 @@ class ApplicantInterviewManagement extends CI_Controller {
         $reqnum = $_REQUEST['REQUESTNUMBER'];
         $question = $_REQUEST['QUESTION'];
         $username = $this->session->userdata('username');
+        $additional = $_REQUEST['ADDITIONAL'];
+        $competencyid = $_REQUEST['COMPETENCYID'];
 
         $data = array(
-            'question' => base64_encode($question)
+            'question' => base64_encode($question),
+            'amendment' => base64_encode($additional),
+            'competencyid' => $competencyid,
+            'lasteditby' => $username
         );
 
         $update = $this->ModelApplicantInterviewManagement->update($data,$rowid);
         if($update){
             $auditdata = array(
-                'modulename'=>'Background Investigation Module',
-                'action'=>'Edit Question ['.$reqnum.']['.$username.']',
+                'modulename'=>'Applicant Interview Module',
+                'action'=>'Edit Question ['.$reqnum.']',
                 'user'=>$this->session->userdata('username'),
                 'ipaddress'=> $_SERVER['REMOTE_ADDR']
             );
             $audit = $this->ModelAuditTrail->insert($auditdata);
             $result = json_encode(array(
                 'Code' => '00',
-                'Message' => 'Background Investigation Question Successfully Updated'
+                'Message' => 'Applicant Interview Question Successfully Updated'
             ));
         }else{
             $result = json_encode(array(
@@ -155,20 +164,20 @@ class ApplicantInterviewManagement extends CI_Controller {
         $delete = $this->ModelApplicantInterviewManagement->delete($rowid);
         if($delete){
             $auditdata = array(
-                'modulename'=>'Background Investigation Module',
-                'action'=>'Delete Exam ['.$reqnum.']['.$username.']',
+                'modulename'=>'Applicant Interview Module',
+                'action'=>'Delete Interview Question ['.$reqnum.']['.$username.']',
                 'user'=>$this->session->userdata('username'),
                 'ipaddress'=> $_SERVER['REMOTE_ADDR']
             );
             $audit = $this->ModelAuditTrail->insert($auditdata);
             $result = json_encode(array(
                 'Code' => '00',
-                'Message' => 'Background Investigation Question Deleted Successfully'
+                'Message' => 'Applicant Interview Question Deleted Successfully'
             ));
         }else{
             $result = json_encode(array(
                 'Code' => '01',
-                'Message' => 'Background Investigation Question Delete Failed'
+                'Message' => 'Applicant Interview Question Delete Failed'
             ));
         }
         echo $result;

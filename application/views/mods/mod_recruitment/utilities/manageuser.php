@@ -307,11 +307,11 @@
     };
 
     $("#userlevel").change(function(){
-        if($(this).val() == "DEPARTMENTHEAD"){
-            $("#divDepartment").show();
-        } else {
-            $("#divDepartment").hide();
-        }
+//        if($(this).val() == "DEPARTMENTHEAD"){
+//            $("#divDepartment").show();
+//        } else {
+//            $("#divDepartment").hide();
+//        }
         loadData($(this).val());
     });
 
@@ -355,7 +355,7 @@
                     return data.firstname + " " + data.middlename + " " +data.lastname;
                 }},
                 {"data":function(data){
-                    return $("#userlevel option[value='"+data.userlevel+"']").text();
+                    return $("#userlevel option[value='"+data.userlevel+"']").text() ? $("#userlevel option[value='"+data.userlevel+"']").text() : data.userlevel;
                 }},
                 {"data":function(data){
                     return (data.department == null || data.department == "") ? "--" : data.department;
@@ -421,11 +421,12 @@
         console.log(data.filename);
         $("#imgName").text("");
         $("#imgPrev").attr("src","");
-        if(data.department == "" || data.department == null){
-            $("#divDepartment").hide();
-        } else {
+        if(data.userlevel != "TEMPORARY"){
             $("#divDepartment").show();
             $("#department").val(data.department);
+
+        } else {
+            $("#divDepartment").hide();
         }
 
         $("#edituserlevel").val(data.userlevel);

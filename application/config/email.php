@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 $config['useragent'] = 'CodeIgniter';
 $config['protocol'] = 'smtp';
 $config['smtp_host'] = 'smtp.hostinger.ph';
