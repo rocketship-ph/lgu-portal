@@ -61,8 +61,8 @@
             <legend>Competency Requirement Per Position </legend>
             <div class="row">
                 <div class="col-md-6 form-group">
-                    <select class="form-control clearField" id="position">
-                        <option selected disabled>- Select Vacant Position -</option>
+                    <select class="form-control clearField" id="reqnum">
+                        <option selected disabled>- Select Request Number -</option>
                     </select>
 
                 </div>
@@ -72,9 +72,16 @@
                 <div class="col-md-12">
                     <h5 id="tblmsg1" style="display:none"></h5>
                     <div class="table-responsive" id="containerPrint">
-                        <center><h4 id="printTitle" style="display: none"><b>Selection Criteria for the Vacant Position</b></h4></center>
+                        <center><h4 id="printTitle" style="display: none"><b>COMPETENCY REQUIREMENT PER POSITION</b></h4></center>
                         <div id="container">
+                            <div>
+                                <table class="tblanalytics" id="tbldata" style="width: 100%;" border="2" cellpadding="10" >
 
+                                </table>
+                            </div>
+                            <div id="divSignatory">
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,30 +93,29 @@
 <script type="application/javascript">
     $(document).ready(function(){
         $("#nav_recruitment_reports").removeClass().addClass("active");
-
         $("#ul_recruitmentmenu").show();
         $("#ul_mainmenu").hide();
         window.switch=0;
         $("#panel_requestpersonnelreports").addClass("selected_panel");
         loadReport();
-
     });
+    var res = null;
     function loadReport() {
-        var select = $("#position");
+        var select = $("#reqnum");
         select.empty();
         $.ajax({
-            url: "<?php echo base_url();?>homepage/announcements",
+            url: "<?php echo base_url();?>analyticsmanagement/getcompetencyrequirement",
             type: "GET",
             dataType: "json",
             success: function(result){
                 if(result.Code === "00"){
-                    console.log(result);
-                    select.append('<option selected disabled>- Select Vacant Position -</option>');
+                    res = result;
+                    select.append('<option selected disabled>- Select Request Number -</option>');
                     for(var keys in result.details){
-                        select.append('<option value="'+result.details[keys].requestnumber+'">'+((result.details[keys].name == "" || result.details[keys].name == null) ? 'POSITION NAME' : result.details[keys].name )+' ['+result.details[keys].requestnumber+']</option>');
+                        select.append('<option value="'+result.details[keys].requestnumber+'">'+result.details[keys].requestnumber+'</option>');
                     }
                 } else {
-                    select.append('<option selected disabled>- No Vacant Position Available -</option>');
+                    select.append('<option selected disabled>- No Request Number Available -</option>');
                 }
             },
             error: function(e){
@@ -117,93 +123,135 @@
             }
         });
     }
-
-    $("#position").change(function () {
-        viewJobPosting($("#position").val());
-    });
-
-
-    function viewJobPosting(reqnum){
+    var globalJsonCbi = null;
+    $("#reqnum").change(function () {
+        $("#tbldata").empty();
         $("#loadingmodal").modal("show");
+        var data = $("#reqnum").val();
+        var cbi = [];
+        for(var key in res.details){
+            if(res.details[key].requestnumber===data){
+                console.log(res.details[key]);
+                $("#tbldata").append('  <tr>' +
+                    '    <th rowspan="2" width="25%"><b>Position / Office</b></th>' +
+                    '    <th rowspan="2" width="10%"><b>Salary Grade / Annual Salary</b></th>' +
+                    '    <th rowspan="2" width="10%"><b>Item No.</b></th>' +
+                    '    <th colspan="4" width="55%"><b>QUALIFICATION STANDARDS</b></th>' +
+                    '  </tr>' +
+                    '  <tr>' +
+                    '    <td><b>Education</b></td>' +
+                    '    <td><b>Work Experience</b></td>' +
+                    '    <td><b>Training</b></td>' +
+                    '    <td><b>Eligibility</b></td>' +
+                    '  </tr>' +
+                    '  <tr>' +
+                    '    <td valign="top"><b>'+res.details[key].position+'</b><br><br><b>'+res.details[key].office+'</b></td>' +
+                    '    <td valign="top">'+res.details[key].salarygrade+' / P'+res.details[key].salaryequivalent+'</td>' +
+                    '    <td><textarea rows="9"  id="labelItemNo" class="form-control"></textarea></td>' +
+                    '    <td><textarea rows="9" id="labelEducation" class="form-control">'+res.details[key].education+'</textarea></td>' +
+                    '    <td><textarea rows="9"  id="labelExperience" class="form-control">'+res.details[key].experience+'</textarea></td>' +
+                    '    <td><textarea rows="9" id="labelTraining" class="form-control">'+res.details[key].training+'</textarea></td>' +
+                    '    <td><textarea rows="9"  id="labelEligibility" class="form-control">'+res.details[key].eligibility+'</textarea></td>' +
+                    '  </tr>' +
+                    '  <tr>' +
+                    '    <td colspan="2"><b>Brief description of the General Function</b></td>' +
+                    '    <td colspan="5"><i>'+atob(res.details[key].description)+'</i></td>' +
+                    '  </tr>' +
+                    '  <tr>' +
+                    '    <td colspan="7"><center><b>REQUIRED COMPETENCIES</b></center></td>' +
+                    '  </tr>');
+                var jsonCbi = JSON.parse(atob(res.details[key].cbiskills));
+                globalJsonCbi = jsonCbi;
+                for (var i = 0; i<jsonCbi.length;i++){
+                    cbi.push(jsonCbi[i].title);
+                }
+                console.log(JSON.stringify(jsonCbi));
+                break;
+            }
+        }
         $.ajax({
-            url:"<?php echo base_url();?>homepage/displayapprovedrequestdetails",
+            url: "<?php echo base_url();?>analyticsmanagement/getcbiskills",
             type: "POST",
-            data: {
-                "REQUESTNUMBER": reqnum
-            },
             dataType: "json",
-            success:function(result){
+            data: {
+                "DATA": JSON.stringify(cbi).replace("[","").replace("]","")
+            },
+            success: function(result){
                 $("#loadingmodal").modal("hide");
-                console.log(JSON.stringify(result));
-                if(result.Code == "00"){
-                    generateTable(result);
-                } else {
-                    messageDialogModal("Server Message","No Details Available");
+                if(result.Code === "00"){
+                    $("#exportPDF").show();
+                    var groupBy = function(xs, key) {
+                        return xs.reduce(function(rv, x) {
+                            (rv[x[key]] = rv[x[key]] || []).push(x);
+                            return rv;
+                        }, {});
+                    };
+                    var groupedByType=groupBy(result.details, 'type');
+                    for(var h=0; h < Object.keys(groupedByType).length;h++){
+                        generatecbi(groupedByType,h);
+                    }
+
                 }
             },
             error: function(e){
+                $("#exportPDF").hide();
                 $("#loadingmodal").modal("hide");
+                console.log(e);
             }
         });
+    });
+    function generatecbi(groupedByType,h){
+        var type = groupedByType[Object.keys(groupedByType)[h]];
+        $("#tbldata").append('<tr style="background-color: #D9D9D9 !important;"><td colspan="7"><b>'+Object.keys(groupedByType)[h]+' COMPETENCIES</b></td>' +
+            '  </tr>');
+        for(var i = 0; i < type.length; i++){
+            $("#tbldata").append('<tr>' +
+                '    <td colspan="2"><b>'+type[i].title+'</b><br><br><i>'+getLevel(type[i].title)+'</i></td>' +
+                '    <td colspan="5">'+atob(type[i].description)+'</td>' +
+                '  </tr>');
+        }
     }
 
-    function generateTable(result) {
-        $("#exportPDF").show();
-        $("#container").empty();
-        $("#containerPrint").show();
-        var date = new Date(result.details[0].mdateapproved);
-        $("#container").append('<b style="color:black">Date Published (CSC Field Office): </b><span style="color:black">' + date.toDateString()+'</span>');
-        $("#container").append('<table class="data" width="100%" border="2" style="color: black"><tr><th rowspan="2" width="23%"><b>Position Title</b></th><th rowspan="2" width="7%">SG</th><th rowspan="2" width="15%"><b>Office</b></th><th colspan="4" style="border-color: black"><b>Qualification Standards</b></th></tr><tr><td width="15%"><b>Education</b></td><td width="15%"><b>Experience</b></td><td width="15%"><b>Training</b></td><td width="15%"><b>Eligibility</b></td></tr><tr><td valign="center">'+result.details[0].positionname+'</td><td>'+result.details[0].salarygrade+'</td><td>'+result.details[0].department+'</td><td>'+check(result.details[0].mineducbackground)+'</td><td> at least  '+result.details[0].experience+' years</td><td> at least '+result.details[0].training+' hours</td><td>'+check(result.details[0].eligibility)+'</td></tr><tr><td colspan="7" style="text-align: center"><b>UPDATED POSITION DESCRIPTION FORM</b></td></tr><tr><td colspan="7" id="skillset"></td></tr></table>');
-        var skillset = $("#skillset");
-        skillset.empty();
-        skillset.append('<ol type="a" id="skills">');
-        for(var keys in result.details){
-            var skills = JSON.parse(atob(result.details[keys].cbiskills));
-            for(var i=0;i<skills.length;i++){
-                $("#skills").append("<li>"+skills[i].desc+"</li>");
+    function getLevel(title) {
+        console.log(title);
+        for (var i = 0; i<globalJsonCbi.length;i++){
+            console.log(title + " : " + globalJsonCbi[i].title + " > " + globalJsonCbi[i].level);
+            if(title===globalJsonCbi[i].title){
+                return "Level: "+globalJsonCbi[i].level.toUpperCase();
             }
         }
-        skillset.append("</ol>");
-        $("#container").append('<br><span style="color: black">Prepared by:</span><br><br>' + '<b style="color: black">'+'<?php echo $this->session->userdata('firstname');?> '+'<?php echo $this->session->userdata('lastname');?>'+'</b><br><i>'+'<?php echo $this->session->userdata('position');?>'+'</i>');
     }
-    function check(data){
-        var str = data;
-        if (data.toUpperCase().indexOf("GRADUATE") >= 0)
-            str = '<textarea class="form-control textarea">'+data+'</textarea>';
-        else if (data.toUpperCase().indexOf("COLLEGE") >= 0)
-            str = '<textarea class="form-control textarea">'+data+'</textarea>';
-        else if (data.toUpperCase().indexOf("YES") >= 0)
-            str = '<textarea class="form-control textarea1">'+data+'</textarea>';
-        else if (data.toUpperCase().indexOf("NO") >= 0)
-            str = 'None required';
-
-        return str;
-    }
-
     $('#exportPDF').click(function(){
-        if($(".textarea").val()===""){
-            $(".textarea").addClass('error');
-        }else if($(".textarea1").val()===""){
-            $(".textarea1").addClass('error');
+        if($("#labelItemNo").val()===""){
+            $("#labelItemNo").addClass('error');
+        }else if($("#labelEligibility").val()===""){
+            $("#labelEligibility").addClass('error');
+        }else if($("#labelEducation").val()===""){
+            $("#labelEducation").addClass('error');
+        }else if($("#labelExperience").val()===""){
+            $("#labelExperience").addClass('error');
+        }else if($("#labelTraining").val()===""){
+            $("#labelTraining").addClass('error');
         } else {
+            $("#labelItemNo").removeClass('error');
+            $("#labelEligibility").removeClass('error');
+            $("#labelEducation").removeClass('error');
+            $("#labelExperience").removeClass('error');
+            $("#labelTraining").removeClass('error');
             $("#printTitle").show();
-            $(".textarea").removeClass('form-control');
-            $(".textarea").removeClass('error');
-            $(".textarea1").removeClass('form-control');
-            $(".textarea1").removeClass('error');
             $("#containerPrint").print({
-                prepend: '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table><br>'
+                prepend: '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>'
             });
             $("#printTitle").hide();
-            $(".textarea").addClass('form-control');
-            $(".textarea1").addClass('form-control');
+            $("#printTitle").show();
         }
 
     });
 </script>
+
 <style type="text/css">
     table.tblanalytics td{
-        padding: 5px;
+        padding: 10px;
         color: black;
     }
     @media print {
@@ -225,44 +273,67 @@
         /*}*/
         #containerPrint {
             -webkit-print-color-adjust: exact;
+            height: 100%!important;
         }
         #exportPDF {
             visibility: hidden;
         }
-        th {
+        table.tblanalytics th {
             background-color: #949494 !important;
             border-color: black;
             color: black;
             text-align: center;
         }
-        tr {
+        table.tblanalytics tr {
             border-color: black;
             color: black;
         }
-        td {
+        table.tblanalytics td {
             border-color: black;
             color: black;
         }
 
-        table.data td, th{
+        table.tblanalytics table.data td, th{
             -webkit-print-color-adjust: exact;
             padding: 2px;
         }
-        textarea {
+        #labelEducation {
             outline: none;
+            height: 30px;
         }
+        #labelEligibility {
+            outline: none;
+            height: 30px;
+        }
+        .type {
+            outline: none;
+            border-color: transparent;
+        }
+        .hide {
+            outline: none;
+            border-color: transparent;
+        }
+        textarea {
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+        button {
+            display: none !important;
+        }
+
     }
-    th {
+    table.tblanalytics th {
         background-color: #949494 !important;
         border-color: black;
         color: black;
         text-align: center;
     }
-    tr {
+    table.tblanalytics tr {
         border-color: black;
         color: black;
     }
-    td {
+    table.tblanalytics td {
         border-color: black;
         color: black;
     }
@@ -270,13 +341,21 @@
     table.data td, th{
         padding: 2px;
     }
+
+    .error{
+        border-color: red;
+    }
+
+    .type {
+        outline: none;
+    }
+    .hide {
+        outline: none;
+        border-color: transparent;
+    }
     textarea {
         resize: none;
         outline: none;
         border-color: transparent;
-    }
-
-    .error{
-        border-color: red;
     }
 </style>

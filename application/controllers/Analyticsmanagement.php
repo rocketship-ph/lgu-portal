@@ -58,4 +58,37 @@ class AnalyticsManagement extends CI_Controller {
         }
         echo $result;
     }
+    public function getcompetencyrequirement(){
+        $report = $this->ModelAnalyticsManagement->getcompetencyrequirement();
+        if($report){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $report
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
+    public function getcbiskills(){
+        $data = $_REQUEST['DATA'];
+        $report = $this->ModelAnalyticsManagement->getcbiskills($data);
+        if($report){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $report
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
 }

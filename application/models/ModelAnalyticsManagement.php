@@ -66,6 +66,36 @@ class ModelAnalyticsManagement extends CI_Model{
             return false;
         }
     }
+    function getcompetencyrequirement(){
+        try {
+            $query = $this->db->query("SELECT * FROM csc_competencyrequirementperposition ORDER BY csc_competencyrequirementperposition.requestnumber DESC");
+
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+    function getcbiskills($data){
+        try {
+            $query = $this->db->query("select title,type,description from tblcompetency where title in (".$data.")");
+
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
 
 
 }

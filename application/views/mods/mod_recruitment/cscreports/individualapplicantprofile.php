@@ -341,7 +341,7 @@ $('#exportPDF').click(function(){
         $("#labelEducation").removeClass('error');
         $("#labelEligibility").removeClass('error');
         $("#divPrint").print({
-            prepend: '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table><br><br><span>&nbsp;&nbsp;&nbsp;'
+            prepend: '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>'
         });
     }
 
@@ -439,6 +439,11 @@ $('#exportPDF').click(function(){
         outline: none;
     }
     .hide {
+        outline: none;
+        border-color: transparent;
+    }
+    textarea {
+        resize: none;
         outline: none;
         border-color: transparent;
     }
