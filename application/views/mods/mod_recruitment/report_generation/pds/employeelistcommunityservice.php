@@ -147,34 +147,36 @@
                         var json = JSON.parse(result.details[keys].voluntarywork);
                         var span = json.length;
                         var isFirst = true;
-                        for(var i=0;i<span;i++){
-                            var pds1 = '';
-                            var pds2 = '';
-                            if(isFirst){
-                                var name = result.details[keys].firstname + " " +result.details[keys].middlename + " " +result.details[keys].lastname;
-                                pds1+='<td style="vertical-align:middle;" rowspan="'+span+'">'+name+'</td>' +
-                                '<td style="vertical-align:middle;" rowspan="'+span+'">'+result.details[keys].currentposition+'</td>' +
-                                '<td style="vertical-align:middle;" rowspan="'+span+'">'+result.details[keys].department+'</td>' +
-                                '<td align="center" style="text-align: center">'+json[i].organization+'</td>' +
-                                '<td align="center" style="text-align: center">'+json[i].fromdate+'</td>' +
-                                '<td align="center" style="text-align: center">'+json[i].todate+'</td>' +
-                                '<td align="center" style="text-align: center">'+json[i].hours+'</td>' +
-                                '<td align="center" style="text-align: center">'+json[i].position+'</td>';
+                        for(var i=0;i<span;i++) {
+                            if (!(json[i].organization == "" || json[i].organization == "na" || json[i].organization == "n/a" || json[i].organization == "N/A" || json[i].organization == "NA" || json[i].organization == "none" || json[i].organization == "NONE" || json[i].organization == "None")) {
+                                var pds1 = '';
+                                var pds2 = '';
+                                if (isFirst) {
+                                    var name = result.details[keys].firstname + " " + result.details[keys].middlename + " " + result.details[keys].lastname;
+                                    pds1 += '<td style="vertical-align:middle;" rowspan="' + span + '">' + name + '</td>' +
+                                    '<td style="vertical-align:middle;" rowspan="' + span + '">' + result.details[keys].currentposition + '</td>' +
+                                    '<td style="vertical-align:middle;" rowspan="' + span + '">' + result.details[keys].department + '</td>' +
+                                    '<td align="center" style="text-align: center">' + json[i].organization + '</td>' +
+                                    '<td align="center" style="text-align: center">' + json[i].fromdate + '</td>' +
+                                    '<td align="center" style="text-align: center">' + json[i].todate + '</td>' +
+                                    '<td align="center" style="text-align: center">' + json[i].hours + '</td>' +
+                                    '<td align="center" style="text-align: center">' + json[i].position + '</td>';
 
-                                tr +='<tr>'+pds1+'</tr>';
-                            } else {
-                                pds2+='<td align="center" style="text-align: center">'+json[i].organization+'</td>' +
-                                '<td align="center" style="text-align: center">'+json[i].fromdate+'</td>' +
-                                '<td align="center" style="text-align: center">'+json[i].todate+'</td>' +
-                                '<td align="center" style="text-align: center">'+json[i].hours+'</td>' +
-                                '<td align="center" style="text-align: center">'+json[i].position+'</td>';
+                                    tr += '<tr>' + pds1 + '</tr>';
+                                } else {
+                                    pds2 += '<td align="center" style="text-align: center">' + json[i].organization + '</td>' +
+                                    '<td align="center" style="text-align: center">' + json[i].fromdate + '</td>' +
+                                    '<td align="center" style="text-align: center">' + json[i].todate + '</td>' +
+                                    '<td align="center" style="text-align: center">' + json[i].hours + '</td>' +
+                                    '<td align="center" style="text-align: center">' + json[i].position + '</td>';
 
-                                tr +='<tr>'+pds2+'</tr>';
+                                    tr += '<tr>' + pds2 + '</tr>';
+                                }
+                                isFirst = false;
+
                             }
-                            isFirst = false;
-
                         }
-                        tbody.append(tr);
+                            tbody.append(tr);
 
                     }
                 } else {
