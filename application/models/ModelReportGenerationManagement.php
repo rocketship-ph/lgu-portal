@@ -692,4 +692,21 @@ function getexaminees($reqnum){
         }
     }
 
+
+    function getEmployeenopds(){
+        try {
+            $statement="select u.username,u.firstname,u.middlename,u.lastname,u.userlevel,d.contactnumber,case when (d.department = '' or d.department is null) then 'UNSPECIFIED DEPARTMENT' else d.department end as department,d.address,d.birthday,d.gender from tblusers u inner join tbluserdetails d on u.username=d.username where d.username not in (select username from tblpdsdetails) and u.status=0 and u.userlevel not in ('TEMPORARY','ADMINISTRATOR') order by u.lastname asc;";
+            $query = $this->db->query($statement);
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
 }
