@@ -52,17 +52,17 @@
         </div>
 <!--        --><?php //endif; ?>
 <!--        --><?php //if(in_array($GLOBALS['NAV_EVALUATEINTERVIEW'],$this->session->userdata('modules'))):?>
-        <div class="form-group col-md-3">
-            <div class="panel">
-                <div class="panel-body" align="center">
-                    <a style="text-align: center" href="<?php echo base_url();?>applicantinterview/evaluateinterview">
-                        <img src="<?php echo base_url();?>assets/img/icons/interview_evaluate.png" height="100px">
-                        <br><br>
-                        Evaluate Interview
-                    </a>
-                </div>
-            </div>
-        </div>
+<!--        <div class="form-group col-md-3">-->
+<!--            <div class="panel">-->
+<!--                <div class="panel-body" align="center">-->
+<!--                    <a style="text-align: center" href="--><?php //echo base_url();?><!--applicantinterview/evaluateinterview">-->
+<!--                        <img src="--><?php //echo base_url();?><!--assets/img/icons/interview_evaluate.png" height="100px">-->
+<!--                        <br><br>-->
+<!--                        Evaluate Interview-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 <!--        --><?php //endif; ?>
     </div>
 </div>

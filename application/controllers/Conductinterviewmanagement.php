@@ -29,14 +29,15 @@ class ConductInterviewManagement extends CI_Controller {
 
     public function displayrequestdetails(){
         $details = $this->ModelConductInterviewManagement->getRequestdetails($_REQUEST['REQUESTNUMBER']);
-        if($details){
-            $evaluators = $this->ModelConductInterviewManagement->getEvaluators($_REQUEST['REQUESTNUMBER']);
-            if($evaluators){
+        $isevaluator = $this->ModelConductInterviewManagement->isevaluator($_REQUEST['REQUESTNUMBER'],$this->session->userdata('username'));
+        if($isevaluator && $details){
+            $applicants = $this->ModelConductInterviewManagement->getApplicants($_REQUEST['REQUESTNUMBER']);
+            if($applicants){
                 $result = json_encode(array(
                     'Code' => '00',
                     'Message' => 'Successfully Fetched Data',
                     'details' => $details,
-                    'evaluators'=>$evaluators
+                    'applicants'=> $applicants
                 ));
             } else {
                 $result = json_encode(array(
@@ -45,14 +46,21 @@ class ConductInterviewManagement extends CI_Controller {
                     'details' => $details
                 ));
             }
-            echo $result;
+        } else if($details){
+            $result = json_encode(array(
+                'Code' => '05',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $details,
+                'applicants'=>'none'
+            ));
         } else {
             $result = json_encode(array(
                 'Code' => '99',
-                'Message' => 'No Data Found'
+                'Message' => 'No Data Found',
+                'details'=>$details
             ));
-            echo $result;
         }
+        echo $result;
     }
 
     public function displayapplicants(){
@@ -74,25 +82,16 @@ class ConductInterviewManagement extends CI_Controller {
     }
 
     public function displayquestion(){
-        $existing = $this->ModelConductInterviewManagement->getAnsweredBi($_REQUEST['REQUESTNUMBER'],$_REQUEST['USERNAME'],$_REQUEST['APPLICANTCODE']);
+        $existing = $this->ModelConductInterviewManagement->getAnsweredInterview($_REQUEST['REQUESTNUMBER'],$this->session->userdata('username'),$_REQUEST['APPLICANTCODE']);
         if($existing){
-            $question = $this->ModelConductInterviewManagement->getQuestions($_REQUEST['REQUESTNUMBER'],$_REQUEST['USERNAME']);
-            if($question){
-                $result = json_encode(array(
-                    'Code' => '00',
-                    'Message' => 'Successfully Fetched Data',
-                    'details' => $question,
-                    'answered'=>$existing
-                ));
-            }else{
-                $result = json_encode(array(
-                    'Code' => '99',
-                    'Message' => 'No Data Found'
-                ));
-            }
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'answered'=>$existing
+            ));
             echo $result;
         } else {
-            $question = $this->ModelConductInterviewManagement->getQuestions($_REQUEST['REQUESTNUMBER'],$_REQUEST['USERNAME']);
+            $question = $this->ModelConductInterviewManagement->getQuestions($_REQUEST['REQUESTNUMBER']);
             if($question){
                 $result = json_encode(array(
                     'Code' => '00',
@@ -112,33 +111,61 @@ class ConductInterviewManagement extends CI_Controller {
 
     public function conduct(){
         $reqnum = $_REQUEST['REQUESTNUMBER'];
-        $question = $_REQUEST['QUESTION'];
-        $answer = $_REQUEST['ANSWER'];
-        $encodedby = $_REQUEST['EVALUATOR'];
+        $question1 = $_REQUEST['Q1'];
+        $question2 = $_REQUEST['Q2'];
         $applicantcode = $_REQUEST['APPLICANTCODE'];
+        $content = $_REQUEST['CONTENT'];
+        $mechanics = $_REQUEST['MECHANICS'];
+        $organization = $_REQUEST['ORGANIZATION'];
+        $delivery = $_REQUEST['DELIVERY'];
+        $oral = $_REQUEST['ORAL'];
+        $analytical = $_REQUEST['ANALYTICAL'];
+        $judgment = $_REQUEST['JUDGMENT'];
+        $initiative = $_REQUEST['INITIATIVE'];
+        $stress = $_REQUEST['STRESS'];
+        $sensitivity = $_REQUEST['SENSITIVITY'];
+        $service = $_REQUEST['SERVICE'];
+        $behavioralave = $_REQUEST['BEHAVIORALAVE'];
+        $pspttotal = $_REQUEST['PSPTTOTAL'];
+        $comments = $_REQUEST['COMMENTS'];
+        $json = $_REQUEST['JSON'];
         $username = $this->session->userdata('username');
 
         $insertData = array(
-            'question' => base64_encode($question),
-            'answer' => base64_encode($answer),
+            'question1' => $question1,
+            'question2' => $question2,
+            'json' => $json,
+            'comments' => $comments,
             'requestnumber' => $reqnum,
-            'encodedby' => $encodedby,
-            'conductedby' => $username,
+            'evaluator' => $username,
             'applicantcode' => $applicantcode,
+            'content' => $content,
+            'mechanics' => $mechanics,
+            'organization' => $organization,
+            'delivery' => $delivery,
+            'psptoral' => $oral,
+            'psptanalytical' => $analytical,
+            'psptjudgment' => $judgment,
+            'psptinitiative' => $initiative,
+            'psptstress' => $stress,
+            'psptsensitivity' => $sensitivity,
+            'psptservice' => $service,
+            'oralaverage' => $behavioralave,
+            'overalltotal' => $pspttotal,
         );
 
         $insert = $this->ModelConductInterviewManagement->insert($insertData);
         if($insert){
             $auditdata = array(
-                'modulename'=>'Background Investigation Module',
-                'action'=>'Conduct Background Investigation ['.$reqnum.']['.$username.']',
+                'modulename'=>'Applicant Interview Module',
+                'action'=>'Conduct Interview ['.$reqnum.']['.$applicantcode.']',
                 'user'=>$this->session->userdata('username'),
                 'ipaddress'=> $_SERVER['REMOTE_ADDR']
             );
             $audit = $this->ModelAuditTrail->insert($auditdata);
             $result = json_encode(array(
                 'Code' => '00',
-                'Message' => 'Background Investigation Answer Successfully Recorded'
+                'Message' => 'Interview Answer Successfully Recorded'
             ));
         }else{
             $result = json_encode(array(
@@ -152,31 +179,59 @@ class ConductInterviewManagement extends CI_Controller {
     public function edit(){
         $rowid = $_REQUEST['ROWID'];
         $reqnum = $_REQUEST['REQUESTNUMBER'];
-        $answer = $_REQUEST['ANSWER'];
+        $applicantcode = $_REQUEST['APPLICANTCODE'];
+        $content = $_REQUEST['CONTENT'];
+        $mechanics = $_REQUEST['MECHANICS'];
+        $organization = $_REQUEST['ORGANIZATION'];
+        $delivery = $_REQUEST['DELIVERY'];
+        $oral = $_REQUEST['ORAL'];
+        $analytical = $_REQUEST['ANALYTICAL'];
+        $judgment = $_REQUEST['JUDGMENT'];
+        $initiative = $_REQUEST['INITIATIVE'];
+        $stress = $_REQUEST['STRESS'];
+        $sensitivity = $_REQUEST['SENSITIVITY'];
+        $service = $_REQUEST['SERVICE'];
+        $behavioralave = $_REQUEST['BEHAVIORALAVE'];
+        $pspttotal = $_REQUEST['PSPTTOTAL'];
+        $comments = $_REQUEST['COMMENTS'];
+        $json = $_REQUEST['JSON'];
         $username = $this->session->userdata('username');
 
         $data = array(
-            'answer' => base64_encode($answer),
-            'modifiedby'=>$username
+            'json' => $json,
+            'comments' => $comments,
+            'content' => $content,
+            'mechanics' => $mechanics,
+            'organization' => $organization,
+            'delivery' => $delivery,
+            'psptoral' => $oral,
+            'psptanalytical' => $analytical,
+            'psptjudgment' => $judgment,
+            'psptinitiative' => $initiative,
+            'psptstress' => $stress,
+            'psptsensitivity' => $sensitivity,
+            'psptservice' => $service,
+            'oralaverage' => $behavioralave,
+            'overalltotal' => $pspttotal,
         );
 
         $update = $this->ModelConductInterviewManagement->update($data,$rowid);
         if($update){
             $auditdata = array(
-                'modulename'=>'Background Investigation Module',
-                'action'=>'Edit Answer ['.$reqnum.']['.$username.']',
-                'user'=>$this->session->userdata('username'),
+                'modulename'=>'Applicant Interview Module',
+                'action'=>'Edit Rating ['.$reqnum.']['.$applicantcode.']',
+                'user'=>$username,
                 'ipaddress'=> $_SERVER['REMOTE_ADDR']
             );
             $audit = $this->ModelAuditTrail->insert($auditdata);
             $result = json_encode(array(
                 'Code' => '00',
-                'Message' => 'Background Investigation Answer Successfully Updated'
+                'Message' => 'Applicant Interview Rating Successfully Updated'
             ));
         }else{
             $result = json_encode(array(
                 'Code' => '01',
-                'Message' => 'Background Investigation Answer Updated Failed'
+                'Message' => 'Applicant Interview Rating Update Failed'
             ));
         }
         echo $result;
@@ -184,10 +239,9 @@ class ConductInterviewManagement extends CI_Controller {
 
     public function inquirechanges(){
         $reqnum = $_REQUEST['REQUESTNUMBER'];
-        $evaluator = $_REQUEST['EVALUATOR'];
         $applicantcode = $_REQUEST['APPLICANTCODE'];
-
-        $isanwered = $this->ModelConductInterviewManagement->isanswered($reqnum,$evaluator,$applicantcode);
+        $username = $this->session->userdata('username');
+        $isanwered = $this->ModelConductInterviewManagement->isbi($reqnum,$username,$applicantcode);
         if(!$isanwered){
             $result = json_encode(array(
                 'Code' => '00',
@@ -196,7 +250,7 @@ class ConductInterviewManagement extends CI_Controller {
         } else {
             $result = json_encode(array(
                 'Code' => '99',
-                'Message' => 'Background assessment for applicant '.$applicantcode.' under request number: '.$reqnum.' has started thus, further changes are prohibited.'
+                'Message' => 'Background investigation for applicant '.$applicantcode.' under request number: '.$reqnum.' has started thus, further changes are prohibited.'
             ));
         }
         echo $result;
@@ -205,24 +259,25 @@ class ConductInterviewManagement extends CI_Controller {
     public function delete(){
         $rowid = $_REQUEST['ROWID'];
         $reqnum = $_REQUEST['REQUESTNUMBER'];
+        $appcode = $_REQUEST['APPLICANTCODE'];
         $username = $this->session->userdata('username');
         $delete = $this->ModelConductInterviewManagement->delete($rowid);
         if($delete){
             $auditdata = array(
-                'modulename'=>'Background Investigation Module',
-                'action'=>'Delete Answer ['.$reqnum.']['.$username.']',
+                'modulename'=>'Applicant Interview Module',
+                'action'=>'Delete Answer ['.$reqnum.']['.$appcode.']',
                 'user'=>$this->session->userdata('username'),
                 'ipaddress'=> $_SERVER['REMOTE_ADDR']
             );
             $audit = $this->ModelAuditTrail->insert($auditdata);
             $result = json_encode(array(
                 'Code' => '00',
-                'Message' => 'Background Investigation Answer Deleted Successfully'
+                'Message' => 'Applicant Interview Answer Deleted Successfully'
             ));
         }else{
             $result = json_encode(array(
                 'Code' => '01',
-                'Message' => 'Background Investigation Answer Delete Failed'
+                'Message' => 'Applicant Interview Answer Delete Failed'
             ));
         }
         echo $result;

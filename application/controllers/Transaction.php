@@ -75,7 +75,8 @@ class Transaction extends CI_Controller {
 
     public function interviewmenu()
     {
-        if(array_intersect($GLOBALS['NAVINTERVIEW_MGT'],$this->session->userdata('modules'))){
+//        if(array_intersect($GLOBALS['NAVINTERVIEW_MGT'],$this->session->userdata('modules'))){
+        if($this->session->userdata('userlevel') != 'TEMPORARY'){
             $data = array('content'=>'mods/mod_menu/interviewmenu');
         } else {
             $data = array('content'=>'mods/unauthorizedpage');

@@ -28,7 +28,7 @@
             <td align="center" width="20px">
                 &nbsp;&nbsp;
             </td>
-            <td style="border: 1px solid #d1d1d1">
+            <td style="border-left: 1px solid #d1d1d1">
             <td align="center" width="20px">
                 &nbsp;&nbsp;
             </td>
@@ -58,18 +58,18 @@
             <td align="center" width="20px">
                 &nbsp;&nbsp;
             </td>
-            <td>
-                <div class="panel" align="center" id="panel_evaluate">
-                    <a  href="<?php echo base_url();?>applicantinterview/evaluateinterview" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">
-                        <img src="<?php echo base_url();?>assets/img/icons/interview_evaluate.png" height="40px">
-                        <br>
-                        Evaluate Interview
-                    </a>
-                </div>
-            </td>
-            <td align="center" width="20px">
-                &nbsp;&nbsp;
-            </td>
+<!--            <td>-->
+<!--                <div class="panel" align="center" id="panel_evaluate">-->
+<!--                    <a  href="--><?php //echo base_url();?><!--applicantinterview/evaluateinterview" style="height: 60px;width:60px;text-align: center;border-radius: 5px;">-->
+<!--                        <img src="--><?php //echo base_url();?><!--assets/img/icons/interview_evaluate.png" height="40px">-->
+<!--                        <br>-->
+<!--                        Evaluate Interview-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </td>-->
+<!--            <td align="center" width="20px">-->
+<!--                &nbsp;&nbsp;-->
+<!--            </td>-->
             </td>
         </tr>
     </table>

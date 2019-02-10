@@ -1,15 +1,34 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class ModelConductInterviewManagement extends CI_Model{
     function __construct() {
-        $this->biTbl = 'tblbi';
+        $this->evaluatorsTbl = 'tblevaluators';
         $this->interviewConductTbl = 'tblconductinterview';
-        $this->biAssesstbl = 'tblbiassessment';
+        $this->interviewPsptTbl = 'tblinterviewpspt';
+        $this->interviewAssesstbl = 'tblinterviewassessment';
+    }
+
+    function isevaluator($reqnum,$username){
+        try {
+            $this->db->select('*');
+            $this->db->from($this->evaluatorsTbl);
+            $this->db->where('evaluatorusername',$username);
+            $this->db->where('requestnumber',$reqnum);
+            $query = $this->db->get();
+            if($query->num_rows() > 0){
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
     }
 
     function getRequestnumbers(){
         try {
 
-            $statement = "select distinct requestnumber from tblbi order by requestnumber desc;";
+            $statement = "select distinct requestnumber from tblinterviewquestions order by requestnumber desc;";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
@@ -56,7 +75,7 @@ class ModelConductInterviewManagement extends CI_Model{
 
     function getApplicants($reqnum){
         try {
-            $statement = "select u.firstname,u.middlename,u.lastname,u.userlevel,a.* from tblusers u inner join tblapplicant a on u.username=a.username where a.requestnumber='".$reqnum."' and a.isqualified='YES' and a.applicantcode not in (select applicantcode from tblbiassessment);";
+            $statement = "select u.firstname,u.middlename,u.lastname,u.userlevel,a.*,pd.currentposition from tblusers u inner join tblapplicant a on u.username=a.username inner join tblpdsdetails pd on a.username=pd.username where a.requestnumber='".$reqnum."' and a.isqualified='YES' and a.applicantcode not in (select applicantcode from tblinterviewpspt where evaluator='".$this->session->userdata('username')."');";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
@@ -70,9 +89,9 @@ class ModelConductInterviewManagement extends CI_Model{
         }
     }
 
-    function getQuestions($reqnum,$username){
+    function getQuestions($reqnum){
         try {
-            $statement = "select * from tblbi where requestnumber='".$reqnum."' and encodedby='".$username."';";
+            $statement = "select * from tblinterviewquestions where requestnumber='".$reqnum."';";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
@@ -86,9 +105,9 @@ class ModelConductInterviewManagement extends CI_Model{
         }
     }
 
-    function getAnsweredBi($reqnum,$username,$applicantcode){
+    function getAnsweredInterview($reqnum,$username,$applicantcode){
         try {
-            $statement = "select * from tblconductbi where requestnumber='".$reqnum."' and encodedby='".$username."' and applicantcode='".$applicantcode."';";
+            $statement = "select * from tblinterviewpspt where requestnumber='".$reqnum."' and evaluator='".$username."' and applicantcode='".$applicantcode."';";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
@@ -104,7 +123,7 @@ class ModelConductInterviewManagement extends CI_Model{
 
     public function insert($data = array()) {
         try {
-            $insert = $this->db->insert($this->interviewConductTbl, $data);
+            $insert = $this->db->insert($this->interviewPsptTbl, $data);
             if($insert){
                 return true;
             }else{
@@ -121,7 +140,7 @@ class ModelConductInterviewManagement extends CI_Model{
         try {
             $this->db->set($data);
             $this->db->where('id', $id);
-            $update = $this->db->update($this->interviewConductTbl);
+            $update = $this->db->update($this->interviewPsptTbl);
 
             if($update){
                 return true;
@@ -134,14 +153,10 @@ class ModelConductInterviewManagement extends CI_Model{
         }
     }
 
-
-
-
-
     function isanswered($reqnum,$username,$applicantcode){
         try {
             $this->db->select('*');
-            $this->db->from($this->biAssesstbl);
+            $this->db->from($this->interviewAssesstbl);
             $this->db->where('assessedby',$username);
             $this->db->where('requestnumber',$reqnum);
             $this->db->where('applicantcode',$applicantcode);
@@ -157,9 +172,27 @@ class ModelConductInterviewManagement extends CI_Model{
         }
     }
 
+    function isbi($reqnum,$username,$applicantcode){
+        try {
+            $this->db->select('*');
+            $this->db->from('tblapplicant');
+            $this->db->where('applicantcode',$applicantcode);
+            $this->db->where('isbi','YES');
+            $query = $this->db->get();
+            if($query->num_rows() > 0){
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
     public function delete($id) {
         try {
-            $delete = $this->db->query("delete from tblconductbi where id='".$id."'");
+            $delete = $this->db->query("delete from tblinterviewpspt where id='".$id."'");
             if($delete){
                 return true;
             }else{
