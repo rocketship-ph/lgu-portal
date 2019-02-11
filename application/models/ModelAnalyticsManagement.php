@@ -97,5 +97,21 @@ class ModelAnalyticsManagement extends CI_Model{
         }
     }
 
+    function getrequestforvacantposition(){
+        try {
+            $query = $this->db->query("select * from csc_requestforvacantposition order by position");
+
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
 
 }

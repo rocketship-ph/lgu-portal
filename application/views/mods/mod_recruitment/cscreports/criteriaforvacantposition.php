@@ -169,11 +169,11 @@
     function check(data){
         var str = data;
         if (data.toUpperCase().indexOf("GRADUATE") >= 0)
-            str = '<textarea class="form-control textarea">'+data+'</textarea>';
+            str = '<span id="labelEducation" style="display:none"></span><textarea class="form-control textarea">'+data+'</textarea>';
         else if (data.toUpperCase().indexOf("COLLEGE") >= 0)
-            str = '<textarea class="form-control textarea">'+data+'</textarea>';
+            str = '<span id="labelEducation" style="display:none"></span><textarea class="form-control textarea">'+data+'</textarea>';
         else if (data.toUpperCase().indexOf("YES") >= 0)
-            str = '<textarea class="form-control textarea1">'+data+'</textarea>';
+            str = '<span id="labelEligibility" style="display:none"></span><textarea class="form-control textarea1">'+data+'</textarea>';
         else if (data.toUpperCase().indexOf("NO") >= 0)
             str = 'None required';
 
@@ -191,12 +191,23 @@
             $(".textarea").removeClass('error');
             $(".textarea1").removeClass('form-control');
             $(".textarea1").removeClass('error');
+            $(".textarea").hide();
+            $(".textarea1").hide();
+            $("#labelEducation").show();
+            $("#labelEligibility").show();
+            $("#labelEducation").text( $(".textarea").val());
+            $("#labelEligibility").text( $(".textarea1").val());
+
             $("#containerPrint").print({
-                prepend: '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table><br>'
+                prepend: '<table align="center"><tr><td width="20%" valign="top"><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="60%"><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td width="20%"></td></tr></table><br>'
             });
             $("#printTitle").hide();
             $(".textarea").addClass('form-control');
             $(".textarea1").addClass('form-control');
+            $(".textarea").show();
+            $(".textarea1").show();
+            $("#labelEducation").hide();
+            $("#labelEligibility").hide();
         }
 
     });

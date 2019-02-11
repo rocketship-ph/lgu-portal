@@ -147,11 +147,11 @@
                     '  <tr>' +
                     '    <td valign="top"><b>'+res.details[key].position+'</b><br><br><b>'+res.details[key].office+'</b></td>' +
                     '    <td valign="top">'+res.details[key].salarygrade+' / P'+res.details[key].salaryequivalent+'</td>' +
-                    '    <td><textarea rows="9"  id="labelItemNo" class="form-control"></textarea></td>' +
-                    '    <td><textarea rows="9" id="labelEducation" class="form-control">'+res.details[key].education+'</textarea></td>' +
-                    '    <td><textarea rows="9"  id="labelExperience" class="form-control">'+res.details[key].experience+'</textarea></td>' +
-                    '    <td><textarea rows="9" id="labelTraining" class="form-control">'+res.details[key].training+'</textarea></td>' +
-                    '    <td><textarea rows="9"  id="labelEligibility" class="form-control">'+res.details[key].eligibility+'</textarea></td>' +
+                    '    <td><span id="labelItemNox" style="display:none"></span><textarea id="labelItemNo" class="form-control"></textarea></td>' +
+                    '    <td><span id="labelEducationx" style="display:none"></span><textarea id="labelEducation" class="form-control">'+res.details[key].education+'</textarea></td>' +
+                    '    <td><span id="labelExperiencex" style="display:none"></span><textarea id="labelExperience" class="form-control">'+res.details[key].experience+'</textarea></td>' +
+                    '    <td><span id="labelTrainingx" style="display:none"></span><textarea id="labelTraining" class="form-control">'+res.details[key].training+'</textarea></td>' +
+                    '    <td><span id="labelEligibilityx" style="display:none"></span><textarea id="labelEligibility" class="form-control">'+res.details[key].eligibility+'</textarea></td>' +
                     '  </tr>' +
                     '  <tr>' +
                     '    <td colspan="2"><b>Brief description of the General Function</b></td>' +
@@ -239,11 +239,37 @@
             $("#labelExperience").removeClass('error');
             $("#labelTraining").removeClass('error');
             $("#printTitle").show();
+            $("#labelItemNo").hide();
+            $("#labelEligibility").hide();
+            $("#labelEducation").hide();
+            $("#labelExperience").hide();
+            $("#labelTraining").hide();
+            $("#labelItemNox").text( $("#labelItemNo").val());
+            $("#labelEligibilityx").text($("#labelEligibility").val());
+            $("#labelEducationx").text($("#labelEducation").val());
+            $("#labelExperiencex").text( $("#labelExperience").val());
+            $("#labelTrainingx").text($("#labelTraining").val());
+            $("#labelItemNox").show();
+            $("#labelEligibilityx").show();
+            $("#labelEducationx").show();
+            $("#labelExperiencex").show();
+            $("#labelTrainingx").show();
             $("#containerPrint").print({
-                prepend: '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table>'
+                prepend: '<table align="center"><tr><td width="20%" valign="top"><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="60%"><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td width="20%"></td></tr></table><br>'
             });
             $("#printTitle").hide();
             $("#printTitle").show();
+
+            $("#labelItemNo").show();
+            $("#labelEligibility").show();
+            $("#labelEducation").show();
+            $("#labelExperience").show();
+            $("#labelTraining").show();
+            $("#labelItemNox").hide();
+            $("#labelEligibilityx").hide();
+            $("#labelEducationx").hide();
+            $("#labelExperiencex").hide();
+            $("#labelTrainingx").hide();
         }
 
     });

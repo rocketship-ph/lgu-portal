@@ -50,4 +50,8 @@ class Cscreports extends CI_Controller {
         $data = array('content'=>'mods/mod_recruitment/cscreports/individualapplicantprofile');
         $this->load->view('templates/MasterTemplate',$data);
     }
+    public function requestforvacantposition() {
+        $data = array('content'=>'mods/mod_recruitment/cscreports/requestforvacantposition');
+        $this->load->view('templates/MasterTemplate',$data);
+    }
 }
