@@ -4,7 +4,7 @@ class ModelApplicantInterviewManagement extends CI_Model{
         $this->examTbl = 'tblexamination';
         $this->ansTbl = 'tblexamanswers';
         $this->interviewTbl = 'tblinterviewquestions';
-        $this->interviewConductTbl = 'tblconductinterview';
+        $this->interviewPsptTbl = 'tblinterviewpspt';
     }
 
     function getRequestnumbers(){
@@ -104,8 +104,8 @@ class ModelApplicantInterviewManagement extends CI_Model{
     function isanswered($reqnum,$username){
         try {
             $this->db->select('*');
-            $this->db->from($this->interviewConductTbl);
-            $this->db->where('conductedby',$username);
+            $this->db->from($this->interviewPsptTbl);
+//            $this->db->where('evaluator',$username);
             $this->db->where('requestnumber',$reqnum);
             $query = $this->db->get();
             if($query->num_rows() > 0){

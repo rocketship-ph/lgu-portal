@@ -151,7 +151,7 @@ class ApplicantInterviewManagement extends CI_Controller {
         } else {
             $result = json_encode(array(
                 'Code' => '99',
-                'Message' => 'Background investigation for this request number has started thus, further changes are prohibited.'
+                'Message' => 'Applicant Interview for this request number has started thus, further changes are prohibited.'
             ));
         }
         echo $result;

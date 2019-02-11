@@ -250,7 +250,7 @@ class ConductInterviewManagement extends CI_Controller {
         } else {
             $result = json_encode(array(
                 'Code' => '99',
-                'Message' => 'Background investigation for applicant '.$applicantcode.' under request number: '.$reqnum.' has started thus, further changes are prohibited.'
+                'Message' => 'Background investigation for applicant '.$applicantcode.' under request number: '.$reqnum.' has started thus, further changes to PSPT rating are prohibited.'
             ));
         }
         echo $result;
