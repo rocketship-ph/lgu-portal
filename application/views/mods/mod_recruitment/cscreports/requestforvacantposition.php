@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-md-12">
                     <h5 id="tblmsg1" style="display:none"></h5>
-                    <div class="table-responsive" id="containerPrint">
+                    <div class="table-responsive" id="containerPrint" style="display: none">
                         <div id="container">
                             <h5><b>To: CIVIL SERVICE COMMISSION (CSC)</b></h5>
                             <h5>&nbsp;&nbsp;&nbsp;&nbsp;This is to request the publication of the following vacant positions of the Local Government Unit of Carmona, Cavite in the CSC website.</h5>
@@ -107,6 +107,7 @@
     });
     var resx = null;
     function loadReport() {
+        $('#loadingmodal').modal('show');
         var select = $("#reqnum");
         select.empty();
         $.ajax({
@@ -116,6 +117,8 @@
             success: function(result){
                 console.log(result);
                 if(result.Code === "00"){
+                    $("#containerPrint").show();
+                    $('#loadingmodal').modal('hide');
                     $("#exportPDF").show();
                     $("#tbldata").append('<tr>' +
                         '    <th rowspan="2"><b>No.</b></th>' +
@@ -152,9 +155,15 @@
                             '</tr>');
                     }
                     $("#tbldata").append('<tr><td colspan="11" style="text-align: center">xxxxxxxxx nothing follows xxxxxxxxx</td></tr>');
+                } else {
+                    $('#loadingmodal').modal('hide');
+                    $("#containerPrint").hide();
+                    $("#tblmsg1").text("No Data Found");
+                    $("#tblmsg1").show();
                 }
             },
             error: function(e){
+                $('#loadingmodal').modal('hide');
                 console.log(e);
             }
         });
@@ -172,7 +181,7 @@
         var str = "";
         for(var h=0; h < Object.keys(groupedByType).length;h++){
             var type = groupedByType[Object.keys(groupedByType)[h]];
-            str += "<b>"+Object.keys(groupedByType)[h]+"COMPETENCIES"+"</b><br>";
+            str += "<b>"+Object.keys(groupedByType)[h]+" COMPETENCIES"+"</b><br>";
             for(var i = 0; i < type.length; i++){
                 if((i+1)===type.length){
                     str+=type[i].title+"<br>";

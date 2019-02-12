@@ -214,6 +214,7 @@
         </div>
     </div>
     <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCPROFILEOFAPPLICANTS'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -225,6 +226,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCINDIVIDUALPROFILEOFAPPLICANTS'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -236,6 +239,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCCOMPETENCYREQUIREMENTPERPOSITION'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -247,6 +252,8 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCREQUESTFORVACANTPOSITION'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">
             <div class="panel-body" align="center">
@@ -258,7 +265,7 @@
             </div>
         </div>
     </div>
-
+    <?php endif;?>
 
 </div>
 

@@ -252,19 +252,23 @@ function displayAll(data,type){
     var str ="";
     switch (type){
         case "EDUCATION":
-            var college = JSON.parse(data.college);
-            var vocational  = JSON.parse(data.vocational);
-            var graduate  = JSON.parse(data.graduate);
-            if(vocational.school!==""){
-                str += isEmpty(vocational.degree) + "<br>" + isEmpty(vocational.school)+ "<br><br>";
+            try {
+                var college = JSON.parse(data.college);
+                var vocational = JSON.parse(data.vocational);
+                var graduate = JSON.parse(data.graduate);
+                if (vocational.school !== "") {
+                    str += isEmpty(vocational.degree) + "<br>" + isEmpty(vocational.school) + "<br><br>";
+                }
+                if (college.school !== "") {
+                    str += isEmpty(college.degree) + "<br>" + isEmpty(college.school) + "<br><br>";
+                }
+                if (graduate.school !== "") {
+                    str += isEmpty(graduate.degree) + "<br>" + isEmpty(graduate.school) + "<br><br>";
+                }
+            }catch(e){
+                console.log(e);
+                str = "NO AVAILABLE INFORMATION";
             }
-            if(college.school!==""){
-                str += isEmpty(college.degree) + "<br>" + isEmpty(college.school)+ "<br><br>";
-            }
-            if(graduate.school!==""){
-                str += isEmpty(graduate.degree) + "<br>" + isEmpty(graduate.school)+ "<br><br>";
-            }
-
             break;
         case "ELIGIBILITY":
             try {
@@ -279,11 +283,15 @@ function displayAll(data,type){
 
             break;
         case "WORKEXPERIENCE":
-            var work = JSON.parse(data.workexperience);
-            for(var key in work){
-                str += "<b>"+isEmpty(work[key].position)+"</b><br>"+isEmpty(work[key].company) + "<br>" + isEmpty(work[key].fromdate) + "-" + isEmpty(work[key].todate) + "<br><br>";
+            try {
+                var work = JSON.parse(data.workexperience);
+                for (var key in work) {
+                    str += "<b>" + isEmpty(work[key].position) + "</b><br>" + isEmpty(work[key].company) + "<br>" + isEmpty(work[key].fromdate) + "-" + isEmpty(work[key].todate) + "<br><br>";
+                }
+            } catch(e){
+                console.log(e);
+                str = "NO AVAILABLE INFORMATION";
             }
-
             break;
         case "TRAINING":
             var training = JSON.parse(data.training);
