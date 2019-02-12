@@ -399,6 +399,19 @@
             </div>
         </div>
     <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_NOPDSREPORT'],$this->session->userdata('modules'))):?>
+        <div class="form-group col-md-3">
+            <div class="panel">
+                <div class="panel-body" align="center">
+                    <a style="text-align: center" href="<?php echo base_url();?>reports/employeenopds">
+                        <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                        <br><br>
+                        List of Employee With No PDS Data
+                    </a>
+                </div>
+            </div>
+        </div>
+    <?php endif;?>
 <?php endif;?>
 
 <?php if(array_intersect($GLOBALS['NAVBIREPORTSMGT'],$this->session->userdata('modules'))):?>

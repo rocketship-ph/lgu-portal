@@ -79,10 +79,6 @@
                                 <option value="GRADUATE">Graduate School</option>
                             </select>
                         </div>
-                        <div class="col-md-6 form-group divPrint" align="right" style="padding-top: 5px;display: none">
-                            <br>
-                            <button class="btn btn-success" id="btnPrint"><i class="fa fa-print"></i>&nbsp;Print</button>
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-12" id="divPrint">
@@ -163,7 +159,7 @@
                     "EDUCATION":data
                 },
                 dataSrc: function (json) {
-                    console.log(json);
+                    console.log(json.details.length);
                     if (json.Code == "00") {
                         $('#loadingmodal').modal('hide');
                         $('#tblcont1').show();
@@ -272,7 +268,28 @@
                     return p;
                 }}
             ],
-            "sDom": 't'
+            "sDom": 'Blfrtip',
+            "buttons": [
+                {
+                    extend: 'print',
+                    autoPrint: true,
+                    message: moment().format("MMM DD YYYY hh:mm:ss A"),
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '10pt');
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                        $(win.document.body).find('h1')
+                            .text('Employee List Based on Educational Level - '+$("#education option:selected").val())
+                            .css('font-size', '12pt');
+                        $(win.document.body)
+                            .prepend( '<table align="center"><tr><td><img style="height: 100px;width: 100px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="10px"></td><td><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h4 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h4></p></td><td witdh="100px"></td></tr></table><br><br>');
+                        $(win.document.body)
+                            .append($("#divGraph").html());
+                    }
+                }
+            ]
         });
     }
         function composeData(items, prop) {

@@ -743,4 +743,23 @@ public function examcompetencyrequestnumbers()
         }
         echo $result;
     }
+
+
+    public function employeenopds()
+    {
+        $data = $this->ModelReportGenerationManagement->getEmployeenopds();
+        if($data){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $data
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
 }

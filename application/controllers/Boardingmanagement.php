@@ -27,27 +27,46 @@ class BoardingManagement extends CI_Controller {
         echo $result;
     }
 
-    public function boardapplicant(){
-        $applicantcode = $_REQUEST['APPLICANTCODE'];
-        $permanentid = $_REQUEST['PERMANENTID'];
-        $data = array(
-            'isboarding'=>'YES',
-            'permanentid'=>$permanentid
-        );
-        $existingid = $this->ModelBoardingManagement->checkExistingId($permanentid);
-        if($existingid){
+
+    public function displayfocalperson(){
+        $focalperson = $this->ModelBoardingManagement->getFocalPerson($_REQUEST['DEPARTMENT']);
+        if($focalperson){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $focalperson
+            ));
+        }else{
             $result = json_encode(array(
                 'Code' => '99',
-                'Message' => 'Applicant Boarding Failed. The given Permanent ID: '.$permanentid.' is already assigned to another employee.'
+                'Message' => 'No Data Found'
             ));
-            echo $result;
-        } else {
-            $board = $this->ModelBoardingManagement->boardApplicant($data,$applicantcode);
+
+        }
+        echo $result;
+    }
+
+    public function boardapplicant(){
+        $applicantcode = $_REQUEST['APPLICANTCODE'];
+        $details = $_REQUEST['ORIENTATIONDETAILS'];
+        $data = array(
+            'isboarding'=>'YES',
+            'orientationdetails'=>$details
+        );
+
+        $board = $this->ModelBoardingManagement->boardApplicant($data,$applicantcode);
             if($board){
                 $result = json_encode(array(
                     'Code' => '00',
-                    'Message' => 'Successfully Assigned Permanent ID to '.$applicantcode
+                    'Message' => 'Successfully boarded applicant'
                 ));
+                $auditdata = array(
+                    'modulename'=>'Applicant Boarding Module',
+                    'action'=>'Onboard/Orient Newly-Hired Employee ['.$applicantcode.']',
+                    'user'=>$this->session->userdata('username'),
+                    'ipaddress'=> $_SERVER['REMOTE_ADDR']
+                );
+                $audit = $this->ModelAuditTrail->insert($auditdata);
             }else{
                 $result = json_encode(array(
                     'Code' => '99',
@@ -56,7 +75,30 @@ class BoardingManagement extends CI_Controller {
 
             }
             echo $result;
-        }
+        //BAKA IPABALIK
+//        $existingid = $this->ModelBoardingManagement->checkExistingId($permanentid);
+//        if($existingid){
+//            $result = json_encode(array(
+//                'Code' => '99',
+//                'Message' => 'Applicant Boarding Failed. The given Permanent ID: '.$permanentid.' is already assigned to another employee.'
+//            ));
+//            echo $result;
+//        } else {
+//            $board = $this->ModelBoardingManagement->boardApplicant($data,$applicantcode);
+//            if($board){
+//                $result = json_encode(array(
+//                    'Code' => '00',
+//                    'Message' => 'Successfully Assigned Permanent ID to '.$applicantcode
+//                ));
+//            }else{
+//                $result = json_encode(array(
+//                    'Code' => '99',
+//                    'Message' => 'Applicant Boarding Failed'
+//                ));
+//
+//            }
+//            echo $result;
+//        }
 
     }
 

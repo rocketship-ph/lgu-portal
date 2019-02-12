@@ -832,7 +832,7 @@ function generateChart(data){
         }
 
         if($("#citymun option:selected").val() == "- Select City/Municipality -" || $("#citymun option:selected").val() == null){
-            messageDialogModal("Required","Please Select City/Municapality");
+            messageDialogModal("Required","Please Select City/Municipality");
             return false;
         }
 

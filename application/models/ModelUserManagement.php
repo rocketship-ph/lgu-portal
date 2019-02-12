@@ -86,10 +86,7 @@ class ModelUserManagement extends CI_Model{
 
     function getDepartments(){
         try {
-            $this->db->select('*');
-            $this->db->from($this->departmentsTbl);
-            $query = $this->db->get();
-
+            $query = $this->db->query("select * from tbldepartments order by department asc");
             if($query){
                 $result = $query->result_array();
                 return $result;

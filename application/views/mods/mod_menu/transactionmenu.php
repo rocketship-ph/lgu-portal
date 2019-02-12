@@ -51,6 +51,33 @@
             </div>
         </div>
         <?php endif; ?>
+<!--        --><?php //if(array_intersect($GLOBALS['NAVINTERVIEW_MGT'],$this->session->userdata('modules'))):?>
+        <?php if ($this->session->userdata('userlevel') != 'TEMPORARY'):?>
+            <div class="form-group col-md-3">
+                <div class="panel">
+                    <div class="panel-body" align="center">
+                        <a style="text-align: center" href="<?php echo base_url();?>transaction/interviewmenu">
+                            <img src="<?php echo base_url();?>assets/img/icons/applicant_interview.png" height="100px">
+                            <br><br>
+                            Applicant Interview
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if(in_array($GLOBALS['NAV_ETE'],$this->session->userdata('modules'))):?>
+            <div class="form-group col-md-3">
+                <div class="panel">
+                    <div class="panel-body" align="center">
+                        <a style="text-align: center" href="<?php echo base_url();?>transaction/ete">
+                            <img src="<?php echo base_url();?>assets/img/icons/ete.png" height="82px">
+                            <br> <br>
+                            Education, Training, Experience (ETE)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
         <?php if(array_intersect($GLOBALS['NAVBI_MGT'],$this->session->userdata('modules'))):?>
         <div class="form-group col-md-3">
             <div class="panel">
@@ -64,19 +91,6 @@
             </div>
         </div>
         <?php endif; ?>
-        <?php if(in_array($GLOBALS['NAV_BOARDING'],$this->session->userdata('modules'))):?>
-        <div class="form-group col-md-3">
-            <div class="panel">
-                <div class="panel-body" align="center">
-                    <a style="text-align: center" href="<?php echo base_url();?>transaction/boarding">
-                        <img src="<?php echo base_url();?>assets/img/icons/boarding.png" height="100px">
-                        <br><br>
-                        Boarding
-                    </a>
-                </div>
-            </div>
-        </div>
-        <?php endif; ?>
         <?php if($this->session->userdata('userlevel') == 'HRMANAGER'):?>
             <div class="form-group col-md-3">
                 <div class="panel">
@@ -85,6 +99,19 @@
                             <img src="<?php echo base_url();?>assets/img/icons/data_sheet.png" height="100px">
                             <br><br>
                             Requirements Checklist
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if(in_array($GLOBALS['NAV_BOARDING'],$this->session->userdata('modules'))):?>
+            <div class="form-group col-md-3">
+                <div class="panel">
+                    <div class="panel-body" align="center">
+                        <a style="text-align: center" href="<?php echo base_url();?>transaction/boarding">
+                            <img src="<?php echo base_url();?>assets/img/icons/boarding.png" height="100px">
+                            <br><br>
+                            Boarding
                         </a>
                     </div>
                 </div>

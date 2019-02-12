@@ -451,4 +451,16 @@ public function qualifiedemployees()
     }
 
 
+public function employeenopds()
+    {
+//        if(in_array($GLOBALS['NAV_CREATEREQUESTPERSONNEL'],$this->session->userdata('modules'))){
+//            $data = array('content'=>'mods/mod_rsp/mod_recruitment/requestnewpersonnel');
+//        } else {
+//            $data = array('content'=>'mods/unauthorizedpage');
+//        }
+        $data = array('content'=>'mods/mod_recruitment/report_generation/pds/employeenopds');
+        $this->load->view('templates/MasterTemplate',$data);
+    }
+
+
 }

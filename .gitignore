@@ -9,3 +9,9 @@
 application/logs/log-2019-01-27.php
 application/logs/log-2019-01-27.php
 application/logs/log-2019-01-30.php
+application/config/database.php
+application/config/config.php
+application/config/email.php
+application/logs/log-2019-02-03.php
+application/logs/log-2019-02-04.php
+application/logs/log-2019-02-05.php
