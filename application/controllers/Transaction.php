@@ -95,5 +95,16 @@ class Transaction extends CI_Controller {
         $this->load->view('templates/MasterTemplate',$data);
     }
 
+ public function pmsrating()
+    {
+        if(in_array($GLOBALS['NAV_PMSPERFORMANCERATING'],$this->session->userdata('modules'))){
+//        if($this->session->userdata('userlevel') != 'TEMPORARY'){
+            $data = array('content'=>'mods/mod_recruitment/transaction/pmsrating');
+        } else {
+            $data = array('content'=>'mods/unauthorizedpage');
+        }
+        $this->load->view('templates/MasterTemplate',$data);
+    }
+
 
 }

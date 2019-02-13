@@ -78,6 +78,19 @@
                 </div>
             </div>
         <?php endif; ?>
+        <?php if(in_array($GLOBALS['NAV_PMSPERFORMANCERATING'],$this->session->userdata('modules'))):?>
+            <div class="form-group col-md-3">
+                <div class="panel">
+                    <div class="panel-body" align="center">
+                        <a style="text-align: center" href="<?php echo base_url();?>transaction/pmsrating">
+                            <img src="<?php echo base_url();?>assets/img/icons/pmsperformance.png" height="82px">
+                            <br> <br>
+                            Performance Rating (Internal Applicants)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
         <?php if(array_intersect($GLOBALS['NAVBI_MGT'],$this->session->userdata('modules'))):?>
         <div class="form-group col-md-3">
             <div class="panel">
