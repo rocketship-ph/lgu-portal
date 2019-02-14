@@ -93,6 +93,19 @@
     <div class="col-md-12">
         <legend>Workforce Profile</legend>
     </div>
+    <?php if(in_array($GLOBALS['NAV_CSCCOMPARATIVEASSESSMENT'],$this->session->userdata('modules'))):?>
+        <div class="form-group col-md-3">
+            <div class="panel">
+                <div class="panel-body" align="center">
+                    <a style="text-align: center" href="<?php echo base_url();?>cscreports/comparativeassessment">
+                        <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                        <br><br>
+                        Comparative Assessment
+                    </a>
+                </div>
+            </div>
+        </div>
+    <?php endif;?>
     <?php if(in_array($GLOBALS['NAV_CSCEMPLOYMENTSTATUS'],$this->session->userdata('modules'))):?>
     <div class="form-group col-md-3">
         <div class="panel">

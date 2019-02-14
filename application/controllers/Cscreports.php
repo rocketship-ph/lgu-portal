@@ -54,4 +54,9 @@ class Cscreports extends CI_Controller {
         $data = array('content'=>'mods/mod_recruitment/cscreports/requestforvacantposition');
         $this->load->view('templates/MasterTemplate',$data);
     }
+
+    public function comparativeassessment() {
+        $data = array('content'=>'mods/mod_recruitment/cscreports/comparativeassessment');
+        $this->load->view('templates/MasterTemplate',$data);
+    }
 }
