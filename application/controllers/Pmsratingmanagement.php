@@ -129,7 +129,7 @@ class PmsRatingManagement extends CI_Controller {
         if($board){
             $result = json_encode(array(
                 'Code' => '00',
-                'Message' => 'Successfully updated Performance Rating for applicant '.$applicantcode
+                'Message' => 'Successfully deleted Performance Rating for applicant '.$applicantcode
             ));
             $auditdata = array(
                 'modulename'=>'Performance Rating Module',
