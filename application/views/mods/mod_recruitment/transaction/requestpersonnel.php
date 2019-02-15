@@ -358,7 +358,7 @@
                     }
                     select.val("<?php echo $this->session->userdata('department')?>");
                     if(select.val() == "<?php echo $this->session->userdata('department')?>"){
-                        select.prop("disabled",true);
+                        select.prop("disabled",false);
                     } else {
                         select.prop("disabled",false);
 
