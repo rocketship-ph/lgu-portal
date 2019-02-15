@@ -41,7 +41,7 @@ class ModelAssessBiManagement extends CI_Model{
 
     function getApplicants($reqnum,$username){
         try {
-            $statement = "select u.firstname,u.middlename,u.lastname,u.userlevel,a.* from tblusers u inner join tblapplicant a on u.username=a.username where a.requestnumber in (select requestnumber from tblconductbi where requestnumber='".$reqnum."' and encodedby='".$username."') and a.applicantcode in (select distinct applicantcode from tblconductbi) and a.isqualified='YES';";
+            $statement = "select u.firstname,u.middlename,u.lastname,u.userlevel,a.* from tblusers u inner join tblapplicant a on u.username=a.username where a.requestnumber in (select requestnumber from tblconductbi where requestnumber='".$reqnum."' and encodedby='".$username."') and a.applicantcode in (select distinct applicantcode from tblconductbi) and a.forbi='YES';";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();

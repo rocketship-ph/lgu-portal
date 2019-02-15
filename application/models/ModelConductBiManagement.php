@@ -9,7 +9,7 @@ class ModelConductBiManagement extends CI_Model{
     function getRequestnumbers(){
         try {
 
-            $statement = "select distinct requestnumber from tblbi order by requestnumber desc;";
+            $statement = "select distinct requestnumber from tblapplicant where forbi='YES' order by requestnumber desc;";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
@@ -56,7 +56,7 @@ class ModelConductBiManagement extends CI_Model{
 
     function getApplicants($reqnum){
         try {
-            $statement = "select u.firstname,u.middlename,u.lastname,u.userlevel,a.* from tblusers u inner join tblapplicant a on u.username=a.username where a.requestnumber='".$reqnum."' and a.isqualified='YES' and a.applicantcode not in (select applicantcode from tblbiassessment);";
+            $statement = "select u.firstname,u.middlename,u.lastname,u.userlevel,a.* from tblusers u inner join tblapplicant a on u.username=a.username where a.requestnumber='".$reqnum."' and a.forbi='YES' and a.applicantcode not in (select applicantcode from tblbiassessment);";
             $query = $this->db->query($statement);
             if($query){
                 $result = $query->result_array();
