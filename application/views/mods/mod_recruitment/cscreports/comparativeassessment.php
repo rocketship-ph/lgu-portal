@@ -274,7 +274,25 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo $GLOBALS['googlecharts'];?>"></script>
+<div class="modal fade bs-example-modal-sm" id="modalConfirm" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content ">
+            <div class="modal-body">
+                <legend>Confirmation</legend>
+
+                <div class="form-group">
+                    <input type="hidden" id="appcode">
+                    <input type="hidden" id="reqnum">
+                    <label class="control-label">Are you sure you want to subject applicant <b id="appname"></b> for background investigation?</label>
+                </div>
+                <div align="right">
+                    <input type="button" class="btn btn-success" id="btnProceedBi" value="YES, PROCEED">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal"  value="CANCEL">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="application/javascript">
 $(document).ready(function(){
     $("#nav_recruitment_reports").removeClass().addClass("active");
@@ -354,7 +372,7 @@ $("#requestnumber").change(function(){
                             isinternal= false;
                         }
                         internal +='<tr>' +
-                        '<td class="name-area">'+label+'<a class="clickhandler" requestnumber="'+result.details[keys].requestnumber+'" applicantcode="'+result.details[keys].applicantcode+'">'+name+'</a></td>' +
+                        '<td class="name-area">'+label+'<a class="clickhandler" applicantname="'+name+'" requestnumber="'+result.details[keys].requestnumber+'" applicantcode="'+result.details[keys].applicantcode+'">'+name+'</a></td>' +
                         '<td class="center-text">'+result.details[keys].performancerating+'</td>' +
                         '<td class="center-text">'+result.details[keys].performanceeps+'</td>' +
                         '<td class="center-text">'+result.details[keys].eterating+'</td>' +
@@ -378,7 +396,7 @@ $("#requestnumber").change(function(){
                             isexternal=false;
                         }
                         external +='<tr>' +
-                        '<td class="name-area">'+label+'<a class="clickhandler" requestnumber="'+result.details[keys].requestnumber+'" applicantcode="'+result.details[keys].applicantcode+'">'+name+'</a></td>' +
+                        '<td class="name-area">'+label+'<a class="clickhandler" applicantname="'+name+'" requestnumber="'+result.details[keys].requestnumber+'" applicantcode="'+result.details[keys].applicantcode+'">'+name+'</a></td>' +
                         '<td colspan="2"></td>' +
                         '<td class="center-text">'+result.details[keys].eterating+'</td>' +
                         '<td class="center-text">'+result.details[keys].eteeps+'</td>' +
@@ -457,10 +475,43 @@ $("#requestnumber").change(function(){
     });
 });
 
+$(document).on("click",".clickhandler",function(){
+    $("#reqnum").val($(this).attr("requestnumber"));
+    $("#appcode").val($(this).attr("applicantcode"));
+    $("#appname").text($(this).attr("applicantname"));
+    $("#modalConfirm").modal("show");
+
+});
+
+$("#btnProceedBi").click(function(){
+    $("#modalConfirm").modal("hide");
+    $("#loadingmodal").modal("show");
+    $.ajax({
+        url: "<?php echo base_url();?>comparativeassessmentmanagement/forbi",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "REQUESTNUMBER":$("#reqnum").val(),
+            "APPLICANTCODE":$("#appcode").val(),
+            "APPLICANTNAME":$("#appname").text()
+        },
+        success: function(result){
+            $("#loadingmodal").modal("hide");
+            if(result.Code == "00"){
+                messageDialogModal("Server Message",result.Message);
+            } else {
+                messageDialogModal("Server Message",result.Message);
+            }
+        },
+        error: function(e){
+            console.log(e);
+        }
+    });
+});
 
 $('#exportPDF').click(function(){
     $("#divPrint").print({
-        prepend: '<table align="center"><tr><td width="20%" valign="top"><img style="height: 90px;width: 90px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="70%"><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h5 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h5></p></td><td width="20%"></td></tr></table><hr>',
+        prepend: '<table align="center"><tr><td width="20%" valign="top"><img style="height: 90px;width: 90px" src="data:image/png;base64,<?php echo $this->session->userdata('logo'); ?>" ></td><td width="70%"><p align="center">Republic of the Philippines<br>Province of Cavite<br><b>MUNICIPALITY OF CARMONA</b><br><h5 align="center">HUMAN RESOURCE MANAGEMENT OFFICE</h5></p></td><td width="20%"></td></tr></table><hr><span style="float:right;font-size: 9pt;">'+moment().format("MMM DD YYYY hh:mm:ss A")+'</span>',
         noPrintSelector: ".excludePrint"
     });
 });

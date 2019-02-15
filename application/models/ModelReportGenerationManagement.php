@@ -352,7 +352,7 @@ class ModelReportGenerationManagement extends CI_Model{
     }
     function getbiassessmentrequestnumbers(){
         try {
-            $statement = "select distinct e.requestnumber,p.name as position,p.groupposition,p.groupdesc from tblbiassessment e inner join tblpersonnelrequest r on e.requestnumber=r.requestnumber inner join tblposition p on r.positioncode=p.positioncode order by requestnumber asc";
+            $statement = "select distinct e.requestnumber,p.name as position,p.groupposition,p.groupdesc from tblbiassessment e inner join tblpersonnelrequest r on e.requestnumber=r.requestnumber inner join tblposition p on r.positioncode=p.positioncode order by requestnumber desc";
 
             $query = $this->db->query($statement);
             if($query){

@@ -66,108 +66,40 @@ class ComparativeAssessmentManagement extends CI_Controller {
         echo $result;
     }
 
-    public function submit(){
+    public function forbi(){
         $applicantcode = $_REQUEST['APPLICANTCODE'];
         $reqnum = $_REQUEST['REQUESTNUMBER'];
-        $total = $_REQUEST['RATING'];
-        $eps = floatval($total)*.10;
-        $data = array(
-            'applicantcode'=>$applicantcode,
-            'evaluator'=>$this->session->userdata('username'),
-            'rating'=>$total,
-            'eps'=>$eps,
-            'requestnumber'=>$reqnum
-        );
+        $appname = $_REQUEST['APPLICANTNAME'];
 
-        $board = $this->ModelComparativeAssessmentManagement->insert($data);
-        if($board){
-            $result = json_encode(array(
-                'Code' => '00',
-                'Message' => 'Successfully submitted Potential Rating for internal applicant '.$applicantcode
-            ));
-            $auditdata = array(
-                'modulename'=>'Potential Rating Module',
-                'action'=>'Submit Potential Rating for Internal Applicant: '.$applicantcode,
-                'user'=>$this->session->userdata('username'),
-                'ipaddress'=> $_SERVER['REMOTE_ADDR']
-            );
-            $audit = $this->ModelAuditTrail->insert($auditdata);
-        }else{
-            $result = json_encode(array(
-                'Code' => '99',
-                'Message' => 'Potential Rating Failed'
-            ));
 
+        $exists = $this->ModelComparativeAssessmentManagement->checkRecord($applicantcode);
+        if($exists){
+            $result = json_encode(array(
+                'Code' => '01',
+                'Message' => 'Applicant '.$appname.' is already submitted for background investigation'
+            ));
+        } else {
+            $forbi = $this->ModelComparativeAssessmentManagement->forBackground($applicantcode);
+            if($forbi){
+                $result = json_encode(array(
+                    'Code' => '00',
+                    'Message' => 'Successfully submitted applicant '.$appname.' for background investigation'
+                ));
+                $auditdata = array(
+                    'modulename'=>'Comparative Assessment Module',
+                    'action'=>'Submit Applicant: '.$applicantcode.' for background investigation',
+                    'user'=>$this->session->userdata('username'),
+                    'ipaddress'=> $_SERVER['REMOTE_ADDR']
+                );
+                $audit = $this->ModelAuditTrail->insert($auditdata);
+            }else{
+                $result = json_encode(array(
+                    'Code' => '99',
+                    'Message' => 'Submission for background investigation failed'
+                ));
+
+            }
         }
         echo $result;
-
     }
-
-    public function update(){
-        $id = $_REQUEST['ROWID'];
-        $applicantcode = $_REQUEST['APPLICANTCODE'];
-        $reqnum = $_REQUEST['REQUESTNUMBER'];
-        $total = $_REQUEST['RATING'];
-        $eps = floatval($total)*.10;
-        $data = array(
-            'applicantcode'=>$applicantcode,
-            'evaluator'=>$this->session->userdata('username'),
-            'rating'=>$total,
-            'eps'=>$eps,
-            'requestnumber'=>$reqnum
-        );
-
-        $board = $this->ModelComparativeAssessmentManagement->update($data,$id);
-        if($board){
-            $result = json_encode(array(
-                'Code' => '00',
-                'Message' => 'Successfully updated Potential Rating for internal applicant '.$applicantcode
-            ));
-            $auditdata = array(
-                'modulename'=>'Potential Rating Module',
-                'action'=>'Update Potential Rating for Internal Applicant: '.$applicantcode,
-                'user'=>$this->session->userdata('username'),
-                'ipaddress'=> $_SERVER['REMOTE_ADDR']
-            );
-            $audit = $this->ModelAuditTrail->insert($auditdata);
-        }else{
-            $result = json_encode(array(
-                'Code' => '99',
-                'Message' => 'Update of Potential rating Failed'
-            ));
-
-        }
-        echo $result;
-
-    }
-
-    public function delete(){
-        $id = $_REQUEST['ROWID'];
-        $applicantcode = $_REQUEST['APPLICANTCODE'];
-
-        $board = $this->ModelComparativeAssessmentManagement->delete($id);
-        if($board){
-            $result = json_encode(array(
-                'Code' => '00',
-                'Message' => 'Successfully delete Potential Rating for internal applicant '.$applicantcode
-            ));
-            $auditdata = array(
-                'modulename'=>'Potential Rating Module',
-                'action'=>'Delete Potential Rating for Internal Applicant: '.$applicantcode,
-                'user'=>$this->session->userdata('username'),
-                'ipaddress'=> $_SERVER['REMOTE_ADDR']
-            );
-            $audit = $this->ModelAuditTrail->insert($auditdata);
-        }else{
-            $result = json_encode(array(
-                'Code' => '99',
-                'Message' => 'Delete of Potetial rating Failed'
-            ));
-
-        }
-        echo $result;
-
-    }
-
-
 }

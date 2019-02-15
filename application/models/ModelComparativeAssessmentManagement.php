@@ -68,26 +68,10 @@ class ModelComparativeAssessmentManagement extends CI_Model{
         }
     }
 
-
-    public function update($data = array(),$rowid) {
+    public function checkRecord($appcode) {
         try {
-            $this->db->where('id',$rowid);
-            $query = $this->db->update($this->ratingTbl,$data);
-            if($query){
-                return true;
-            } else {
-                return false;
-            }
-        } catch(Exception $e){
-            log_message('error', $e);
-            return false;
-        }
-    }
-
-    public function delete($id) {
-        try {
-            $delete = $this->db->query("delete from tblpotentialrating where id='".$id."'");
-            if($delete){
+            $check = $this->db->query("select * from tblapplicant where applicantcode='".$appcode."' and (isbi='YES' || forbi='YES')");
+            if($check->num_rows() > 0){
                 return true;
             }else{
                 return false;
@@ -98,5 +82,18 @@ class ModelComparativeAssessmentManagement extends CI_Model{
         }
     }
 
+    public function forBackground($appcode) {
+        try {
+            $update = $this->db->query("update tblapplicant set forbi='YES' where applicantcode='".$appcode."'");
+            if($update){
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
 
 }
