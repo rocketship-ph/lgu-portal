@@ -10,7 +10,7 @@ class ModelEvaluatorSelectionManagement extends CI_Model{
             $delete = $this->db->query("delete from tblevaluators where requestnumber='".$reqnum."'");
             log_message('debug', "delete from tblevaluators where requestnumber='".$reqnum."'");
             if($delete){
-                $insert = $this->db->query("insert into tblevaluators (requestnumber,evaluatorname,evaluatorusername,userlevel,status,evalorder) values ".$data);
+                $insert = $this->db->query("insert into tblevaluators (requestnumber,evaluatorname,evaluatorusername,userlevel,status,evalorder,isadditional) values ".$data);
                 if($insert){
                     return true;
                 }else{
@@ -77,9 +77,9 @@ class ModelEvaluatorSelectionManagement extends CI_Model{
             $sql = "select * from(select firstname,middlename,lastname,userlevel,username,".
                 "(case when (userlevel='MUNICIPALHEAD') THEN '1'".
                 "when (userlevel='HRMANAGER') then '2'".
-                "end) as 'evalorder' from tblusers where userlevel in ('HRMANAGER','MUNICIPALHEAD') and status = '0' ".
-                "union select firstname,middlename,lastname,userlevel,username,'3' as 'evalorder' from tblusers ".
-                " where username in (select createdby from tblpersonnelrequest where requestnumber = '".$reqnum."')) ".
+                "end) as 'evalorder','NO' isadditional from tblusers where userlevel in ('HRMANAGER','MUNICIPALHEAD') and status = '0' ".
+                "union select firstname,middlename,lastname,userlevel,username,'3' as 'evalorder','NO' isadditional from tblusers ".
+                " where username in (select createdby from tblpersonnelrequest where requestnumber = '".$reqnum."' and createdby not in (select username from tblusers where userlevel='HRMANAGER'))) ".
                 "as evals order by evalorder asc;";
             $query = $this->db->query($sql);
 
@@ -97,7 +97,7 @@ class ModelEvaluatorSelectionManagement extends CI_Model{
 
     function existingevals($reqnum){
         try {
-            $query = $this->db->query("select u.firstname,u.middlename,u.lastname,u.userlevel,e.evalorder,u.username from tblusers u inner join tblevaluators e on u.username=e.evaluatorusername where e.requestnumber='".$reqnum."' order by e.evalorder asc;");
+            $query = $this->db->query("select u.firstname,u.middlename,u.lastname,u.userlevel,e.evalorder,u.username,e.isadditional from tblusers u inner join tblevaluators e on u.username=e.evaluatorusername where e.requestnumber='".$reqnum."' order by e.evalorder asc;");
 
             if($query){
                 $result = $query->result_array();

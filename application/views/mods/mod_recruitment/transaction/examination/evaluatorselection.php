@@ -101,7 +101,7 @@
                                 <ol>
                                     <li><h4 style="margin-bottom: 0px !important;" id="eval1"></h4><label>City/Municipal Mayor</label></li>
                                     <li><h4 style="margin-bottom: 0px !important;" id="eval2"></h4><span>HR Manager</span></li>
-                                    <li><h4 style="margin-bottom: 0px !important;" id="eval3"></h4><span>Requestor</span></li>
+                                    <li class="eval3"><h4 style="margin-bottom: 0px !important;" id="eval3"></h4><span>Requestor</span></li>
                                     <li style="margin-top: 9px !important;">
                                         <select order="4" class="form-control clearField" id="eval4">
                                             <option selected disabled>- Select Evaluator -</option>
@@ -109,6 +109,11 @@
                                     </li>
                                     <li style="margin-top: 9px !important;">
                                         <select order="5" class="form-control clearField" id="eval5">
+                                            <option selected disabled>- Select Evaluator -</option>
+                                        </select>
+                                    </li>
+                                    <li class="eval6" style="margin-top: 9px !important;display: none">
+                                        <select order="3" class="form-control clearField" id="eval6">
                                             <option selected disabled>- Select Evaluator -</option>
                                         </select>
                                     </li>
@@ -194,6 +199,7 @@
     }
 
     $("#requestNumber").change(function(){
+        window.hasthird = false;
         window.arrevaluators = [];
         $("#position").text($("#requestNumber option:selected").attr("position") + ", " + $("#requestNumber option:selected").attr("department") + " Department");
         $("#position").show();
@@ -212,29 +218,83 @@
                     $("#loadingmodal").modal("hide");
                     console.log(data);
                     if(data.details.length > 3){
+
                         $("#btnAdd").prop("disabled",true);
                         $("#btnEdit").prop("disabled",false);
                         $("#btnDelete").prop("disabled",false);
                         $("#btnSave").prop("disabled",true);
                         for(var keys in data.details){
                             var dt = data.details[keys];
-                            if(parseInt(dt.evalorder) == (parseInt(keys)+ 1)){
-                                if(parseInt(keys)+1 == 4 || parseInt(keys)+1 == 5){
-                                    $("#eval"+(parseInt(keys)+1)).prop("disabled",true);
-                                    $("#eval"+(parseInt(keys)+1)).val(""+dt.username);
+                            console.log(dt.isadditional);
+                            if(dt.isadditional == 'YES'){
+                                $(".eval3").hide();
+                                $(".eval6").show();
+                                window.hasthird = true;
+                                if(parseInt(dt.evalorder) == 3){
+                                    $("#eval6").prop("disabled",true);
+                                    $("#eval6").val(""+dt.username);
                                 } else {
-                                    $("#eval"+(parseInt(keys)+1)).text(dt.firstname + " " +dt.lastname);
+                                    if(parseInt(dt.evalorder) == (parseInt(keys)+ 1) && dt.evalorder != 3){
+                                        if(parseInt(keys)+1 == 4 || parseInt(keys)+1 == 5){
+                                            $("#eval"+(parseInt(keys)+1)).prop("disabled",true);
+                                            $("#eval"+(parseInt(keys)+1)).val(""+dt.username);
+                                        } else {
+                                            $("#eval"+(parseInt(keys)+1)).text(dt.firstname + " " +dt.lastname);
+                                        }
+                                    }
+                                }
+                            } else {
+                                $(".eval3").show();
+                                $(".eval6").hide();
+                                window.hasthird = false;
+                                if(parseInt(dt.evalorder) == (parseInt(keys)+ 1)){
+                                    if(parseInt(keys)+1 == 4 || parseInt(keys)+1 == 5){
+                                        $("#eval"+(parseInt(keys)+1)).prop("disabled",true);
+                                        $("#eval"+(parseInt(keys)+1)).val(""+dt.username);
+                                    } else {
+                                        $("#eval"+(parseInt(keys)+1)).text(dt.firstname + " " +dt.lastname);
+                                    }
                                 }
                             }
+
                             if(parseInt(keys) < 3){
                                 (window.arrevaluators).push({
                                     username: dt.username,
                                     userlevel:dt.userlevel,
                                     name: dt.firstname + " " + dt.lastname,
-                                    order: dt.evalorder
+                                    order: dt.evalorder,
+                                    isadditional: dt.isadditional
                                 });
                             }
                         }
+                        console.log("fedc");
+                        console.log(window.arrevaluators);
+                    } else if (data.details.length == 2) {
+                        window.hasthird = true;
+                        $("#btnAdd").prop("disabled",false);
+                        $("#btnEdit").prop("disabled",true);
+                        $("#btnDelete").prop("disabled",true);
+                        $("#btnSave").prop("disabled",true);
+
+                        $("#eval4").prop("disabled",false);
+                        $("#eval5").prop("disabled",false);
+                        $("#eval6").prop("disabled",false);
+                        for(var keys in data.details){
+                            var dt = data.details[keys];
+                            (window.arrevaluators).push({
+                                username: dt.username,
+                                userlevel:dt.userlevel,
+                                name: dt.firstname + " " + dt.lastname,
+                                order: dt.evalorder,
+                                isadditional:dt.isadditional
+                            });
+                            if(parseInt(dt.evalorder) == (parseInt(keys)+ 1)){
+                                $("#eval"+(parseInt(keys)+1)).text(dt.firstname + " " + dt.lastname);
+                            }
+                        }
+
+                        $(".eval3").hide();
+                        $(".eval6").show();
                     } else {
                         $("#btnAdd").prop("disabled",false);
                         $("#btnEdit").prop("disabled",true);
@@ -249,13 +309,18 @@
                                 username: dt.username,
                                 userlevel:dt.userlevel,
                                 name: dt.firstname + " " + dt.lastname,
-                                order: dt.evalorder
+                                order: dt.evalorder,
+                                isadditional:dt.isadditional
                             });
                             if(parseInt(dt.evalorder) == (parseInt(keys)+ 1)){
                                 $("#eval"+(parseInt(keys)+1)).text(dt.firstname + " " + dt.lastname);
                             }
                         }
+
+                        $(".eval3").show();
+                        $(".eval6").hide();
                     }
+
                 } else {
                     $("#loadingmodal").modal("hide");
 
@@ -272,8 +337,10 @@
     function loadOtherEvals(reqnum){
         var select = $("#eval4");
         var select2 = $("#eval5");
+        var select3 = $("#eval6");
         select.empty();
         select2.empty();
+        select3.empty();
         $.ajax({
             url: "<?php echo base_url();?>evaluatorselectionmanagement/displayevals",
             type: "POST",
@@ -285,17 +352,20 @@
                 if(result.Code == "00"){
                     select.append("<option selected disabled>- Select Evaluator -</option>");
                     select2.append("<option selected disabled>- Select Evaluator -</option>");
+                    select3.append("<option selected disabled>- Select Evaluator -</option>");
                     window.arrselection = result.details;
                     for(var keys in result.details){
                         var name = result.details[keys].firstname + " " + result.details[keys].lastname;
                         select.append('<option userlevel="'+result.details[keys].userlevel+'" value="'+result.details[keys].username+'">'+name+'</option>');
                         select2.append('<option userlevel="'+result.details[keys].userlevel+'" value="'+result.details[keys].username+'">'+name+'</option>');
+                        select3.append('<option userlevel="'+result.details[keys].userlevel+'" value="'+result.details[keys].username+'">'+name+'</option>');
                     }
                     $("#loadingmodal").modal("hide");
                 } else {
                     console.log(result);
                     select.append("<option selected disabled>- Select Evaluator -</option>");
                     select2.append("<option selected disabled>- Select Evaluator -</option>");
+                    select3.append("<option selected disabled>- Select Evaluator -</option>");
 
                 }
             },
@@ -303,6 +373,7 @@
                 $("#loadingmodal").modal("hide");
                 select.append("<option selected disabled>- Select Evaluator -</option>");
                 select2.append("<option selected disabled>- Select Evaluator -</option>");
+                select3.append("<option selected disabled>- Select Evaluator -</option>");
 
                 console.log(e);
             }
@@ -322,13 +393,28 @@
         }
     });
 
+    $("#eval5").change(function(){
+        var username = $(this).val();
+        var col = window.arrselection;
+        col = (col).filter(arr => arr.username != username);
+
+        var select = $("#eval6");
+        select.empty().append("<option selected disabled>- Select Evaluator -</option>");
+        for(var keys in col){
+            var name = col[keys].firstname + " " + col[keys].lastname;
+            select.append('<option userlevel="'+col[keys].userlevel+'" value="'+col[keys].username+'">'+name+'</option>');
+        }
+    });
+
     $("#btnAdd").click(function(){
         if($("#requestNumber option:selected").val() == "- Select Request Number -" || $("#requestNumber option:selected").val() == null){
             messageDialogModal("Required","Please Select Request Number");
         } else if($("#eval4 option:selected").val() == "- Select Evaluator -" || $("#eval4 option:selected").val() == null){
-            messageDialogModal("Required","Please select fourth evaluator");
+            messageDialogModal("Required","Please select evaluator");
         } else if($("#eval5 option:selected").val() == "- Select Evaluator -" || $("#eval5 option:selected").val() == null){
-            messageDialogModal("Required","Please select fifth evaluator");
+            messageDialogModal("Required","Please select evaluator");
+        } else if(window.hasthird == true && ($("#eval6 option:selected").val() == "- Select Evaluator -" || $("#eval6 option:selected").val() == null)){
+            messageDialogModal("Required","Please select evaluator");
         } else {
             if(!submitData()){
                 messageDialogModal("Server Message","Failed to Assign Evaluators");
@@ -350,6 +436,7 @@
     $("#btnEdit").click(function(){
        $("#eval4").prop("disabled",false);
        $("#eval5").prop("disabled",false);
+       $("#eval6").prop("disabled",false);
 
         $("#btnAdd").prop("disabled",true);
         $("#btnEdit").prop("disabled",true);
@@ -361,9 +448,11 @@
         if($("#requestNumber option:selected").val() == "- Select Request Number -" || $("#requestNumber option:selected").val() == null){
             messageDialogModal("Required","Please Select Request Number");
         } else if($("#eval4 option:selected").val() == "- Select Evaluator -" || $("#eval4 option:selected").val() == null){
-            messageDialogModal("Required","Please select fourth evaluator");
+            messageDialogModal("Required","Please select evaluator");
         } else if($("#eval5 option:selected").val() == "- Select Evaluator -" || $("#eval5 option:selected").val() == null){
-            messageDialogModal("Required","Please select fifth evaluator");
+            messageDialogModal("Required","Please select evaluator");
+        } else if(window.hasthird == true && ($("#eval6 option:selected").val() == "- Select Evaluator -" || $("#eval6 option:selected").val() == null)){
+            messageDialogModal("Required","Please select evaluator");
         } else {
             if(!submitData()){
                 messageDialogModal("Server Message","Failed to Edit Evaluators");
@@ -383,15 +472,34 @@
     });
 
     function submitData(){
-                    for(var i=0;i<2;i++){
+        if(window.hasthird){
+            var data = $.grep(window.arrevaluators, function(e){
+                return parseInt(e.order) != 3;
+            });
+            window.arrevaluators = data;
+            for(var i=0;i<3;i++){
                 var eval = "#eval"+(i+4)+" option:selected";
                 (window.arrevaluators).push({
                     username: $(eval).val(),
                     userlevel: $(eval).attr("userlevel"),
                     name: $(eval).text(),
-                    order: $("#eval"+(i+4)).attr("order")
+                    order: $("#eval"+(i+4)).attr("order"),
+                    isadditional:'YES'
                 });
             }
+        } else {
+            for(var i=0;i<2;i++){
+                var eval = "#eval"+(i+4)+" option:selected";
+                (window.arrevaluators).push({
+                    username: $(eval).val(),
+                    userlevel: $(eval).attr("userlevel"),
+                    name: $(eval).text(),
+                    order: $("#eval"+(i+4)).attr("order"),
+                    isadditional:'NO'
+                });
+            }
+        }
+
             console.log(window.arrevaluators);
             $("#loadingmodal").modal("show");
             $.ajax({
@@ -400,7 +508,8 @@
                 dataType: "json",
                 data: {
                     "REQUESTNUMBER": $("#requestNumber option:selected").val(),
-                    "EVALUATORS": window.arrevaluators
+                    "EVALUATORS": window.arrevaluators,
+                    "ADDITIONAL":window.hasthird ? "YES" : "NO"
                 },
                 success: function(result) {
                     $("#loadingmodal").modal("hide");

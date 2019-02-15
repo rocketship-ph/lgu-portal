@@ -78,13 +78,19 @@ class EvaluatorSelectionManagement extends CI_Controller {
     }
 
     public function insert(){
+        $additional = $_REQUEST['ADDITIONAL'];
         $requestnumber = $_REQUEST['REQUESTNUMBER'];
         $evals = $_REQUEST['EVALUATORS'];
         $data = "";
         $notifdata = "";
-
+        $add = "";
+        if($additional == "YES"){
+            $add="YES";
+        } else {
+            $add="NO";
+        }
         foreach($evals as $key=>$value){
-            $data .= "('".$requestnumber."','".$value['name']."','".$value['username']."','".$value['userlevel']."','0','".$value['order']."'),";
+            $data .= "('".$requestnumber."','".$value['name']."','".$value['username']."','".$value['userlevel']."','0','".$value['order']."','".$add."'),";
             $notifdata.="('".$requestnumber."','EVALUATOR ASSIGNMENT','100','".$value['username']."','".$this->session->userdata('username')."','0','You have been assigned by ".$this->session->userdata('name')." to be an Evaluator on Position Request: ".$requestnumber."'),";
         }
         $data = substr($data, 0, -1);
