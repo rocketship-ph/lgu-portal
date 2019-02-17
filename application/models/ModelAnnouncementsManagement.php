@@ -7,7 +7,7 @@ class ModelAnnouncementsManagement extends CI_Model{
 
     function get(){
         try {
-            $query = $this->db->query("select pub.url,pub.datepublished,pub.requestnumber,req.positioncode,pos.name from tblpublishrequest pub inner join tblpersonnelrequest req on pub.requestnumber=req.requestnumber inner join tblposition pos on req.positioncode = pos.positioncode where pub.publishedby <> null or pub.publishedby <> '' order by pub.datepublished desc");
+            $query = $this->db->query("select pub.url,pub.datepublished,pub.requestnumber,req.positioncode,pos.name from tblpublishrequest pub inner join tblpersonnelrequest req on pub.requestnumber=req.requestnumber inner join tblposition pos on req.positioncode = pos.positioncode where pub.publishedby <> null or pub.publishedby <> '' and pub.requestnumber not in (select requestnumber from tblapplicant where isboarding='YES' or isrequirements='YES') order by pub.datepublished desc;");
 
             if($query){
                 $result = $query->result_array();
