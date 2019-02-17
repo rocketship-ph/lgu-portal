@@ -247,7 +247,7 @@
     <div class="modal-dialog">
         <div class="modal-content ">
             <div class="modal-body">
-                <h4 style="margin-top: 5px;">Applicant Onboar</h4>
+                <h4 style="margin-top: 5px;">Applicant Onboard</h4>
                 <p>Applicant on boarding successful. Please print the Orientation Form for Newly-Hired Employees by clicking the 'PRINT' button below.</p>
                 <div align="right">
                     <a class="btn btn-success" id="btnPrint"><i class="fa fa-print"></i>&nbsp;PRINT</a>
