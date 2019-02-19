@@ -712,7 +712,7 @@ $("#btnAdd").click(function(){
                     $("#lblbehavioraverage").text("");
                     $("#lblpspt").text("");
                     clearField();
-
+		    $("#applicantCode").empty();
                 } else {
                     messageDialogModal("Server Message",result.Message);
                 }
@@ -840,6 +840,7 @@ $("#btnProceedDelete").click(function(){
                 $("#comments").val("");
                 $("#btnPrint").hide();
                 clearField();
+		$("#applicantCode").empty();
             } else {
                 messageDialogModal("Server Message",result.Message);
             }
@@ -911,6 +912,7 @@ $("#btnSave").click(function(){
                     $("#lblbehavioraverage").text("");
                     $("#lblpspt").text("");
                     clearField();
+			$("#applicantCode").empty();
                 } else {
                     messageDialogModal("Server Message",result.Message);
                 }
