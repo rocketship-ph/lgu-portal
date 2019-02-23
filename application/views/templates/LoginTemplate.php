@@ -304,7 +304,7 @@
         } else {
 
         }
-        $("#modal_description").modal("show");
+       // $("#modal_description").modal("show");
     }
 
     $(document).on('hidden.bs.modal', function (e) {
