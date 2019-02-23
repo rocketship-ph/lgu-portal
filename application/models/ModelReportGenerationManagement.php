@@ -709,4 +709,67 @@ function getexaminees($reqnum){
         }
     }
 
+    function getqualification($month,$year){
+        try {
+            $statement="select * from zeal_qualifienonqualified WHERE YEAR(datepublished) = ".$year." AND MONTH(datepublished) IN (".$month.");";
+            $query = $this->db->query($statement);
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
+    function getqualificationyears(){
+        try {
+            $statement="SELECT DISTINCT DATE_FORMAT(datepublished,'%Y') as years FROM zeal_qualifienonqualified;";
+            $query = $this->db->query($statement);
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
+    function approved($month,$year){
+        try {
+            $statement="select * from zeal_approved WHERE year = ".$year." AND month IN (".$month.");";
+            $query = $this->db->query($statement);
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+    function rejected($month,$year){
+        try {
+            $statement="select * from zeal_rejected WHERE year = ".$year." AND month IN (".$month.");";
+            $query = $this->db->query($statement);
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
 }

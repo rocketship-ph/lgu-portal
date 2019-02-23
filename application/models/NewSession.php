@@ -8,7 +8,9 @@
 
      function getRows($username){
          try {
-             $query = $this->db->query("select u.*,d.*,p.currentposition from tblusers u inner join tbluserdetails d on u.username=d.username left join tblpdsdetails p on u.username=p.username where u.username='".$username."' and u.status='0'");;
+             $this->db->query("SET GLOBAL group_concat_max_len=1500000;");
+             $query = $this->db->query("select u.*,d.*,p.currentposition from tblusers u inner join tbluserdetails d on u.username=d.username left join tblpdsdetails p on u.username=p.username where u.username='".$username."' and u.status='0'");
+
              $result = ($query->num_rows() > 0) ? $query->row_array() : false;
 
              //return fetched data

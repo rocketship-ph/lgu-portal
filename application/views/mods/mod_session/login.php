@@ -2,27 +2,46 @@
 <div class="divAnnCont">
 </div>
 <div class="modal fade" id="modalSealOftransparency" role="dialog" data-backdrop="static">
-    <div  class="modal-dialog modal-lg">
+    <div  class="modal-dialog modal-lg" style="width:90%!important;">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
                 <legend>Seal of Transparency</legend>
                 <div class="row">
                     <div class="col-md-12" style="height: 430px !important;overflow-y: auto">
-                        <table cellspacing="0" width="100%">
-                            <tr>
-                                <td>
-                                    <div id="divGraph2"></div>
-                                </td>
-                            </tr>
-                         </table>
-                        <table cellspacing="0" width="100%">
-                            <tr>
-                                <td>
-                                    <div id="divGraph"></div>
-                                </td>
-                            </tr>
-                         </table>
+                        <div class="col-md-6">
+
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>Select quarter</label>
+                            <select class="form-control clearField" id="month">
+                                <option value="1,2,3" nameform="'January','February','March'">First quarter</option>
+                                <option value="4,5,6" nameform="'April','May','June'">Second quarter</option>
+                                <option value="7,8,9" nameform="'July','August','September'">Third quarter</option>
+                                <option value="10,11,12" nameform="'October','November','December'">Fourth quarter</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>Select year</label>
+                            <select class="form-control clearField" id="year">
+                            </select>
+                        </div>
+                       <div class="col-xs-12">
+                           <legend>Number of recruitment done
+                           </legend>
+                           <div id="divGraph4"></div>
+                       </div>
+                        <div class="col-xs-12">
+                            <legend>Number of qualified and non-qualified applicants and/or personnel per position
+                            </legend>
+                            <div id="divGraph3"></div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div id="divGraph2"></div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div id="divGraph"></div>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <hr>
@@ -384,8 +403,91 @@
     #fixedContainer {
         position: fixed;
     }
+    th.google-visualization-table-th {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 50px;
+    }
+
+    th.google-visualization-table-th:hover {
+        white-space: nowrap;
+        overflow: visible;
+    }
 </style>
 <script type="application/javascript">
+    function countDays(number) {
+        var val;
+        var years=0;
+        var months=0;
+        var days=0;
+        months=number/30;
+        if(months>12){
+            years=months/12;
+            months=(years-Math.floor(years))*12;
+        }
+        days=(months-Math.floor(months))*30;
+        if(years<1){
+            if(months<1){
+                if(days>1)
+                    val=parseInt(days) +  " days";
+                else
+                    val=parseInt(days) +  " day";
+            } else {
+                if(months>=2){
+                    if(days>1)
+                        val=parseInt(months) + " months and " + parseInt(days) +  " days";
+                    else
+                    if(parseInt(days)>1)
+                        val=parseInt(months) + " months and " + parseInt(days) +  " day";
+                    else
+                        console.log(parseInt(months) + " months");
+                }
+                else{
+                    if(parseInt(days)>1)
+                        val=parseInt(months) + " month and " + parseInt(days) +  " days";
+                    else{
+                        if(parseInt(days)>1)
+                            val=parseInt(months) + " month and " + parseInt(days) +  " day";
+                        else
+                            val=parseInt(months) + " month";
+                    }
+                }
+
+            }
+        } else {
+            if(months<1){
+                if(days>1)
+                    val=parseInt(years) +  " year(s) " + parseInt(days) +  " days";
+                else
+                    val=parseInt(years) +  " year(s) " + parseInt(days) +  " day";
+            } else {
+                if(months>=2){
+                    if(days>1)
+                        val=parseInt(years) +  " year(s) " + parseInt(months) + " months and " + parseInt(days) +  " days";
+                    else
+                    if(parseInt(days)>1)
+                        val=parseInt(years) +  " year(s) " + parseInt(months) + " months and " + parseInt(days) +  " day";
+                    else
+                        val=parseInt(years) +  " year(s) " + parseInt(months) + " months";
+                }
+                else{
+                    if(parseInt(days)>1)
+                        val=parseInt(years) +  " year(s) " + parseInt(months) + " month and " + parseInt(days) +  " days";
+                    else{
+                        if(parseInt(days)>1)
+                            val=parseInt(years) +  " year(s) " + parseInt(months) + " month and " + parseInt(days) +  " day";
+                        else
+                            val=parseInt(years) +  " year(s) " + parseInt(months) + " month";
+                    }
+                }
+
+            }
+        }
+        return val;
+
+    }
+
     $(document).ready(function(){
         console.log("<?php echo CI_VERSION;?>");
        loadAnnouncement();
@@ -404,7 +506,6 @@
             dataType: "json",
             data: {},
             success: function(data){
-                console.log(data);
                 if(data.Code == "00"){
                     generateChart(data.details);
                 } 
@@ -412,93 +513,391 @@
             error: function(e){
                 console.log(e);
             }
-        }); 
+         });
+          $.ajax({
+              url: "<?php echo base_url();?>reportgenerationmanagement/qualificationyears",
+              type: "POST",
+              dataType: "json",
+              data: {},
+              success: function(data){
+                  if(data.Code == "00"){
+                      $("#year").empty();
+                      for(var key in data.details){
+                          $("#year").append("<option value ='"+data.details[key].years+"'>"+data.details[key].years+"</option>");
+                      }
+                      var d = new Date(),
+                          n = d.getMonth(),
+                          y = d.getFullYear();
+                      var fq = ["1","2","3"];
+                      var sq=["4","5","6"];
+                      var tq=["7","8","9"];
+                      var frq=["10","11","12"];
+                      if(jQuery.inArray(n,fq)!==-1){
+                          console.log("1 ");
+                          $('#month option[value="1,2,3"]').prop('selected', true);
+                      }
+                      if(jQuery.inArray(n,sq)!==-1){
+                          console.log("2");
+                          $('#month option[value="4,5,6"]').prop('selected', true);
+                      }
+                      if(jQuery.inArray(n,tq)!==-1){
+                          console.log("3");
+                          $('#month option[value="7,8,9"]').prop('selected', true);
+                      }
+                      if(jQuery.inArray(n,frq)!==-1){
+                          console.log("4");
+                          $('#month option[value="10,11,12"]').prop('selected', true);
+                      }
+
+                      loadQualification($("#month").val(),$("#year").val());
+                      loadApproved();
+                  }
+              },
+              error: function(e){
+                  console.log(e);
+              }
+          });
       }
-      function composeData(items, prop) {
-    var item = [];
-    var number = {}
-    var data = [];
-    for(var i=0;i<items.length;i++) {
-        var value = items[i][prop];
-        if(value!=""||value!=null||value!="null"){
-            item.push(value);
-        }
-    }
-    item.sort();
-   var current = null;
-    var cnt = 0;
-    for (var i = 0; i < item.length; i++) {
-        if (item[i] != current) {
-            if (cnt > 0) {
-                var temp = [];
-                temp.push(current);
-                temp.push(cnt);
-                data.push(temp);
-            }
-            current = item[i];
-            cnt = 1;
-        } else {
-            cnt++;
-        }
-    }
-    if (cnt > 0) {
-        var temp = [];
-        temp.push(current);
-        temp.push(cnt);
-        data.push(temp);
-    }
-    console.log(JSON.stringify(data));
-    return data;
-}
-
-function generateChart(data){
-    var chartObj = new Object();
-    chartObj['chartName'] = 'engDiv';
-    chartObj['chartTitle'] = 'Number of employees per department';
-    chartObj['data'] = composeData(data,'department');
-    google.charts.setOnLoadCallback(function() {
-        drawChart();
-        drawChart2();
+    $("#month").change(function () {
+        loadQualification($("#month").val(),$("#year").val());
+        loadApproved();
     });
-    function drawChart() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Department');
-        data.addColumn('number', 'Total Number of Employee');
+    $("#year").change(function () {
+        loadQualification($("#month").val(),$("#year").val());
+        loadApproved();
+    });
+      function loadQualification(month,year) {
+          $("#divGraph3").empty();
+          $.ajax({
+              url: "<?php echo base_url();?>reportgenerationmanagement/qualification",
+              type: "POST",
+              dataType: "json",
+              data: {
+                  "MONTH":month,
+                  "YEAR":year
+              },
+              success: function(data){
+                  if(data.Code == "00"){
+                      generateChart1(data.details);
+                  } else {
+                      $("#divGraph3").height(50);
+                      $("#divGraph3").append("<center><h3>No available data found on the given date.</h3></center>");
+                  }
+              },
+              error: function(e){
+                  console.log(e);
+              }
+          });
+      }
 
-        data.addRows(chartObj.data);
-        var options = {
-        };
-        var chart = new google.visualization.PieChart(document.getElementById('divGraph'));  
-        var height = data.getNumberOfRows() * 41 + 30;
-        $("#divGraph").height(height);
-        chart.draw(data, options);
-    }
-    function drawChart2() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Department');
-        data.addColumn('number', 'Total Number of Employee');
+    function loadRecruitmentData(approved,rejected) {
+          var data = [["January",0,0],["February",0,0],["March",0,0],["April",0,0],
+              ["May",0,0],["June",0,0],["July",0,0],["August",0,0],["September",0,0],
+              ["October",0,0],["November",0,0],["December",0,0]];
+          if(approved!="" || rejected!=""){
+              for(var key in approved){
+                  if(approved[key].month === "January"){
+                      data[0][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "February"){
+                      data[1][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "March"){
+                      data[2][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "April"){
+                      data[3][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "May"){
+                      data[4][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "June"){
+                      data[5][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "July"){
+                      data[6][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "August"){
+                      data[7][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "September"){
+                      data[8][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "October"){
+                      data[9][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "November"){
+                      data[10][1]=parseInt(approved[key].approvedcount);
+                  }
+                  if(approved[key].month === "December"){
+                      data[11][1]=parseInt(approved[key].approvedcount);
+                  }
+              }
+              for(var key in rejected){
+                  if(rejected[key].month === "January"){
+                      data[0][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "February"){
+                      data[1][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "March"){
+                      data[2][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "April"){
+                      data[3][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "May"){
+                      data[4][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "June"){
+                      data[5][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "July"){
+                      data[6][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "August"){
+                      data[7][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "September"){
+                      data[8][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "October"){
+                      data[9][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "November"){
+                      data[10][2]=parseInt(rejected[key].rejectedcount);
+                  }
+                  if(rejected[key].month === "December"){
+                      data[11][2]=parseInt(rejected[key].rejectedcount);
+                  }
+              }
+              generateChart2(data);
+          } else {
 
-         data.addRows(chartObj.data);
-        var options = {
-            title: chartObj.chartTitle,
-            chartArea: {
-                width: '65%',
-                right: 15
-            },
-            hAxis: {
-                title: '',
-                minValue: 0,
-                format: ' '
-            },
-            legend: 'none',
-            bar: {groupWidth: '95%'}
-        };
-        var chart = new google.visualization.BarChart(document.getElementById('divGraph2')); 
-        var height = data.getNumberOfRows() * 41 + 30;
-        $("#divGraph2").height(height);
-        chart.draw(data, options);
+              $("#divGraph4").height(50);
+              $("#divGraph4").append("<center><h3>No available data found on the given date.</h3></center>");
+          }
     }
-}
+
+    function loadApproved() {
+        var rejected="";
+        var approved="";
+        $("#divGraph4").empty();
+        $.ajax({
+            url: "<?php echo base_url();?>reportgenerationmanagement/approved",
+            type: "POST",
+            dataType: "json",
+            data: {
+                "MONTH":$("#month :selected").attr('nameform'),
+                "YEAR":$("#year :selected").val()
+            },
+            success: function(data){
+                if(data.Code == "00"){
+                    console.log(data);
+                    approved = data.details;
+                }
+                $.ajax({
+                    url: "<?php echo base_url();?>reportgenerationmanagement/rejected",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        "MONTH":$("#month :selected").attr('nameform'),
+                        "YEAR":$("#year :selected").val()
+                    },
+                    success: function(data){
+                        if(data.Code == "00"){
+                            console.log(data);
+                            rejected = data.details;
+                        }
+                        loadRecruitmentData(approved,rejected);
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }
+                });
+            },
+            error: function(e){
+                console.log(e);
+            }
+        });
+    }
+
+      function composeData(items, prop) {
+        var item = [];
+        var number = {}
+        var data = [];
+        for(var i=0;i<items.length;i++) {
+            var value = items[i][prop];
+            if(value!=""||value!=null||value!="null"){
+                item.push(value);
+            }
+        }
+        item.sort();
+        var current = null;
+        var cnt = 0;
+        for (var i = 0; i < item.length; i++) {
+            if (item[i] != current) {
+                if (cnt > 0) {
+                    var temp = [];
+                    temp.push(current);
+                    temp.push(cnt);
+                    data.push(temp);
+                }
+                current = item[i];
+                cnt = 1;
+            } else {
+                cnt++;
+            }
+        }
+        if (cnt > 0) {
+            var temp = [];
+            temp.push(current);
+            temp.push(cnt);
+            data.push(temp);
+        }
+        return data;
+    }
+
+    function composeData1(data) {
+        var chartData = [];
+        for(var key in data){
+            var chartItem = [];
+            chartItem.push(data[key].position);
+            chartItem.push(parseInt(data[key].qualifiedapplicants));
+            chartItem.push(parseInt(data[key].nonqualifiedapplicants));
+            chartItem.push(parseInt(data[key].qualifiedpersonnel));
+            chartItem.push(parseInt(data[key].nonqualifiedpersonnel));
+            chartData.push(chartItem);
+        }
+        return chartData;
+    }
+
+    function generateChart2(data) {
+        var chartObj = new Object();
+        chartObj['chartName'] = 'engDiv';
+        chartObj['chartTitle'] = 'Number of recruitment done';
+        chartObj['data'] = data;
+        google.charts.setOnLoadCallback(function () {
+            drawChart();
+        });
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Month');
+            data.addColumn('number', 'Approved');
+            data.addColumn('number', 'Rejected');
+
+            data.addRows(chartObj.data);
+            var options = {
+                title: "",
+                chartArea: {
+                    width: '100%',
+                    left: 250
+                },
+                legend: { position: 'top', alignment: 'center' },
+                colors: ['#1976d2','#e53935'],
+                hAxis: {
+                    title: '',
+                    minValue: 0,
+                    format: ' '
+                },
+                bar: {groupWidth: 100}
+            };
+            var chart = new google.visualization.BarChart(document.getElementById('divGraph4'));
+            var height = data.getNumberOfRows() * 41 + 30;
+            $("#divGraph4").height(height);
+            chart.draw(data, options);
+        }
+    }
+
+    function generateChart1(data) {
+        var chartObj = new Object();
+        chartObj['chartName'] = 'engDiv';
+        chartObj['chartTitle'] = 'Number of qualified and non-qualified applicants and/or personnel per position';
+        chartObj['data'] = composeData1(data);
+        google.charts.setOnLoadCallback(function () {
+            drawChart();
+        });
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Position');
+            data.addColumn('number', 'Qualified Applicant');
+            data.addColumn('number', 'Non-Qualified Applicant');
+            data.addColumn('number', 'Qualified Personnel');
+            data.addColumn('number', 'Non-Qualified Personnel');
+
+            data.addRows(chartObj.data);
+            var options = {
+                title: "",
+                chartArea: {
+                    width: '100%',
+                    left: 250
+                },
+                legend: { position: 'top', alignment: 'center' },
+                colors: ['#1976d2','#e53935'],
+                hAxis: {
+                    title: '',
+                    minValue: 0,
+                    format: ' '
+                },
+                bar: {groupWidth: 100}
+            };
+            var chart = new google.visualization.BarChart(document.getElementById('divGraph3'));
+            var height = data.getNumberOfRows() * 41 + 30;
+            $("#divGraph3").height(height);
+            chart.draw(data, options);
+        }
+    }
+
+    function generateChart(data){
+        var chartObj = new Object();
+        chartObj['chartName'] = 'engDiv';
+        chartObj['chartTitle'] = 'Number of employees per department';
+        chartObj['data'] = composeData(data,'department');
+        google.charts.setOnLoadCallback(function() {
+            drawChart();
+            drawChart2();
+        });
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Department');
+            data.addColumn('number', 'Total Number of Employee');
+
+            data.addRows(chartObj.data);
+            var options = {
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('divGraph'));
+            var height = data.getNumberOfRows() * 41 + 30;
+            $("#divGraph").height(height);
+            chart.draw(data, options);
+        }
+        function drawChart2() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Department');
+            data.addColumn('number', 'Total Number of Employee');
+
+             data.addRows(chartObj.data);
+            var options = {
+                title: chartObj.chartTitle,
+                chartArea: {
+                    width: '65%',
+                    right: 15
+                },
+                hAxis: {
+                    title: '',
+                    minValue: 0,
+                    format: ' '
+                },
+                legend: 'none',
+                bar: {groupWidth: '95%'}
+            };
+            var chart = new google.visualization.BarChart(document.getElementById('divGraph2'));
+            var height = data.getNumberOfRows() * 41 + 30;
+            $("#divGraph2").height(height);
+            chart.draw(data, options);
+        }
+    }
     function loadProvince(){
         $.ajax({
             url: '<?php echo base_url();?>homepage/getprovince',

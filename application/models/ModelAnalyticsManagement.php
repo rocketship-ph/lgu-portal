@@ -113,5 +113,37 @@ class ModelAnalyticsManagement extends CI_Model{
         }
     }
 
+    function getcreationofrelevantposition($year){
+        try {
+            $query = $this->db->query("SELECT * FROM csc_relevantposition WHERE YEAR(daterequested) = ".$year." ORDER BY requestingofficer,positiontitle");
+
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
+    function costperhire($year){
+        try {
+            $query = $this->db->query('SELECT * FROM csc_costperhire WHERE yearposted = "'.$year.'" ORDER BY datepublished,office,position');
+
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
 
 }

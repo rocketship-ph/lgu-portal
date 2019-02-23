@@ -59,4 +59,13 @@ class Cscreports extends CI_Controller {
         $data = array('content'=>'mods/mod_recruitment/cscreports/comparativeassessment');
         $this->load->view('templates/MasterTemplate',$data);
     }
+
+    public function creationofrelevantposition() {
+        $data = array('content'=>'mods/mod_recruitment/cscreports/creationofrelevantposition');
+        $this->load->view('templates/MasterTemplate',$data);
+    }
+    public function costperhire() {
+        $data = array('content'=>'mods/mod_recruitment/cscreports/costperhire');
+        $this->load->view('templates/MasterTemplate',$data);
+    }
 }

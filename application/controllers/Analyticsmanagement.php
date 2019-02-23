@@ -107,4 +107,38 @@ class AnalyticsManagement extends CI_Controller {
         }
         echo $result;
     }
+    public function getcreationofrelevantposition(){
+        $year = $_REQUEST['YEAR'];
+        $report = $this->ModelAnalyticsManagement->getcreationofrelevantposition($year);
+        if($report){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $report
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
+    public function costperhire(){
+        $year = $_REQUEST['YEAR'];
+        $report = $this->ModelAnalyticsManagement->costperhire($year);
+        if($report){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $report
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
 }

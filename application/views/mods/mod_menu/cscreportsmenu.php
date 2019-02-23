@@ -267,17 +267,43 @@
     </div>
     <?php endif;?>
     <?php if(in_array($GLOBALS['NAV_CSCREQUESTFORVACANTPOSITION'],$this->session->userdata('modules'))):?>
-    <div class="form-group col-md-3">
-        <div class="panel">
-            <div class="panel-body" align="center">
-                <a style="text-align: center" href="<?php echo base_url();?>cscreports/requestforvacantposition">
-                    <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
-                    <br><br>
-                    Request for Vacant Position
-                </a>
+        <div class="form-group col-md-3">
+            <div class="panel">
+                <div class="panel-body" align="center">
+                    <a style="text-align: center" href="<?php echo base_url();?>cscreports/requestforvacantposition">
+                        <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                        <br><br>
+                        Request for Vacant Position
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCCREATIONOFRELEVANTPOSITION'],$this->session->userdata('modules'))):?>
+        <div class="form-group col-md-3">
+            <div class="panel">
+                <div class="panel-body" align="center">
+                    <a style="text-align: center" href="<?php echo base_url();?>cscreports/creationofrelevantposition">
+                        <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                        <br><br>
+                        Creation of Relevant Position
+                    </a>
+                </div>
+            </div>
+        </div>
+    <?php endif;?>
+    <?php if(in_array($GLOBALS['NAV_CSCCOSTPERHIRE'],$this->session->userdata('modules'))):?>
+        <div class="form-group col-md-3">
+            <div class="panel">
+                <div class="panel-body" align="center">
+                    <a style="text-align: center" href="<?php echo base_url();?>cscreports/costperhire">
+                        <img src="<?php echo base_url();?>assets/img/icons/generic_report.png" height="100px">
+                        <br><br>
+                        Turnaround time and cost per hire
+                    </a>
+                </div>
+            </div>
+        </div>
     <?php endif;?>
 
 </div>

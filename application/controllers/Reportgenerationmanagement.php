@@ -762,4 +762,72 @@ public function examcompetencyrequestnumbers()
         }
         echo $result;
     }
+    public function qualification()
+    {
+        $data = $this->ModelReportGenerationManagement->getqualification($_REQUEST['MONTH'],$_REQUEST['YEAR']);
+        if($data){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $data
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
+    public function qualificationyears()
+    {
+        $data = $this->ModelReportGenerationManagement->getqualificationyears();
+        if($data){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $data
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
+    public function approved()
+    {
+        $data = $this->ModelReportGenerationManagement->approved($_REQUEST['MONTH'],$_REQUEST['YEAR']);
+        if($data){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $data
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
+    public function rejected()
+    {
+        $data = $this->ModelReportGenerationManagement->rejected($_REQUEST['MONTH'],$_REQUEST['YEAR']);
+        if($data){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $data
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
 }
