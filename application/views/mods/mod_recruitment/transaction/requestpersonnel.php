@@ -746,7 +746,6 @@ $("#btnQualified").click(function(){
             $("#loadingmodal").modal("hide");
             if(result.Code == "00"){
                 console.log(result);
-                $("#divAnalytics").show();
                 generateCharts(result.educational,result.position,result.department);
             } else if(result.Code == "07"){
                 $("#divAnalytics").hide();
@@ -783,6 +782,21 @@ $("#btnQualified").click(function(){
             temp.push(parseInt(dept[keys].count));
             deptdata.push(temp);
         }
+
+        window.educdata = educdata;
+        window.posdata = posdata;
+        window.deptdata = deptdata;
+        console.log("calling create chart fxn..");
+        setTimeout(createCharts(),3000);
+    }
+
+
+    function createCharts(){
+        console.log("start creating charts..");
+        var educdata = window.educdata;
+        var posdata = window.posdata;
+        var deptdata = window.deptdata;
+
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -847,7 +861,7 @@ $("#btnQualified").click(function(){
             piechart.draw(datadept, piechart_options);
         }
 
-
+        $("#divAnalytics").show();
     }
 });
 </script>
