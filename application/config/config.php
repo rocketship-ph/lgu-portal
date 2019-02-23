@@ -29,7 +29,8 @@ $GLOBALS['crypt'] = "lGu20!7";
 $GLOBALS['logohandler'] = "";
 $GLOBALS['lguid'] = '1';
 $GLOBALS['superadmin'] = 'http://localhost:8082/carmonauat/server/lgu-admin/changelogo';
-$GLOBALS['googlecharts'] = "https://www.gstatic.com/charts/loader.js";
+//$GLOBALS['googlecharts'] = "https://www.gstatic.com/charts/loader.js";
+$GLOBALS['googlecharts'] = "http://localhost:8082/carmonauat/server/lgu-portal/transaction/gstatic/loader.js";
 
 /*
 |--------------------------------------------------------------------------
