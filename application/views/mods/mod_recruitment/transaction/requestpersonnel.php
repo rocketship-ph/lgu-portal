@@ -128,7 +128,7 @@
                                            <div class="form-group">
                                                <label for="positionTitle" class="control-label">Experience</label>
                                                <div class="input-group">
-                                                   <input class="form-control clearField analyticsField" id="experience" type="number" placeholder="Work Experience..">
+                                                   <input class="form-control clearField analyticsField" id="experience" type="number" placeholder="Work Experience.." readonly>
                                                    <span class="input-group-addon">Year(s) of Experience</span>
                                                </div>
 
@@ -136,17 +136,13 @@
                                            <div class="form-group">
                                                <label for="positionTitle" class="control-label">Training</label>
                                                <div class="input-group">
-                                                   <input class="form-control clearField analyticsField" id="training" type="number" placeholder="Training..">
+                                                   <input class="form-control clearField analyticsField" id="training" type="number" placeholder="Training.." readonly>
                                                    <span class="input-group-addon">Hour(s) of Training</span>
                                                </div>
                                            </div>
                                            <div class="form-group">
                                                <label for="positionTitle" class="control-label">Civil Service Eligibility&nbsp;<a href="http://www.officialgazette.gov.ph/services/civil-service-eligibility/eligibilities-granted-under-special-laws-and-csc-issuances/" target="_blank"><i class="fa fa-lg fa-question-circle" aria-hidden="true"></i></a></label>
-                                               <select class="form-control clearField analyticsField" id="eligibility">
-                                                   <option selected disabled>- Select Option -</option>
-                                                   <option value="YES">YES</option>
-                                                   <option value="NO">NO</option>
-                                               </select>
+                                               <textarea style="resize: none" class="form-control clearField analyticsField" rows="2" id="eligibility" readonly></textarea>
                                            </div>
                                            <div class="form-group">
                                                <label for="positionTitle" class="control-label">Minimum Educational Background</label>
@@ -218,6 +214,31 @@
                     <div class="col-md-6" align="center">
                         <h4 style="text-align: left"><b>Departments With Qualified Employees</b></h4>
                         <div id="bar_department" style="border: 1px solid #ccc"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 style="text-align: left">List of Qualified Employees</h4>
+                        <h5 id="tblmsg1" style="display:none"></h5>
+                        <div class="table-responsive" id="tblcont1" style="display: none">
+                            <table id="tblreport1" class="display compact responsive cell-border" cellspacing="0" width="100%" >
+                                <thead>
+                                <tr>
+                                    <th>EMPLOYEE ID</th>
+                                    <th>EMPLOYEE NAME</th>
+                                    <th>CURRENT POSITION</th>
+                                    <th>DEPARTMENT</th>
+                                    <th>HIGHEST EDUCATIONAL ATTAINMENT</th>
+                                    <th>ELIGIBILITY</th>
+                                    <th>TRAININGS</th>
+                                    <th>WORK EXPERIENCE</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                 </div>
@@ -387,6 +408,9 @@
                 $("#salarygrade").val(arr[keys].salarygrade);
                 $("#salaryequivalent").val(arr[keys].salaryequivalent);
                 $("#education").val(arr[keys].mineducbackground);
+                $("#experience").val(arr[keys].experience);
+                $("#training").val(arr[keys].training);
+                $("#eligibility").val(arr[keys].eligibility);
 
                 var skills = JSON.parse(atob(arr[keys].cbiskills));
                 for(var i=0;i<skills.length;i++){
@@ -416,7 +440,7 @@
                     "DEPARTMENT":$("#department option:selected").val(),
                     "EXPERIENCE":$("#experience").val(),
                     "TRAINING":$("#training").val(),
-                    "ELIGIBILITY":$("#eligibility option:selected").val()
+                    "ELIGIBILITY":$("#eligibility").val()
                 },
                 success:function(result){
                     $("#loadingmodal").modal("hide");
@@ -740,13 +764,14 @@ $("#btnQualified").click(function(){
             "DEPARTMENT":$("#department option:selected").val(),
             "EXPERIENCE":$("#experience").val(),
             "TRAINING":$("#training").val(),
-            "ELIGIBILITY":$("#eligibility option:selected").val()
+            "ELIGIBILITY":$("#eligibility").val()
         },
         success:function(result){
+            console.log(result);
             $("#loadingmodal").modal("hide");
             if(result.Code == "00"){
-                console.log(result);
                 generateCharts(result.educational,result.position,result.department);
+                loadQualifiedList();
             } else if(result.Code == "07"){
                 $("#divAnalytics").hide();
                 messageDialogModal("Server Message","NO EMPLOYEE IS QUALIFIED FOR THE POSITION REQUEST BEING CREATED");
@@ -862,6 +887,58 @@ $("#btnQualified").click(function(){
         }
 
         $("#divAnalytics").show();
+    }
+
+    function loadQualifiedList() {
+        $("#tblreport1").dataTable({
+            "destroy": true,
+            "responsive": true,
+            "oLanguage": {
+                "sSearch": "Search:",
+                "sEmptyTable":"No Data Available"
+            },
+            "order": [[6, "desc"],[7, "desc"]],
+            "ajax": {
+                "url": "<?php echo base_url(); ?>personnelrequestmanagement/qualifiedemployees",
+                "type": "POST",
+                "dataType": "json",
+                "data": {
+                    "ISQUALIFIED":"YES"
+                },
+                dataSrc: function (json) {
+                    console.log(json);
+                    if (json.Code == "00") {
+                        $('#loadingmodal').modal('hide');
+                        $('#tblcont1').show();
+                        $("#tblmsg1").hide();
+                        return json.details;
+                    } else {
+                        $('#loadingmodal').modal('hide');
+                        $("#tblcont1").hide();
+                        $("#tblmsg1").text("No Data Found");
+                        $("#tblmsg1").show();
+                    }
+                }
+            },
+            "columns": [
+                {"data": "employeeid"},
+                {"data": "employeename"},
+                {"data": "currentposition"},
+                {"data": "currentdepartment"},
+                {"data": "education"},
+                {"data": function(data){
+                    var el = data.eligibility;
+                    return el.slice(1,-1);
+                }},
+                {"data": function(data){
+                    return data.training + " hour(s)";
+                }},
+                {"data": function(data){
+                    return data.experience + " year(s)";
+                }}
+            ],
+            "sDom": 'lfrtip'
+        });
     }
 });
 </script>

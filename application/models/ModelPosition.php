@@ -6,6 +6,7 @@ class ModelPosition extends CI_Model{
         $this->competencyIndexTbl = 'tblcompetencyindex';
         $this->groupPositionTbl = 'tblgroupposition';
         $this->groupTbl = 'tblgrouptable';
+        $this->requestTbl = 'tblpersonnelrequest';
     }
 
     function positions(){
@@ -123,7 +124,7 @@ class ModelPosition extends CI_Model{
         }
     }
 
-    function updatePosition($data = array(),$id) {
+    function updatePosition($data = array(),$id,$reqdata = array(),$poscode) {
 
         try {
             $this->db->set($data);
@@ -131,6 +132,9 @@ class ModelPosition extends CI_Model{
             $update = $this->db->update($this->positionTbl);
 
             if($update){
+                $this->db->set($reqdata);
+                $this->db->where('positioncode', $poscode);
+                $updaterequest = $this->db->update($this->requestTbl);
                 return true;
             }else{
                 return false;

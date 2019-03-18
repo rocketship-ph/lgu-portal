@@ -445,4 +445,22 @@ public function acceptinvitation(){
         }
         echo $result;
     }
+
+    public function qualifiedemployees()
+    {
+        $data = $this->ModelPersonnelRequestManagement->getqualifiedemployees($_REQUEST['ISQUALIFIED']);
+        if($data){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $data
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'System is busy'
+            ));
+        }
+        echo $result;
+    }
 }

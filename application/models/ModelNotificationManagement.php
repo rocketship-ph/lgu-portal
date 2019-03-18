@@ -24,7 +24,7 @@ class ModelNotificationManagement extends CI_Model{
                 $type = "NOMATCH";
             }
             $username = $this->session->userdata('username');
-            $query = $this->db->query("select n.*,t.id as notifid,'' message from notification n inner join tblnotification t on n.requestnumber=t.requestnumber where n.levelofapproval=t.levelofapproval and t.status='0' and t.id not in (select notifid from tbldismissednotif where username='".$username."') and n.notiftype like '%".$type."%' union all select requestnumber,levelofapproval,fromnotif,'HRMANAGER' as notiftype,id as notifid,message from tblnotification where notiftype in ('EVALUATOR ASSESSMENT','EVALUATOR ASSIGNMENT','APPLICATION REQUIREMENT') and id not in (select notifid from tbldismissednotif where username='".$username."') and fromnotif <>'".$username."' and tonotif  in ('".$userlevel."','".$username."');");
+            $query = $this->db->query("select n.*,t.id as notifid,upper(t.notiftype) as category,'' message from notification n inner join tblnotification t on n.requestnumber=t.requestnumber where n.levelofapproval=t.levelofapproval and t.status='0' and t.id not in (select notifid from tbldismissednotif where username='".$username."') and n.notiftype like '%".$type."%' union all select requestnumber,levelofapproval,fromnotif,'HRMANAGER' as notiftype,id as notifid,upper(notiftype) as category,message from tblnotification where notiftype in ('EVALUATOR ASSESSMENT','EVALUATOR ASSIGNMENT','APPLICATION REQUIREMENT') and id not in (select notifid from tbldismissednotif where username='".$username."') and fromnotif <>'".$username."' and tonotif  in ('".$userlevel."','".$username."');");
 
             if($query){
                 $result = $query->result_array();

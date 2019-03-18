@@ -188,7 +188,7 @@ class PdsManagement extends CI_Controller {
                     }
 
                     //CIVIL SERVICE ELIGIBILITY
-                    if(strtoupper($reqcsc) == "YES" || strtoupper($reqcsc) == "ELIGIBLE"){
+                    if(strtoupper($reqcsc) != "NO"){
                         if($civilservice == "" || $civilservice == null){
                             $qualified += 0;
                             array_push($failedreqs,'civil service eligibility');
@@ -196,14 +196,10 @@ class PdsManagement extends CI_Controller {
                         } else {
                             $ret = 0;
                             foreach($civilservice as $key=>$value){
-                                if($value['careerservice'] == "" || $value['careerservice'] == null){
-                                    $ret += 1;
-                                } else if($value['rating'] == "" || $value['rating'] == null){
-                                    $ret += 1;
-                                } else if($value['examdate'] == "" || $value['examdate'] == null){
-                                    $ret += 1;
-                                } else {
+                                if(strtoupper($value['careerservice']) == strtoupper($reqcsc)){
                                     $ret += 0;
+                                } else {
+                                    $ret += 1;
                                 }
                             }
 

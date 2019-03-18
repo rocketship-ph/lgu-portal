@@ -407,4 +407,23 @@ class ModelPersonnelRequestManagement extends CI_Model{
             return false;
         }
     }
+
+
+    function getqualifiedemployees($isqualified){
+        try {
+            $statement="select * from report_qualifiedemployeestemp where isqualified ='".$isqualified."'";
+            $query = $this->db->query($statement);
+            if($query){
+                $result = $query->result_array();
+                log_message('debug', 'success');
+                log_message('debug', $statement);
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
 }

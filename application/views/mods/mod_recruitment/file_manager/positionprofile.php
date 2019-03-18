@@ -125,6 +125,39 @@
                                         <input type="text" class="form-control clearField " id="salaryequivalent" placeholder="Equivalent" readonly>
                                     </div>
                                     <div class="form-group">
+                                        <label for="positionTitle" class="control-label">Experience</label>
+                                        <div class="input-group">
+                                            <input class="form-control clearField analyticsField" id="experience" type="number" placeholder="Work Experience..">
+                                            <span class="input-group-addon">Year(s) of Experience</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="positionTitle" class="control-label">Training</label>
+                                        <div class="input-group">
+                                            <input class="form-control clearField analyticsField" id="training" type="number" placeholder="Training..">
+                                            <span class="input-group-addon">Hour(s) of Training</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="positionTitle" class="control-label">Civil Service Eligibility&nbsp;<a href="http://www.officialgazette.gov.ph/services/civil-service-eligibility/eligibilities-granted-under-special-laws-and-csc-issuances/" target="_blank"><i class="fa fa-lg fa-question-circle" aria-hidden="true"></i></a></label>
+                                        <select class="form-control clearField analyticsField" id="eligibility">
+                                            <option selected disabled>- Select Option -</option>
+                                            <option value="Bar or Board Eligibility [RA No. 1080]">Bar or Board Eligibility [RA No. 1080]</option>
+                                            <option value="Barangay Health Worker (BHW) Eligibility [RA No. 7883]">Barangay Health Worker (BHW) Eligibility [RA No. 7883]</option>
+                                            <option value="Barangay Nutrition Scholar (BNS) Eligibility [PD No. 1569]">Barangay Nutrition Scholar (BNS) Eligibility [PD No. 1569]</option>
+                                            <option value="Barangay Official Eligibility (BOE) [RA No. 7160]">Barangay Official Eligibility (BOE) [RA No. 7160]</option>
+                                            <option value="Electronic Data Processing Specialist (EDPS) Eligibility [CSC Resolution No. 90-083]">Electronic Data Processing Specialist (EDPS) Eligibility [CSC Resolution No. 90-083]</option>
+                                            <option value="Foreign School Honor Graduate Eligibility (FSHGE) [CSC Resolution No. 1302714]">Foreign School Honor Graduate Eligibility (FSHGE) [CSC Resolution No. 1302714]</option>
+                                            <option value="Honor Graduate Eligibility (HGE) [PD No. 907]">Honor Graduate Eligibility (HGE) [PD No. 907]</option>
+                                            <option value="Sanggunian Member Eligibility (SME) [RA No. 10156]">Sanggunian Member Eligibility (SME) [RA No. 10156]</option>
+                                            <option value="Scientific and Technological Specialist (STS) Eligibility [PD No. 997]">Scientific and Technological Specialist (STS) Eligibility [PD No. 997]</option>
+                                            <option value="Skill Eligibility [CSC MC No. 11]">Skill Eligibility [CSC MC No. 11]</option>
+                                            <option value="Veteran Preference Rating (VPR) Eligibility">Veteran Preference Rating (VPR) Eligibility</option>
+                                            <option value="NO">NOT REQUIRED</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="positionTitle" class="control-label">Minimum Educational Background</label>
                                         <select class="form-control clearField" id="mineducation">
                                             <option selected disabled>- Select Option -</option>
@@ -672,7 +705,10 @@ $("#btnAdd").click(function(){
                 "SALARYGRADE": $("#salarygrade option:selected").val(),
                 "SALARYEQUIVALENT": $("#salaryequivalent").val(),
                 "EDUCATION": $("#mineducation option:selected").val(),
-                "POSITIONCODE":positioncode
+                "POSITIONCODE":positioncode,
+                "EXPERIENCE":$("#experience").val(),
+                "TRAINING":$("#training").val(),
+                "ELIGIBILITY":$("#eligibility").val()
             },
             success: function(result){
                 $("#loadingmodal").modal("hide");
@@ -717,6 +753,22 @@ function validate(){
         messageDialogModal("Required","Please Select Salary Grade");
         return false;
     }
+
+    if($("#experience").val() == "" || $("#experience").val() == null){
+        messageDialogModal("Required","Please Enter Work Experience");
+        return false;
+    }
+
+    if($("#training").val() == "" || $("#training").val() == null){
+        messageDialogModal("Required","Please Enter Training");
+        return false;
+    }
+
+    if($("#eligibility").val() == "" || $("#eligibility").val() == null){
+        messageDialogModal("Required","Please Enter Civil Service Eligibility");
+        return false;
+    }
+
     if($("#mineducation").val() == "" || $("#mineducation").val() == null){
         messageDialogModal("Required","Please Enter Minimum Educational Background");
         return false;
@@ -746,6 +798,20 @@ function validateEdit(){
     }
     if($("#salarygrade option:selected").val() == "- Select Salary Grade -" || $("#salarygrade option:selected").val() == null){
         messageDialogModal("Required","Please Select Salary Grade");
+        return false;
+    }
+    if($("#experience").val() == "" || $("#experience").val() == null){
+        messageDialogModal("Required","Please Enter Work Experience");
+        return false;
+    }
+
+    if($("#training").val() == "" || $("#training").val() == null){
+        messageDialogModal("Required","Please Enter Training");
+        return false;
+    }
+
+    if($("#eligibility").val() == "" || $("#eligibility").val() == null){
+        messageDialogModal("Required","Please Enter Civil Service Eligibility");
         return false;
     }
     if($("#mineducation").val() == "" || $("#mineducation").val() == null){
@@ -849,6 +915,9 @@ function displayData(){
             $("#salarygrade").val(arr[keys].salarygrade);
             $("#salaryequivalent").val(arr[keys].salaryequivalent);
             $("#mineducation").val(arr[keys].mineducbackground);
+            $("#experience").val(arr[keys].experience);
+            $("#training").val(arr[keys].training);
+            $("#eligibility").val(arr[keys].eligibility);
 
             var skills = JSON.parse(atob(arr[keys].cbiskills));
             for(var i=0;i<skills.length;i++){
@@ -945,13 +1014,17 @@ $("#btnSave").click(function(){
             data: {
                 "SKILLS":skillArr,
                 "ROWID": $("#positiondropdown option:selected").attr("rowid"),
+                "POSITIONCODE": $("#positiondropdown option:selected").attr("positioncode-code"),
                 "DESCRIPTION": $("#positiondescription").val(),
                 "GROUPPOSITION": $("#groupposition option:selected").val(),
                 "GROUPCODE": $("#groupposition option:selected").attr("group-code"),
                 "GROUPDESCRIPTION": $("#groupposition option:selected").attr("group-desc"),
                 "SALARYGRADE": $("#salarygrade option:selected").val(),
                 "SALARYEQUIVALENT": $("#salaryequivalent").val(),
-                "EDUCATION": $("#mineducation").val()
+                "EDUCATION": $("#mineducation").val(),
+                "EXPERIENCE":$("#experience").val(),
+                "TRAINING":$("#training").val(),
+                "ELIGIBILITY":$("#eligibility").val()
             },
             success: function(result){
                 $("#loadingmodal").modal("hide");

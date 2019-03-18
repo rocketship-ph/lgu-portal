@@ -626,7 +626,23 @@
                 </thead>
                 <tbody id="tbodycse">
                 <tr class="cseligibility0">
-                    <td><input type="text" class="form-control clearField cseCareerService1" dt="careerservice"></td>
+                    <td>
+                        <input type="hidden" class="form-control clearField cseCareerService1" dt="careerservice">
+                        <select class="form-control clearField forHiddenCsc" target="cseCareerService1">
+                            <option selected disabled>- Select Option -</option>
+                            <option value="Bar or Board Eligibility [RA No. 1080]">Bar or Board Eligibility [RA No. 1080]</option>
+                            <option value="Barangay Health Worker (BHW) Eligibility [RA No. 7883]">Barangay Health Worker (BHW) Eligibility [RA No. 7883]</option>
+                            <option value="Barangay Nutrition Scholar (BNS) Eligibility [PD No. 1569]">Barangay Nutrition Scholar (BNS) Eligibility [PD No. 1569]</option>
+                            <option value="Barangay Official Eligibility (BOE) [RA No. 7160]">Barangay Official Eligibility (BOE) [RA No. 7160]</option>
+                            <option value="Electronic Data Processing Specialist (EDPS) Eligibility [CSC Resolution No. 90-083]">Electronic Data Processing Specialist (EDPS) Eligibility [CSC Resolution No. 90-083]</option>
+                            <option value="Foreign School Honor Graduate Eligibility (FSHGE) [CSC Resolution No. 1302714]">Foreign School Honor Graduate Eligibility (FSHGE) [CSC Resolution No. 1302714]</option>
+                            <option value="Honor Graduate Eligibility (HGE) [PD No. 907]">Honor Graduate Eligibility (HGE) [PD No. 907]</option>
+                            <option value="Sanggunian Member Eligibility (SME) [RA No. 10156]">Sanggunian Member Eligibility (SME) [RA No. 10156]</option>
+                            <option value="Scientific and Technological Specialist (STS) Eligibility [PD No. 997]">Scientific and Technological Specialist (STS) Eligibility [PD No. 997]</option>
+                            <option value="Skill Eligibility [CSC MC No. 11]">Skill Eligibility [CSC MC No. 11]</option>
+                            <option value="Veteran Preference Rating (VPR) Eligibility">Veteran Preference Rating (VPR) Eligibility</option>
+                    </select>
+                    </td>
                     <td><input type="text" class="form-control clearField cseRating1" dt="rating"></td>
                     <td><input type="text" class="form-control clearField cseExamDate1 datepick" dt="examdate" readonly placeholder="Date.."></td>
                     <td><input type="text" class="form-control clearField cseExamPlace1" dt="examplace"></td>
@@ -1220,8 +1236,27 @@ $(document).ready(function(){
     });
     loadCurrentPositions();
     $("#btnPrint").prop("disabled",true);
-
 });
+
+
+$(document).on('change','.forHiddenCsc',function(){
+    var el = $(this).attr("target");
+    $("."+el).val($(this).val());
+    console.log($(this).val());
+});
+
+    var eligibilities = ["Bar or Board Eligibility [RA No. 1080]",
+        "Barangay Health Worker (BHW) Eligibility [RA No. 7883]",
+        "Barangay Nutrition Scholar (BNS) Eligibility [PD No. 1569]",
+        "Barangay Official Eligibility (BOE) [RA No. 7160]",
+        "Electronic Data Processing Specialist (EDPS) Eligibility [CSC Resolution No. 90-083]",
+        "Foreign School Honor Graduate Eligibility (FSHGE) [CSC Resolution No. 1302714]",
+        "Honor Graduate Eligibility (HGE) [PD No. 907]",
+        "Sanggunian Member Eligibility (SME) [RA No. 10156]",
+        "Scientific and Technological Specialist (STS) Eligibility [PD No. 997]",
+        "Skill Eligibility [CSC MC No. 11]",
+        "Veteran Preference Rating (VPR) Eligibility"];
+
 
 function loadCurrentPositions(){
     var select  = $("#currentposition");
@@ -1738,6 +1773,7 @@ function loadPdsData(){
                             var ctr = 1;
                             if($("#tbodycse").find("tr.cseligibility"+c).length > 0){
                                 $(".cseCareerService"+ctr).val(cse[c].careerservice);
+                                $("[target='cseCareerService"+ctr+"']").val(cse[c].careerservice);
                                 $(".cseRating"+ctr).val(cse[c].rating);
                                 $(".cseExamDate"+ctr).val((cse[c].examdate == "" || cse[c].examdate == null || cse[c].examdate == undefined) ? "" : cse[c].examdate);
                                 $(".cseExamPlace"+ctr).val(cse[c].examplace);
@@ -1747,8 +1783,17 @@ function loadPdsData(){
                                 var exdate = (cse[c].examdate == "" || cse[c].examdate == null || cse[c].examdate == undefined) ? "" : cse[c].examdate;
                                 var licensedate = (cse[c].licensedate == "" || cse[c].licensedate == null || cse[c].examdate == undefined) ? "" : cse[c].examdate;
                                 var tbodycse = $("#tbodycse");
+                                var sel = '';
+                                for(var x=0;x<eligibilities.length;x++){
+                                    if(cse[c].careerservice == eligibilities[x]){
+                                        sel+='<option value="'+eligibilities[x]+'" selected>'+eligibilities[x]+'</option>';
+                                    } else {
+                                        sel+='<option value="'+eligibilities[x]+'">'+eligibilities[x]+'</option>';
+                                    }
+                                }
                                 var tr = '<tr class="cseligibility'+c+'">' +
-                                    '<td><input disabled type="text" class="form-control clearField cseCareerService'+(ctr+1)+'" dt="careerservice" value="'+cse[c].careerservice+'"></td>' +
+                                    '<td><input type="hidden" class="form-control clearField cseCareerService'+(ctr+1)+'" dt="careerservice" value="'+cse[c].careerservice+'">' +
+                                    '<select disabled class="form-control clearField forHiddenCsc" target="cseCareerService'+(ctr+1)+'">'+sel+'</select></td>' +
                                     '<td><input disabled type="text" class="form-control clearField cseRating'+(ctr+1)+'" dt="rating" value="'+cse[c].rating+'"></td>' +
                                     '<td><input disabled type="text" class="form-control clearField cseExamDate'+(ctr+1)+' datepick" dt="examdate" readonly placeholder="Date.." value="'+exdate+'"></td>' +
                                     '<td><input disabled type="text" class="form-control clearField cseExamPlace'+(ctr+1)+'" dt="examplace" value="'+cse[c].examplace+'"></td>' +
@@ -2042,7 +2087,20 @@ $("#btnCseAdd").click(function(){
     var tbody = $("#tbodycse");
     var l = $("[class*='cseligibility']").length;
     var tr = '<tr class="cseligibility'+l+'">' +
-        '<td><input type="text" class="form-control clearField cseCareerService'+(l+1)+'" dt="careerservice"></td>' +
+        '<td><input type="hidden" class="form-control clearField cseCareerService'+(l+1)+'" dt="careerservice" >' +
+        '<select class="form-control clearField forHiddenCsc" target="cseCareerService'+(l+1)+'">' +
+        '<option selected disabled>- Select Option -</option>' +
+        '<option value="Bar or Board Eligibility [RA No. 1080]">Bar or Board Eligibility [RA No. 1080]</option>' +
+        '<option value="Barangay Health Worker (BHW) Eligibility [RA No. 7883]">Barangay Health Worker (BHW) Eligibility [RA No. 7883]</option>' +
+        '<option value="Barangay Nutrition Scholar (BNS) Eligibility [PD No. 1569]">Barangay Nutrition Scholar (BNS) Eligibility [PD No. 1569]</option>' +
+        '<option value="Barangay Official Eligibility (BOE) [RA No. 7160]">Barangay Official Eligibility (BOE) [RA No. 7160]</option>' +
+        '<option value="Electronic Data Processing Specialist (EDPS) Eligibility [CSC Resolution No. 90-083]">Electronic Data Processing Specialist (EDPS) Eligibility [CSC Resolution No. 90-083]</option>' +
+        '<option value="Foreign School Honor Graduate Eligibility (FSHGE) [CSC Resolution No. 1302714]">Foreign School Honor Graduate Eligibility (FSHGE) [CSC Resolution No. 1302714]</option>' +
+        '<option value="Honor Graduate Eligibility (HGE) [PD No. 907]">Honor Graduate Eligibility (HGE) [PD No. 907]</option>' +
+        '<option value="Sanggunian Member Eligibility (SME) [RA No. 10156]">Sanggunian Member Eligibility (SME) [RA No. 10156]</option>' +
+        '<option value="Scientific and Technological Specialist (STS) Eligibility [PD No. 997]">Scientific and Technological Specialist (STS) Eligibility [PD No. 997]</option>' +
+        '<option value="Skill Eligibility [CSC MC No. 11]">Skill Eligibility [CSC MC No. 11]</option>' +
+        '<option value="Veteran Preference Rating (VPR) Eligibility">Veteran Preference Rating (VPR) Eligibility</option></select></td>' +
         '<td><input type="text" class="form-control clearField cseRating'+(l+1)+'" dt="rating"></td>' +
         '<td><input type="text" class="form-control clearField cseExamDate'+(l+1)+' datepick" dt="examdate" readonly placeholder="Date.."></td>' +
         '<td><input type="text" class="form-control clearField cseExamPlace'+(l+1)+'" dt="examplace"></td>' +

@@ -220,7 +220,7 @@ function loadRequestNumbers(){
     select.empty();
     $("#loadingmodal").modal("show");
     $.ajax({
-        url: "<?php echo base_url();?>reportgenerationmanagement/evaluatorrequestnumbers",
+        url: "<?php echo base_url();?>reportgenerationmanagement/allrequestnumbers",
         type: "GET",
         dataType: "json",
         success: function(result){

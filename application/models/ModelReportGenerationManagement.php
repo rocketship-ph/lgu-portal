@@ -7,6 +7,22 @@ class ModelReportGenerationManagement extends CI_Model{
         $this->groupPositionTbl = 'tblgroupposition';
     }
 
+    function getallrequestnumber(){
+        try {
+            $statement = "select r.requestnumber,p.name as position from tblpersonnelrequest r left join tblposition p on r.positioncode=p.positioncode where r.levelofapproval=4 order by r.requestnumber asc;";
+            $query = $this->db->query($statement);
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
     function listofposition(){
         try {
             $statement = "select * from tblposition";

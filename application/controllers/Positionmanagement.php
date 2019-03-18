@@ -115,6 +115,9 @@ class PositionManagement extends CI_Controller {
         $mindeducbackground = $_REQUEST['EDUCATION'];
         $positioncode = $_REQUEST['POSITIONCODE'];
         $groupdesc = $_REQUEST['GROUPDESCRIPTION'];
+        $experience = $_REQUEST['EXPERIENCE'];
+        $training = $_REQUEST['TRAINING'];
+        $eligibility = $_REQUEST['ELIGIBILITY'];
 
         $existing = $this->CheckExistingRecord->checkPositions(strtoupper($name));
         if($existing){
@@ -135,7 +138,10 @@ class PositionManagement extends CI_Controller {
                 'mineducbackground' => $mindeducbackground,
                 'positioncode' => strtoupper($positioncode),
                 'groupdesc' => base64_encode($groupdesc),
-                'addedby' => $this->session->userdata('username')
+                'addedby' => $this->session->userdata('username'),
+                'experience' => $experience,
+                'training' => $training,
+                'eligibility' => $eligibility,
             );
             $insert = $this->ModelPosition->insertNewPosition($insertData);
             if($insert){
@@ -170,6 +176,10 @@ class PositionManagement extends CI_Controller {
         $mindeducbackground = $_REQUEST['EDUCATION'];
         $groupdesc = $_REQUEST['GROUPDESCRIPTION'];
         $rowid = $_REQUEST['ROWID'];
+        $experience = $_REQUEST['EXPERIENCE'];
+        $training = $_REQUEST['TRAINING'];
+        $eligibility = $_REQUEST['ELIGIBILITY'];
+        $poscode = $_REQUEST['POSITIONCODE'];
 
         $data = array(
             'cbiskills' => base64_encode($skills),
@@ -179,9 +189,18 @@ class PositionManagement extends CI_Controller {
             'salarygrade' => $salarygrade,
             'salaryequivalent' => $salaryequivalent,
             'mineducbackground' => $mindeducbackground,
-            'groupdesc' => base64_encode($groupdesc)
+            'groupdesc' => base64_encode($groupdesc),
+            'experience' => $experience,
+            'training' => $training,
+            'eligibility' => $eligibility
         );
-        $update = $this->ModelPosition->updatePosition($data,$rowid);
+
+        $requestdata = array(
+            'experience' => $experience,
+            'training' => $training,
+            'eligibility' => $eligibility
+        );
+        $update = $this->ModelPosition->updatePosition($data,$rowid,$requestdata,$poscode);
         if($update){
             $auditdata = array(
                 'modulename'=>'Position Profile Module',
