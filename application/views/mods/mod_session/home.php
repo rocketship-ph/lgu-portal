@@ -333,6 +333,47 @@
 
     </div>
 </div>
+
+<div class="modal fade bs-example-modal-lg" id="modalsummary" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+            <div class="modal-body">
+                <h4 style="margin-top: 5px;">Examination Assessment Summary</h4>
+                <hr>
+                <p>
+                    <span>Request Number: </span><b id="assessmentLblrequestnumber"></b><br>
+                    <span>Applicant Code: </span><b id="assessmentLblapplicantcode"></b><br>
+                    <span>Applicant Name: </span><b id="assessmentLblapplicantname"></b><br>
+                    <span>Evaluator: </span><b id="assessmentLblevaluator"></b><br>
+                    <span>Assessment Date: </span><b id="assessmentLbldate"></b><br>
+                    <br>
+                    <br>
+                </p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive" id="tblsummarycont">
+                            <table id="tblsummary" class="display compact responsive" cellspacing="0" width="100%" >
+                                <thead>
+                                <tr>
+                                    <th>COMPETENCIES</th>
+                                    <th>REQUIRED PROFICIENCY LEVEL</th>
+                                    <th>APPLICANT'S RATING</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div align="right">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal"  value="Close">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <style type="text/css">
     #fixedContainer {
         position: fixed;
@@ -429,7 +470,7 @@ function loadNotifications(){
                     } else if(result.details[keys].levelofapproval == '100' && result.details[keys].category == 'EVALUATOR ASSIGNMENT'){
                         assignment +='<li><a category="ASSIGNMENT" request-number="'+result.details[keys].requestnumber+'">'+result.details[keys].message+'&nbsp;</a><a class="btn btn-sm btn-outline-primary assessedExamination" notifid="'+result.details[keys].notifid+'">Clear</a></li>';
                     } else if(result.details[keys].levelofapproval == '100' && (result.details[keys].category == 'EVALUATOR ASSESSMENT' || result.details[keys].category == 'TAKE EXAM')){
-                        assessment +='<li><a category="ASSESSMENT" request-number="'+result.details[keys].requestnumber+'">'+result.details[keys].message+'&nbsp;</a><a class="btn btn-sm btn-outline-primary assessedExamination" notifid="'+result.details[keys].notifid+'">Clear</a></li>';
+                        assessment +='<li><a category="ASSESSMENT" class="assessmentNotification" request-number="'+result.details[keys].requestnumber+'" evaluator="'+result.details[keys].createdby+'" message="'+result.details[keys].message+'">'+result.details[keys].message+'&nbsp;</a><a class="btn btn-sm btn-outline-primary assessedExamination" notifid="'+result.details[keys].notifid+'">Clear</a></li>';
                     } else if(result.details[keys].category == 'JOB INVITATION' || result.details[keys].category == 'APPLICATION REQUIREMENT'){
                         applicants +='<li><a category="APPLICANT" class="requirementNotification" request-number="'+result.details[keys].requestnumber+'">'+result.details[keys].message+'&nbsp;</a><a class="btn btn-sm btn-outline-primary assessedExamination" notifid="'+result.details[keys].notifid+'">Clear</a></li>';
                     } else {
@@ -1142,6 +1183,69 @@ $("#btnDeclineInv").click(function(){
             console.log(e);
         }
     });
+});
+
+$(document).on("click",".assessmentNotification",function(){
+    var part1 = ($(this).attr("message")).split(":");
+    var part2 = part1[1].split("under");
+    var appcode = (part2[0]).trim();
+    displayAssessmentData($(this).attr("request-number"),$(this).attr("evaluator"),appcode);
+});
+
+function displayAssessmentData(requestnumber,evaluator,appcode){
+    $("#loadingmodal").modal("show");
+    $("#tblsummary").dataTable({
+        "destroy": true,
+        "responsive": true,
+        "oLanguage": {
+            "sSearch": "Search:",
+            "sEmptyTable":"No Assessment Data Available"
+        },
+        "order": [[0, "asc"]],
+        "ajax": {
+            "url": "<?php echo base_url(); ?>examassessmentmanagement/displayassessment",
+            "type": "POST",
+            "dataType": "json",
+            "data": {
+                "REQUESTNUMBER":requestnumber,
+                "EVALUATOR":evaluator,
+                "APPLICANT":appcode
+            },
+            dataSrc: function (json) {
+                $('#loadingmodal').modal('hide');
+                if (json.Code == "00") {
+                    $("#assessmentLblrequestnumber").text(requestnumber);
+                    $("#assessmentLblapplicantcode").text(appcode);
+                    for(var keys in json.details){
+                        $("#assessmentLblapplicantname").text(json.details[keys].applicantname);
+                        $("#assessmentLblevaluator").text(json.details[keys].evaluatorname);
+                        $("#assessmentLbldate").text(moment(json.details[keys].timestamp).format("MMMM DD, YYYY hh:mm A"));
+                    }
+                    var dt = json.details[0].assessment;
+                    $("#modalsummary").modal("show");
+                    return JSON.parse(atob(dt));
+                } else {
+                    return 0;
+                }
+            }
+        },
+        "columns": [
+            {"data": "title"},
+            {"data": function (data) {
+                return (data.level).toUpperCase()
+            }},
+            {"data": "rating"}
+        ],
+        "sDom": 'lfrtip'
+    });
+}
+
+$(document).on('shown.bs.modal','#modalsummary', function () {
+    $('body').addClass("modal-open");
+});
+
+$(document).on('hidden.bs.modal','#modalsummary', function () {
+    $('body').removeClass("modal-open");
 });
 
 </script>

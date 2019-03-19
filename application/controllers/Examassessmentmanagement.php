@@ -194,4 +194,22 @@ class ExamAssessmentManagement extends CI_Controller {
     }
 
 
+    public function displayassessment(){
+        $assessment = $this->ModelExamAssessmentManagement->getAssessment($_REQUEST['REQUESTNUMBER'],$_REQUEST['EVALUATOR'],$_REQUEST['APPLICANT']);
+        if($assessment){
+            $result = json_encode(array(
+                'Code' => '00',
+                'Message' => 'Successfully Fetched Data',
+                'details' => $assessment
+            ));
+        }else{
+            $result = json_encode(array(
+                'Code' => '99',
+                'Message' => 'No Data Found'
+            ));
+        }
+        echo $result;
+    }
+
+
 }

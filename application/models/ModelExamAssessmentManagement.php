@@ -72,6 +72,9 @@ class ModelExamAssessmentManagement extends CI_Model{
         }
     }
 
+
+
+
     public function insert($data = array()) {
         try {
             $insert = $this->db->insert($this->assessmentTbl, $data);
@@ -126,6 +129,22 @@ class ModelExamAssessmentManagement extends CI_Model{
             if($delete){
                 return true;
             }else{
+                return false;
+            }
+        } catch(Exception $e){
+            log_message('error', $e);
+            return false;
+        }
+    }
+
+    function getAssessment($reqnum,$evaluator,$applicantcode){
+        try {
+            $statement = "select timestamp,assessment,(select concat(firstname,' ',middlename,' ',lastname) evaluator from tblusers where username='".$evaluator."') evaluatorname,(select concat(firstname,' ',middlename,' ',lastname) applicant from tblusers where username in (select username from tblapplicant where applicantcode='".$applicantcode."')) applicantname from tblexamassessment where requestnumber='".$reqnum."' and applicantcode='".$applicantcode."' and evaluatorusername='".$evaluator."';";
+            $query = $this->db->query($statement);
+            if($query){
+                $result = $query->result_array();
+                return $result;
+            } else {
                 return false;
             }
         } catch(Exception $e){
