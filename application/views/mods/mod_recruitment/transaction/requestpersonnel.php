@@ -231,8 +231,8 @@
                                     <th>DEPARTMENT</th>
                                     <th>HIGHEST EDUCATIONAL ATTAINMENT</th>
                                     <th>ELIGIBILITY</th>
-                                    <th>TRAININGS</th>
                                     <th>WORK EXPERIENCE</th>
+                                    <th>TRAININGS</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -931,10 +931,10 @@ $("#btnQualified").click(function(){
                     return el.slice(1,-1);
                 }},
                 {"data": function(data){
-                    return data.training + " hour(s)";
+                    return data.experience + " year(s)";
                 }},
                 {"data": function(data){
-                    return data.experience + " year(s)";
+                    return data.training + " hour(s)";
                 }}
             ],
             "sDom": 'lfrtip'
